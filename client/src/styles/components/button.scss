@@ -1,0 +1,25 @@
+.btn {
+    border: none;
+    padding: 15px 3em;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    outline: none;
+}
+
+.btn-primary {
+    background: var(--brand-color);
+    color: #fff;
+}
+
+.btn-primary-outline {
+    background: transparent;
+    border: 1px solid var(--brand-color);
+    color: var(--brand-color);
+}
+
+.btn-secondary {
+}
+
+.btn-secondary-outline {
+}

@@ -7,13 +7,16 @@ import Loader from 'components/loader';
 // styles
 import 'react-toastify/dist/ReactToastify.css';
 
+// main pages
+import Login from 'pages/login';
+
 export default class App extends React.Component {
     render() {
         return (
             <Router history={history}>
                 <div className="app">
                     <Switch>
-                        <Route path="/login" component={() => <p>Login</p>} />
+                        <Route path="/login" component={Login} />
                         <Route path="/app" component={() => <p>Main Site</p>} />
                     </Switch>
 

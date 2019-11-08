@@ -1,0 +1,24 @@
+label {
+    font-weight: 500;
+    color: var(--color3);
+    font-size: 15px;
+    padding-bottom: 5px;
+}
+
+.form-input {
+    border: none;
+    width: 100%;
+    padding: 15px;
+    background: var(--color1);
+    outline: none;
+    margin-bottom: 2rem;
+    font-size: 18px;
+    transition: all ease-in-out 0.5s;
+    border-radius: 13px;
+    color: var(--color3);
+    opacity: 1;
+}
+
+.form-input:focus {
+    opacity: 1;
+}
