@@ -13,7 +13,7 @@
     "dev-server": "cd server && yarn dev",
     "dev-client": "cd client && yarn start",
     "start": "yarn prod-server",
-    "dev": "concurrently --kill-others-on-fail \"yarn dev-server\"",
+    "dev": "concurrently --kill-others-on-fail \"yarn dev-server\" \"yarn dev-client\"",
     "heroku-postbuild": "yarn cache clean && concurrently --kill-others-on-fail \"yarn build-client\" \"yarn build-server\""
   },
   "dependencies": {
