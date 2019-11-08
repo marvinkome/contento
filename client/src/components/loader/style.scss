@@ -1,0 +1,69 @@
+$loader-line-height: 3px;
+$animation-speed: 1s;
+$color-main: #fefefe;
+$primary: #3d3d3d;
+$secondary: #f00;
+
+.xhr-loader {
+    $color-main: $primary;
+    $color-outer-1: $secondary;
+
+    width: 100%;
+    height: $loader-line-height;
+    background-color: $color-main;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+
+    .layer {
+        width: 0;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    &.loading {
+        display: block;
+        .layer_1 {
+            background-color: $color-outer-1;
+            animation: spreadInA $animation-speed infinite ease-out;
+        }
+        .layer_2 {
+            background-color: $color-main;
+            animation: spreadInB $animation-speed infinite ease-out;
+        }
+    }
+}
+
+@keyframes spreadInA {
+    0% {
+        width: 0;
+        left: 50%;
+    }
+    50% {
+        width: 100%;
+        left: 0;
+    }
+    100% {
+        width: 100%;
+        left: 0;
+    }
+}
+
+@keyframes spreadInB {
+    0% {
+        width: 0;
+        left: 50%;
+    }
+    50% {
+        width: 0;
+        left: 50%;
+    }
+    100% {
+        width: 100%;
+        left: 0;
+    }
+}

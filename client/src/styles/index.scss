@@ -1,0 +1,55 @@
+// components
+
+// utils
+@import './utils/mixins.scss';
+@import './utils/theme.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--bg-color);
+    color: var(--color4);
+    position: relative;
+    line-height: 1.5;
+    font-weight: 400;
+    overflow-x: hidden;
+    font-size: calc(14px + 0.25vw);
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: var(--blue-color);
+}
+
+.icon {
+    font-size: 1.5em;
+    margin-inline-end: 0.5em;
+}
