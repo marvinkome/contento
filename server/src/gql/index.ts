@@ -4,12 +4,13 @@ import { IUser } from '@models/users';
 
 // types and resolvers
 import { queryType, queryResolver } from './queries';
+import { mutationType, mutationResolvers } from './mutation';
 import { userType, userResolvers } from './queries/users';
 import { pageType, pageResolvers } from './queries/pages';
 
 const schema = makeExecutableSchema({
-    typeDefs: [queryType, userType, pageType],
-    resolvers: [queryResolver, userResolvers, pageResolvers]
+    typeDefs: [queryType, mutationType, userType, pageType],
+    resolvers: [queryResolver, mutationResolvers, userResolvers, pageResolvers]
 });
 
 export interface IContext {
