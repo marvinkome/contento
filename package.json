@@ -17,6 +17,7 @@
     "heroku-postbuild": "yarn cache clean && concurrently --kill-others-on-fail \"yarn build-client\" \"yarn build-server\""
   },
   "dependencies": {
-    "concurrently": "^4.1.0"
+    "concurrently": "^4.1.0",
+    "typescript": "^3.7.2"
   }
 }
