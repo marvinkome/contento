@@ -1,0 +1,22 @@
+{
+  "name": "contentlify",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:marvinkome/contentlify.git",
+  "author": "Marvin Kome <marvinkome@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build-server": "cd server && yarn install --network-concurrency 1 && yarn build",
+    "build-client": "cd client && yarn install --network-concurrency 1 && yarn build",
+    "prod-server": "cd server && yarn start",
+    "prod-client": "cd client && yarn start",
+    "dev-server": "cd server && yarn dev",
+    "dev-client": "cd client && yarn start",
+    "start": "yarn prod-server",
+    "dev": "concurrently --kill-others-on-fail \"yarn dev-server\"",
+    "heroku-postbuild": "yarn cache clean && concurrently --kill-others-on-fail \"yarn build-client\" \"yarn build-server\""
+  },
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}

@@ -1,1 +1,1 @@
-# Apollo Node Server
+# Server side of Contentlify
