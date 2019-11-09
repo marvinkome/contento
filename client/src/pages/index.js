@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // main pages
 import Login from 'pages/login';
+import Main from 'pages/main';
 
 // global variables
 import history from 'libs/history';
@@ -21,8 +22,8 @@ export default class App extends React.Component {
                 <Router history={history}>
                     <div className="app">
                         <Switch>
-                            <Route path="/login" component={Login} />
-                            <Route path="/app" component={() => <p>Main Site</p>} />
+                            <Route exact path="/login" component={Login} />
+                            <Route path="/" component={Main} />
                         </Switch>
 
                         <Loader />
