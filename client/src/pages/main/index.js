@@ -1,8 +1,12 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 import { inject } from 'mobx-react';
 import { AUTH_TOKEN_KEY } from 'libs/keys';
 import { toast } from 'react-toastify';
 import { mainClient, authApi } from 'libs/api';
+
+// pages
+import Pages from './pages';
 
 class Main extends React.Component {
     async componentDidMount() {
@@ -36,9 +40,23 @@ class Main extends React.Component {
     }
 
     render() {
+        // const username = this.props.profile?.username;
         return (
             <div>
-                <p>Protected Main Site. Welcome {this.props.profile?.username}!!</p>
+                <Switch>
+                    {/* editor */}
+                    <Route
+                        exact
+                        path="/editor"
+                        component={() => <p>All content editor modules</p>}
+                    />
+
+                    {/* pages */}
+                    <Route exact path="/" component={Pages} />
+
+                    {/* 404 */}
+                    <Route path="*" render={() => <p>Future 404 page</p>} />
+                </Switch>
             </div>
         );
     }

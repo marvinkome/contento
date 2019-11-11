@@ -1,0 +1,51 @@
+.main__topbar {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    justify-content: space-between;
+    z-index: 4;
+
+    .logo-area {
+        width: 30%;
+        padding: 0px 5%;
+
+        img {
+            width: 100px;
+        }
+    }
+
+    .topbar-links {
+        width: 70%;
+        display: flex;
+        justify-items: flex-end;
+
+        .notif-content {
+            display: flex;
+            align-items: center;
+
+            margin-left: auto;
+            padding-right: 2em;
+
+            .notif-box {
+                color: inherit;
+                position: relative;
+
+                .notif-icon {
+                    background: var(--red-color);
+                    width: 9px;
+                    height: 9px;
+                    border-radius: 50%;
+                    position: absolute;
+                    right: 1rem;
+                    top: 0rem;
+                }
+            }
+
+            .profile-link {
+                color: inherit;
+                font-size: var(--normal-text);
+                padding-inline-end: 1em;
+            }
+        }
+    }
+}
