@@ -1,11 +1,14 @@
 import React from 'react';
-import { MdNotificationsNone, MdAccountCircle } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { inject } from 'mobx-react';
+import { MdAccountCircle } from 'react-icons/md';
 import logo from 'assets/logo.svg';
 import './style.scss';
 
 class Topbar extends React.Component {
     render() {
+        const profile = this.props.profile;
+
         return (
             <div className="main__topbar">
                 <div className="logo-area">
@@ -14,15 +17,12 @@ class Topbar extends React.Component {
 
                 <div className="topbar-links">
                     <div className="notif-content">
-                        <a className="notif-box" href="/">
-                            <MdNotificationsNone className="icon" />
-                            <i className="notif-icon" />
-                        </a>
-
-                        <Link className="profile-link" to="/admin">
-                            Howdy, Marvin
-                        </Link>
-                        <MdAccountCircle className="icon" />
+                        {profile && (
+                            <Link className="profile-link" to="/profile">
+                                Howdy, {profile.username}
+                                <MdAccountCircle className="icon" />
+                            </Link>
+                        )}
                     </div>
                 </div>
             </div>
@@ -30,4 +30,11 @@ class Topbar extends React.Component {
     }
 }
 
-export default Topbar;
+const mapStateToProps = ({ rootStore }) => {
+    const { updateProfile, profile } = rootStore.userStore;
+    return {
+        setProfile: updateProfile,
+        profile
+    };
+};
+export default inject(mapStateToProps)(Topbar);

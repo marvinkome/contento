@@ -4,6 +4,7 @@
     padding: 15px 20px;
     justify-content: space-between;
     z-index: 4;
+    background: var(--grey1);
 
     .logo-area {
         width: 30%;
@@ -22,29 +23,20 @@
         .notif-content {
             display: flex;
             align-items: center;
-
             margin-left: auto;
             padding-right: 2em;
 
-            .notif-box {
-                color: inherit;
-                position: relative;
-
-                .notif-icon {
-                    background: var(--red-color);
-                    width: 9px;
-                    height: 9px;
-                    border-radius: 50%;
-                    position: absolute;
-                    right: 1rem;
-                    top: 0rem;
-                }
-            }
-
             .profile-link {
+                display: flex;
+                align-items: center;
+                padding-inline-end: 1em;
                 color: inherit;
                 font-size: var(--normal-text);
-                padding-inline-end: 1em;
+
+                .icon {
+                    margin-left: 10px;
+                    font-size: 2.5em;
+                }
             }
         }
     }
