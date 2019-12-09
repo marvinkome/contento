@@ -1,0 +1,66 @@
+.pages {
+    display: flex;
+    height: 90vh;
+    overflow: auto;
+    position: relative;
+
+    .all_pages_section {
+        flex: 4;
+        padding: 3.5%;
+        padding-left: 6%;
+        padding-right: 2%;
+        max-height: 100%;
+
+        h2 {
+            text-transform: uppercase;
+            margin-bottom: 1.5em;
+        }
+
+        .no-page {
+            p {
+                margin-bottom: 15px;
+            }
+
+            ul {
+                list-style: disc;
+                margin-left: 20px;
+
+                li {
+                    margin-bottom: 5px;
+                }
+            }
+        }
+
+        .page {
+            display: flex;
+            background: var(--grey1);
+        }
+    }
+
+    .create_page_section {
+        flex: 1;
+        background: var(--grey2);
+        padding: 3.5%;
+        padding-right: 6%;
+        padding-left: 2%;
+        height: 100%;
+
+        h3 {
+            text-transform: uppercase;
+        }
+
+        form {
+            padding-top: 20px;
+
+            .form-input {
+                margin-bottom: 1rem;
+            }
+
+            .btn {
+                background-color: var(--grey1);
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+        }
+    }
+}

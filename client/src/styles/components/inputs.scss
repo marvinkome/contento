@@ -17,6 +17,14 @@ label {
     border-radius: 13px;
     color: var(--color3);
     opacity: 1;
+
+    &.flat {
+        background: transparent;
+        border-radius: 0px;
+        border-bottom: 1px solid var(--grey0);
+        padding-left: 3px;
+        padding-right: 3px;
+    }
 }
 
 .form-input:focus {
