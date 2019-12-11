@@ -14,6 +14,8 @@
         h2 {
             text-transform: uppercase;
             margin-bottom: 1.5em;
+            border-bottom: 1px solid #bdc3c7;
+            padding-bottom: 10px;
         }
 
         .no-page {
@@ -34,10 +36,10 @@
         .page {
             display: flex;
             justify-content: space-between;
-            background: var(--grey1);
             margin: 20px 0px;
             padding: 15px 25px;
             border-radius: 5px;
+            border-bottom: 1px solid #bdc3c7;
 
             .page-title {
                 display: flex;
@@ -45,11 +47,13 @@
                 font-weight: 500;
 
                 a {
-                    color: inherit;
+                    color: var(--primary-text-color);
                 }
+            }
 
-                .icon {
-                    padding-left: 7px;
+            .page-actions {
+                .btn {
+                    margin-right: 10px;
                 }
             }
         }
@@ -57,7 +61,7 @@
 
     .create_page_section {
         flex: 1;
-        background: var(--grey2);
+        background: var(--grey1);
         padding: 3.5%;
         padding-right: 6%;
         padding-left: 2%;
@@ -71,13 +75,21 @@
             padding-top: 20px;
 
             .form-input {
-                margin-bottom: 1rem;
+                margin-bottom: 3rem;
             }
 
             .btn {
-                background-color: var(--grey1);
+                background-color: var(--brand-color);
                 text-transform: uppercase;
                 font-weight: bold;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .icon {
+                    padding-left: 7px;
+                    margin-inline-end: 0px;
+                }
             }
         }
     }

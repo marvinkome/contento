@@ -28,8 +28,13 @@
 .btn-secondary-outline {
 }
 
+.btn-delete {
+    background: var(--red-color);
+    color: #ffffff;
+}
+
 .btn-delete-outline {
     background: transparent;
-    border: 1px solid #b51311;
-    color: #b51311;
+    border: 1px solid var(--red-color);
+    color: var(--red-color);
 }

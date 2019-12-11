@@ -1,4 +1,5 @@
 import React from 'react';
+import { MdAdd } from 'react-icons/md';
 
 class CreatePage extends React.Component {
     render() {
@@ -8,8 +9,8 @@ class CreatePage extends React.Component {
 
                 <form>
                     <input type="text" className="form-input flat" placeholder="Page name" />
-                    <button className="btn" type="submit">
-                        Add page
+                    <button className="btn btn-primary" type="submit">
+                        Add page <MdAdd className="icon" />
                     </button>
                 </form>
             </div>

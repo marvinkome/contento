@@ -25,13 +25,13 @@ export default class MainSection extends React.Component {
                     <a href="#" title="Click to add contents to Page name page">
                         Page Name
                     </a>
-                    <a href="#" title="Edit page">
-                        <MdEdit className="icon" />
-                    </a>
                 </div>
 
                 <div className="page-actions">
-                    <a href="#" title="Delete page" className="btn btn-sm btn-delete-outline">
+                    <a href="#" title="Edit page" className="btn btn-sm btn-primary">
+                        Edit
+                    </a>
+                    <a href="#" title="Delete page" className="btn btn-sm btn-delete">
                         Delete
                     </a>
                 </div>
