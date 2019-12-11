@@ -33,7 +33,25 @@
 
         .page {
             display: flex;
+            justify-content: space-between;
             background: var(--grey1);
+            margin: 20px 0px;
+            padding: 15px 25px;
+            border-radius: 5px;
+
+            .page-title {
+                display: flex;
+                text-transform: uppercase;
+                font-weight: 500;
+
+                a {
+                    color: inherit;
+                }
+
+                .icon {
+                    padding-left: 7px;
+                }
+            }
         }
     }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { MdEdit } from 'react-icons/md';
 
 export default class MainSection extends React.Component {
     renderListEmpty = () => {
@@ -21,12 +22,16 @@ export default class MainSection extends React.Component {
         return (
             <div className="page">
                 <div className="page-title">
-                    <p>Page Name</p>
-                    {/* edit icon */}
+                    <a href="#" title="Click to add contents to Page name page">
+                        Page Name
+                    </a>
+                    <a href="#" title="Edit page">
+                        <MdEdit className="icon" />
+                    </a>
                 </div>
 
                 <div className="page-actions">
-                    <a href="#" className="btn btn-outline">
+                    <a href="#" title="Delete page" className="btn btn-sm btn-delete-outline">
                         Delete
                     </a>
                 </div>

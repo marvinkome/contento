@@ -7,6 +7,10 @@
     outline: none;
 }
 
+.btn-sm {
+    padding: 7px 1.2em;
+}
+
 .btn-primary {
     background: var(--brand-color);
     color: #fff;
@@ -22,4 +26,10 @@
 }
 
 .btn-secondary-outline {
+}
+
+.btn-delete-outline {
+    background: transparent;
+    border: 1px solid #b51311;
+    color: #b51311;
 }
