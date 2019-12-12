@@ -5,7 +5,7 @@ import { IContext } from '@gql/index';
 export const typeDef = `
     addPage(name: String!): Page
     updatePage(id: ID!, name: String): Page
-    deletePage(id: ID!): Boolean
+    deletePage(id: ID!): ID
 `;
 
 export const resolver = {
@@ -48,6 +48,6 @@ export const resolver = {
         }
 
         await page.remove();
-        return true;
+        return data.id;
     })
 };

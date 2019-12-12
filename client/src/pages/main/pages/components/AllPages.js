@@ -5,13 +5,13 @@ export default class MainSection extends React.Component {
     renderListEmpty = () => {
         return (
             <div className="no-page">
-                <p>You {"haven't"} created any page yet.</p>
+                <p>You {'haven\'t'} created any page yet.</p>
                 <p>To create a page use the form on the right.</p>
 
                 <ul>
                     <li>Name your page e.g Landing page</li>
                     <li>
-                        Click on {'"ADD PAGE"'} and {"it'll"} reflect here
+                        Click on {'"ADD PAGE"'} and {'it\'ll'} reflect here
                     </li>
                 </ul>
             </div>
