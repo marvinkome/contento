@@ -1,14 +1,20 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { ApolloProvider } from '@apollo/react-hooks';
 import { inject } from 'mobx-react';
-import { AUTH_TOKEN_KEY } from 'libs/keys';
 import { toast } from 'react-toastify';
+import { AUTH_TOKEN_KEY } from 'libs/keys';
 import { mainClient, authApi } from 'libs/api';
+import { setupApollo } from 'libs/graphql';
 
 // pages
 import Pages from './pages';
 
 class Main extends React.Component {
+    state = {
+        client: null
+    };
+
     async componentDidMount() {
         const auth_message = 'Auth key not found. Redirecting to login page';
 
@@ -20,6 +26,10 @@ class Main extends React.Component {
                 toast.error(auth_message);
                 throw Error(auth_message);
             }
+
+            // setup apollo client
+            const { client } = setupApollo(token);
+            this.setState({ client });
 
             // add token to api instance
             mainClient.setAccessToken(token);
@@ -40,8 +50,9 @@ class Main extends React.Component {
     }
 
     render() {
-        // const username = this.props.profile?.username;
-        return (
+        const { client } = this.state;
+
+        return client ? (
             <div>
                 <Switch>
                     {/* editor */}
@@ -57,6 +68,10 @@ class Main extends React.Component {
                     {/* 404 */}
                     <Route path="*" render={() => <p>Future 404 page</p>} />
                 </Switch>
+            </div>
+        ) : (
+            <div>
+                <p>Connecting to API.....</p>
             </div>
         );
     }
