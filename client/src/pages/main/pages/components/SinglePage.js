@@ -1,6 +1,6 @@
 import React from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { FiEdit2, FiTrash2 } from 'react-icons/fi';
+import { FiTrash2 } from 'react-icons/fi';
 import { DELETE_PAGE, GET_PAGES } from '../graphql';
 
 export default function SinglePage({ page }) {
@@ -26,9 +26,6 @@ export default function SinglePage({ page }) {
             </div>
 
             <div className="page-actions">
-                <a href="/edit" title="Edit page">
-                    <FiEdit2 className="icon" />
-                </a>
                 <FiTrash2
                     onClick={() => deletePage({ variables: { id: page.id } })}
                     title="Delete page"
