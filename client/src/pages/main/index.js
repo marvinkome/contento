@@ -54,20 +54,22 @@ class Main extends React.Component {
 
         return client ? (
             <div>
-                <Switch>
-                    {/* editor */}
-                    <Route
-                        exact
-                        path="/editor"
-                        component={() => <p>All content editor modules</p>}
-                    />
+                <ApolloProvider client={client}>
+                    <Switch>
+                        {/* editor */}
+                        <Route
+                            exact
+                            path="/editor"
+                            component={() => <p>All content editor modules</p>}
+                        />
 
-                    {/* pages */}
-                    <Route exact path="/" component={Pages} />
+                        {/* pages */}
+                        <Route exact path="/" component={Pages} />
 
-                    {/* 404 */}
-                    <Route path="*" render={() => <p>Future 404 page</p>} />
-                </Switch>
+                        {/* 404 */}
+                        <Route path="*" render={() => <p>Future 404 page</p>} />
+                    </Switch>
+                </ApolloProvider>
             </div>
         ) : (
             <div>

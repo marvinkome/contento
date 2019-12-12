@@ -1,7 +1,7 @@
 module.exports = {
     client: {
         service: {
-            name: 'stark-cms',
+            name: 'contento',
             url: 'http://localhost:7077/graphql'
         }
     }

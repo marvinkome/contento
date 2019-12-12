@@ -1,5 +1,5 @@
 import React from 'react';
-import { MdEdit } from 'react-icons/md';
+import SinglePage from './SinglePage';
 
 export default class MainSection extends React.Component {
     renderListEmpty = () => {
@@ -18,36 +18,26 @@ export default class MainSection extends React.Component {
         );
     };
 
-    renderPage = () => {
-        return (
-            <div className="page">
-                <div className="page-title">
-                    <a href="#" title="Click to add contents to Page name page">
-                        Page Name
-                    </a>
-                </div>
-
-                <div className="page-actions">
-                    <a href="#" title="Edit page" className="btn btn-sm btn-primary">
-                        Edit
-                    </a>
-                    <a href="#" title="Delete page" className="btn btn-sm btn-delete">
-                        Delete
-                    </a>
-                </div>
-            </div>
-        );
-    };
-
     render() {
+        const { loading, error, data } = this.props.response;
+
         return (
             <div className="all_pages_section">
                 <h2>All Pages</h2>
 
                 <div className="all-pages__list">
-                    {/* {this.renderListEmpty()} */}
-                    {this.renderPage()}
-                    {this.renderPage()}
+                    {/* handle error and loading case */}
+                    {loading && <p>Fetching pages...</p>}
+                    {error && <p>Error fetching pages. {error.message}</p>}
+
+                    {/* handle data case */}
+                    {data && (
+                        <React.Fragment>
+                            {data.pages.length
+                                ? data.pages.map((page) => <SinglePage key={page.id} page={page} />)
+                                : this.renderListEmpty()}
+                        </React.Fragment>
+                    )}
                 </div>
             </div>
         );
