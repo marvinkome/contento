@@ -9,6 +9,7 @@ import { setupApollo } from 'libs/graphql';
 
 // pages
 import Pages from './pages';
+import Editor from './editor';
 
 class Main extends React.Component {
     state = {
@@ -57,11 +58,7 @@ class Main extends React.Component {
                 <ApolloProvider client={client}>
                     <Switch>
                         {/* editor */}
-                        <Route
-                            exact
-                            path="/editor"
-                            component={() => <p>All content editor modules</p>}
-                        />
+                        <Route exact path="/editor" component={Editor} />
 
                         {/* pages */}
                         <Route exact path="/" component={Pages} />

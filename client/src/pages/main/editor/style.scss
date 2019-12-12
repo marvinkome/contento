@@ -1,0 +1,91 @@
+.editor-container {
+    display: flex;
+    height: 90vh;
+    overflow: auto;
+    position: relative;
+
+    .main-editor {
+        flex: 4;
+        padding: 3.5%;
+        padding-left: 6%;
+        padding-right: 2%;
+        max-height: 100%;
+        overflow: auto;
+
+        h2 {
+            text-transform: uppercase;
+            margin-bottom: 1.5em;
+            border-bottom: 1px solid #bdc3c7;
+            padding-bottom: 10px;
+            width: 60%;
+        }
+
+        .blocks {
+            .header input {
+                width: 50%;
+                margin-bottom: 0px;
+                color: var(--white-color);
+                border-bottom: none;
+                font-size: var(--small-text);
+
+                &::placeholder {
+                    color: var(--white-color);
+                    font-style: italic;
+                }
+
+                &:focus {
+                    border-bottom: 1px solid var(--white-color);
+                }
+            }
+
+            .text-block {
+                width: 70%;
+
+                .body {
+                    border: 1px solid var(--brand-color);
+                    border-top: none;
+
+                    textarea {
+                        max-height: 150px;
+                    }
+                }
+            }
+
+            .media-block {
+                width: 70%;
+
+                .body {
+                    padding: 0px;
+                    border: 1px dashed var(--brand-color);
+                    border-top: none;
+                }
+            }
+        }
+    }
+
+    .block-picker {
+        flex: 1;
+        background: var(--grey1);
+        padding: 3.5%;
+        padding-right: 6%;
+        padding-left: 2%;
+        height: 100%;
+        overflow: auto;
+
+        h3 {
+            text-transform: uppercase;
+        }
+
+        .block-list {
+            margin-top: 3em;
+
+            .btn-primary-outline {
+                background: #ffffff;
+                width: 80%;
+                color: var(--text-color);
+                text-transform: uppercase;
+                margin-bottom: 20px;
+            }
+        }
+    }
+}

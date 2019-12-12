@@ -1,0 +1,18 @@
+.file-dropzone {
+    text-align: center;
+    outline: none;
+
+    .no-drag-active {
+        padding: 32px 24px;
+
+        p {
+            font-size: var(--small-text);
+            margin-top: 15px;
+        }
+    }
+
+    .drag-active {
+        padding: 32px 24px;
+        background: var(--brand-color);
+    }
+}

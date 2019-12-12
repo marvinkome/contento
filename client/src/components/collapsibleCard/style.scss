@@ -1,0 +1,34 @@
+.collapsible-card {
+    box-shadow: var(--card-shadow);
+    margin: 20px 0px;
+    border-radius: 5px;
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        border-radius: 5px 5px 0px 0px;
+        background: var(--secondary-color);
+        color: var(--semi-white);
+        padding: 15px 20px;
+        cursor: pointer;
+
+        h4 {
+            font-size: var(--normal-text);
+        }
+
+        .collapse-control {
+            display: flex;
+            align-items: center;
+            color: var(--white-color);
+            padding-left: 30px;
+        }
+    }
+
+    .body {
+        padding: 32px 24px;
+
+        &.collapsed {
+            display: none;
+        }
+    }
+}
