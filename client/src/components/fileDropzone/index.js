@@ -19,8 +19,9 @@ function renderDragActive() {
     );
 }
 
-export default function FileDropZone(props) {
-    const onDrop = useCallback((acceptedFiles) => props.onDrop(acceptedFiles), []);
+export default function FileDropZone({ onDrop: propsDrops }) {
+    const onDrop = useCallback((acceptedFiles) => propsDrops(acceptedFiles), [propsDrops]);
+
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
         accept: 'image/*'

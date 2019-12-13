@@ -3,6 +3,20 @@ import CollapsibleCard from 'components/collapsibleCard';
 import FileDropZone from 'components/fileDropzone';
 
 export default class TextBlock extends React.Component {
+    onTitleChange = (e) => {
+        const { blockData } = this.props;
+        const { value } = e.target;
+
+        this.props.updateBlock(blockData.id, 'name', value);
+    };
+
+    onContentChange = (e) => {
+        const { blockData } = this.props;
+        const { value } = e.target;
+
+        this.props.updateBlock(blockData.id, 'content', value);
+    };
+
     renderBlockHeader = () => {
         return (
             <input
@@ -15,9 +29,14 @@ export default class TextBlock extends React.Component {
     };
 
     render() {
+        const { removeBlock, blockData } = this.props;
+
         return (
             <div className="media-block">
-                <CollapsibleCard header={this.renderBlockHeader()}>
+                <CollapsibleCard
+                    header={this.renderBlockHeader()}
+                    onDelete={() => removeBlock(blockData.id)}
+                >
                     <FileDropZone />
                 </CollapsibleCard>
             </div>

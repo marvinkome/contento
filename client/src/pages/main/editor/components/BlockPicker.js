@@ -7,9 +7,20 @@ export default class BlockPicker extends React.Component {
                 <h3>Add Block</h3>
 
                 <div className="block-list">
-                    <button className="btn btn-primary-outline">Text</button>
-                    <button className="btn btn-primary-outline">Media</button>
-                    {/* <button className="btn btn-primary-outline">Rich Text</button> */}
+                    <button
+                        type="button"
+                        onClick={() => this.props.addBlock('TEXT')}
+                        className="btn btn-primary-outline"
+                    >
+                        Text
+                    </button>
+                    {/* <button
+                        type="button"
+                        onClick={() => this.props.addBlock('MEDIA')}
+                        className="btn btn-primary-outline"
+                    >
+                        Media
+                    </button> */}
                 </div>
             </div>
         );
