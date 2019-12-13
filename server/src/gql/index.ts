@@ -7,10 +7,17 @@ import { queryType, queryResolver } from './queries';
 import { mutationType, mutationResolvers } from './mutation';
 import { userType, userResolvers } from './queries/users';
 import { pageType, pageResolvers } from './queries/pages';
+import { contentType, contentResolvers } from './queries/contents';
 
 const schema = makeExecutableSchema({
-    typeDefs: [queryType, mutationType, userType, pageType],
-    resolvers: [queryResolver, mutationResolvers, userResolvers, pageResolvers]
+    typeDefs: [queryType, mutationType, userType, pageType, contentType],
+    resolvers: [
+        queryResolver,
+        mutationResolvers,
+        userResolvers,
+        pageResolvers,
+        contentResolvers
+    ]
 });
 
 export interface IContext {

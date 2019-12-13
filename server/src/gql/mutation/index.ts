@@ -5,6 +5,8 @@ export const mutationType = gql`
     type Mutation {
         ${PageType.typeDef}
     }
+
+    ${PageType.inputDef}
 `;
 
 export const mutationResolvers = {

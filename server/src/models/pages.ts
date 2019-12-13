@@ -1,10 +1,12 @@
 import { Schema, model, Document } from 'mongoose';
+import { contentSchema, IContent } from './content';
 
 export interface IPage extends Document {
     name: string;
+    owner: Schema.Types.ObjectId;
+    contents: [IContent];
     createdAt: string;
     updatedAt: string;
-    owner: Schema.Types.ObjectId;
 }
 
 export const pageSchema: Schema<IPage> = new Schema(
@@ -17,7 +19,8 @@ export const pageSchema: Schema<IPage> = new Schema(
         owner: {
             type: Schema.Types.ObjectId,
             ref: 'User'
-        }
+        },
+        contents: [contentSchema]
     },
     {
         timestamps: true

@@ -2,10 +2,19 @@ import { authenticated } from '@libs/auth';
 import Page from '@models/pages';
 import { IContext } from '@gql/index';
 
+export const inputDef = `
+    input BlockInput {
+        type: String!
+        name: String
+        content: String
+    }
+`;
+
 export const typeDef = `
     addPage(name: String!): Page
     updatePage(id: ID!, name: String): Page
     deletePage(id: ID!): ID
+    updateContents(id: ID!, blocks: [BlockInput]): [Content]
 `;
 
 export const resolver = {
@@ -49,5 +58,25 @@ export const resolver = {
 
         await page.remove();
         return data.id;
-    })
+    }),
+
+    updateContents: authenticated(
+        async (_: any, data: any, context: IContext) => {
+            const page = await Page.findOne({
+                _id: data.id,
+                owner: context.currentUser
+            });
+
+            if (!page) {
+                throw Error(
+                    'Page not found, possibly deleted or belongs to another user'
+                );
+            }
+
+            page.contents = data.blocks;
+            await page.save();
+
+            return page.contents;
+        }
+    )
 };
