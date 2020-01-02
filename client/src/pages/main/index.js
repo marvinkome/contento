@@ -58,7 +58,7 @@ class Main extends React.Component {
                 <ApolloProvider client={client}>
                     <Switch>
                         {/* editor */}
-                        <Route exact path="/editor" component={Editor} />
+                        <Route exact path="/editor/:pageid" component={Editor} />
 
                         {/* pages */}
                         <Route exact path="/" component={Pages} />

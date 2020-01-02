@@ -1,33 +1,26 @@
-import React from 'react';
-import debounce from 'lodash/debounce';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@apollo/react-hooks';
 import Layout from 'components/layout';
 import MainEditor from './components/MainEditor';
 import BlockPicker from './components/BlockPicker';
+import { GET_PAGE } from './graphql';
 
 import './style.scss';
 
-export default class Editor extends React.Component {
-    state = {
-        blocks: [],
-        saveStatus: 'saved as draft'
-    };
+function useDataFetch() {
+    const { pageid } = useParams();
+    const queryResponse = useQuery(GET_PAGE, {
+        variables: { pageId: pageid }
+    });
 
-    componentDidMount() {
-        this.debounceAutoSave = debounce(this.autoSave, 1000);
-    }
+    return queryResponse;
+}
 
-    componentWillUnmount() {
-        this.debounceAutoSave.cancel();
-    }
+function useBlocks() {
+    const [blocks, updateBlockState] = useState([]);
 
-    autoSave = () => {
-        console.log('time to save all this data', this.state.blocks);
-        this.setState({ saveStatus: 'saving...' });
-    };
-
-    addBlock = (blockType) => {
-        const { blocks } = this.state;
-
+    const addBlock = (blockType) => {
         const block = {
             // use a random ID until item is saved
             id: Math.floor(Math.random() * 1000),
@@ -36,52 +29,50 @@ export default class Editor extends React.Component {
             content: ''
         };
 
-        this.setState({ blocks: blocks.concat([block]) }, this.debounceAutoSave);
+        updateBlockState(blocks.concat([block]));
     };
 
-    removeBlock = (blockId) => {
-        const { blocks } = this.state;
+    const removeBlock = (blockId) => {
+        updateBlockState(blocks.filter((block) => block.id !== blockId));
+    };
 
-        this.setState(
-            {
-                blocks: blocks.filter((block) => block.id !== blockId)
-            },
-            this.debounceAutoSave
+    const updateBlock = (blockId, blockField, fieldValue) => {
+        updateBlockState(
+            blocks.map((block) => {
+                if (block.id === blockId) {
+                    return Object.assign({}, block, { [blockField]: fieldValue });
+                }
+                return block;
+            })
         );
     };
 
-    updateBlock = (blockId, blockField, fieldValue) => {
-        const { blocks } = this.state;
-
-        this.setState(
-            {
-                blocks: blocks.map((block) => {
-                    if (block.id === blockId) {
-                        return Object.assign({}, block, { [blockField]: fieldValue });
-                    }
-                    return block;
-                })
-            },
-            this.debounceAutoSave
-        );
+    return {
+        blocks,
+        addBlock,
+        removeBlock,
+        updateBlock
     };
+}
 
-    render() {
-        return (
-            <Layout>
-                <div className="editor-container">
-                    {/* main editor */}
-                    <MainEditor
-                        blocks={this.state.blocks}
-                        saveStatus={this.state.saveStatus}
-                        removeBlock={this.removeBlock}
-                        updateBlock={this.updateBlock}
-                    />
+export default function EditorHooks() {
+    const queryResponse = useDataFetch();
+    const { blocks, addBlock, removeBlock, updateBlock } = useBlocks();
 
-                    {/* block picker */}
-                    <BlockPicker addBlock={this.addBlock} />
-                </div>
-            </Layout>
-        );
-    }
+    return (
+        <Layout>
+            <div className="editor-container">
+                {/* main editor */}
+                <MainEditor
+                    blocks={blocks}
+                    removeBlock={removeBlock}
+                    updateBlock={updateBlock}
+                    response={queryResponse}
+                />
+
+                {/* block picker */}
+                <BlockPicker addBlock={addBlock} />
+            </div>
+        </Layout>
+    );
 }
