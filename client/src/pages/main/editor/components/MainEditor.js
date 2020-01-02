@@ -4,43 +4,51 @@ import Media from '../blocks/MediaBlock';
 
 export default class MainEditor extends React.Component {
     render() {
-        const { saveStatus, blocks, removeBlock, updateBlock } = this.props;
+        const { blocks, removeBlock, updateBlock, response } = this.props;
+        const { loading, error, data } = response;
+
         return (
             <div className="main-editor">
-                <h2>
-                    Page Name <small>{saveStatus}</small>
-                </h2>
+                {/* handle error and loading case */}
+                {loading && <p>Fetching pages...</p>}
+                {error && <p>Error fetching pages. {error.message}</p>}
 
-                <div className="blocks">
-                    {blocks.map((block) => {
-                        switch (block.type) {
-                        case 'TEXT':
-                            return (
-                                <Text
-                                    key={block.id}
-                                    blockData={block}
-                                    removeBlock={removeBlock}
-                                    updateBlock={updateBlock}
-                                />
-                            );
-                        case 'MEDIA':
-                            return (
-                                <Media
-                                    key={block.id}
-                                    blockData={block}
-                                    removeBlock={removeBlock}
-                                    updateBlock={updateBlock}
-                                />
-                            );
-                        default:
-                            return null;
-                        }
-                    })}
+                {data && (
+                    <React.Fragment>
+                        <h2>{data.page.name}</h2>
 
-                    {!blocks.length && (
-                        <p>No block added. Use the buttons on the right to add blocks </p>
-                    )}
-                </div>
+                        <div className="blocks">
+                            {blocks.map((block) => {
+                                switch (block.type) {
+                                    case 'TEXT':
+                                        return (
+                                            <Text
+                                                key={block.id}
+                                                blockData={block}
+                                                removeBlock={removeBlock}
+                                                updateBlock={updateBlock}
+                                            />
+                                        );
+                                    case 'MEDIA':
+                                        return (
+                                            <Media
+                                                key={block.id}
+                                                blockData={block}
+                                                removeBlock={removeBlock}
+                                                updateBlock={updateBlock}
+                                            />
+                                        );
+                                    default:
+                                        return null;
+                                }
+                            })}
+
+                            {!blocks.length && (
+                                <p>No block added. Use the buttons on the right to add blocks </p>
+                            )}
+                        </div>
+                    </React.Fragment>
+                )}
             </div>
         );
     }
