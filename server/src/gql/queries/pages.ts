@@ -4,7 +4,7 @@ export const pageType = gql`
     type Page {
         id: ID!
         name: String!
-        contents: [String]
+        contents: [Content]
     }
 `;
 
