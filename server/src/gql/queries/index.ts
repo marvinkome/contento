@@ -21,6 +21,9 @@ export const queryResolver = {
         }),
         pages: authenticated(async (_: any, __: any, context: IContext) => {
             return Page.find({ owner: context.currentUser?.id });
+        }),
+        page: authenticated(async (_: any, { id }: { id: string }, context: IContext) => {
+            return Page.findOne({ owner: context.currentUser?.id, _id: id });
         })
     }
 };
