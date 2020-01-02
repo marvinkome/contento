@@ -44,6 +44,7 @@ export default class TextBlock extends React.Component {
                         id="textBlockContent"
                         placeholder="Text content..."
                         onChange={this.onContentChange}
+                        value={blockData.content}
                     />
                 </CollapsibleCard>
             </div>

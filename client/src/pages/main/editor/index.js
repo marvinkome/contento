@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import Layout from 'components/layout';
@@ -7,6 +7,18 @@ import BlockPicker from './components/BlockPicker';
 import { GET_PAGE } from './graphql';
 
 import './style.scss';
+
+/* === Utils === */
+function formatContents(contents) {
+    return contents.map((content) => ({
+        id: content.id,
+        type: content.type,
+        name: content.name,
+        content: content.content
+    }));
+}
+
+/* === Custom Hooks ==== */
 
 function useDataFetch() {
     const { pageid } = useParams();
@@ -17,13 +29,22 @@ function useDataFetch() {
     return queryResponse;
 }
 
-function useBlocks() {
+function useBlocks(queryResponse) {
     const [blocks, updateBlockState] = useState([]);
+
+    useEffect(() => {
+        const { data } = queryResponse;
+        if (data) {
+            // strip out unused GQL details
+            const formattedContents = formatContents(data.page.contents);
+            updateBlockState(formattedContents);
+        }
+    }, [queryResponse]);
 
     const addBlock = (blockType) => {
         const block = {
             // use a random ID until item is saved
-            id: Math.floor(Math.random() * 1000),
+            id: `${Math.floor(Math.random() * 1000)}`,
             type: blockType,
             name: '',
             content: ''
@@ -57,7 +78,7 @@ function useBlocks() {
 
 export default function EditorHooks() {
     const queryResponse = useDataFetch();
-    const { blocks, addBlock, removeBlock, updateBlock } = useBlocks();
+    const { blocks, addBlock, removeBlock, updateBlock } = useBlocks(queryResponse);
 
     return (
         <Layout>
