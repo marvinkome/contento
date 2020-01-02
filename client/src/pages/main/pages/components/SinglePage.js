@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 import { FiTrash2 } from 'react-icons/fi';
 import { DELETE_PAGE, GET_PAGES } from '../graphql';
@@ -20,9 +21,12 @@ export default function SinglePage({ page }) {
     return (
         <div className="page">
             <div className="page-title">
-                <a href="/editor/569987" title="Click to add contents to Page name page">
+                <Link
+                    to={`/editor/${page.id}`}
+                    title={`Click to add contents to ${page.name} page`}
+                >
                     {page.name}
-                </a>
+                </Link>
             </div>
 
             <div className="page-actions">
