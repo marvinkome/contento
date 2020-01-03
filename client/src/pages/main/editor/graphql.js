@@ -14,3 +14,17 @@ export const GET_PAGE = gql`
         }
     }
 `;
+
+export const SAVE_BLOCKS = gql`
+    mutation AddBlocksToPage($pageid: ID!, $blocks: [BlockInput!]) {
+        updateContents(id: $pageid, blocks: $blocks) {
+            id
+            contents {
+                id
+                name
+                content
+                type
+            }
+        }
+    }
+`;

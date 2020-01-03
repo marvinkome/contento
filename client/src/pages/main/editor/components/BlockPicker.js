@@ -14,13 +14,22 @@ export default class BlockPicker extends React.Component {
                     >
                         Text
                     </button>
-                    {/* <button
+                    <button
                         type="button"
                         onClick={() => this.props.addBlock('MEDIA')}
                         className="btn btn-primary-outline"
                     >
                         Media
-                    </button> */}
+                    </button>
+
+                    {/* Save Button */}
+                    <button
+                        type="button"
+                        onClick={() => this.props.saveBlocks()}
+                        className="btn btn-primary"
+                    >
+                        Save
+                    </button>
                 </div>
             </div>
         );

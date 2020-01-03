@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+
 import Layout from 'components/layout';
 import MainEditor from './components/MainEditor';
 import BlockPicker from './components/BlockPicker';
-import { GET_PAGE } from './graphql';
+import { GET_PAGE, SAVE_BLOCKS } from './graphql';
 
 import './style.scss';
 
@@ -12,6 +13,14 @@ import './style.scss';
 function formatContents(contents) {
     return contents.map((content) => ({
         id: content.id,
+        type: content.type,
+        name: content.name,
+        content: content.content
+    }));
+}
+
+function formatContentsForSave(contents) {
+    return contents.map((content) => ({
         type: content.type,
         name: content.name,
         content: content.content
@@ -29,17 +38,34 @@ function useDataFetch() {
     return queryResponse;
 }
 
+function useSave(blocks) {
+    const [saveBlocks] = useMutation(SAVE_BLOCKS);
+    const { pageid } = useParams();
+
+    return {
+        saveBlocks: () => {
+            // call mutation function
+            saveBlocks({
+                variables: {
+                    pageid,
+                    blocks: formatContentsForSave(blocks)
+                }
+            });
+        }
+    };
+}
+
 function useBlocks(queryResponse) {
     const [blocks, updateBlockState] = useState([]);
+    const { data } = queryResponse;
 
     useEffect(() => {
-        const { data } = queryResponse;
         if (data) {
             // strip out unused GQL details
             const formattedContents = formatContents(data.page.contents);
             updateBlockState(formattedContents);
         }
-    }, [queryResponse]);
+    }, [data]);
 
     const addBlock = (blockType) => {
         const block = {
@@ -79,6 +105,7 @@ function useBlocks(queryResponse) {
 export default function EditorHooks() {
     const queryResponse = useDataFetch();
     const { blocks, addBlock, removeBlock, updateBlock } = useBlocks(queryResponse);
+    const { saveBlocks } = useSave(blocks);
 
     return (
         <Layout>
@@ -92,7 +119,7 @@ export default function EditorHooks() {
                 />
 
                 {/* block picker */}
-                <BlockPicker addBlock={addBlock} />
+                <BlockPicker addBlock={addBlock} saveBlocks={saveBlocks} />
             </div>
         </Layout>
     );

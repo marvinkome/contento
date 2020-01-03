@@ -78,12 +78,19 @@
         .block-list {
             margin-top: 3em;
 
-            .btn-primary-outline {
-                background: #ffffff;
+            .btn {
                 width: 80%;
-                color: var(--text-color);
                 text-transform: uppercase;
-                margin-bottom: 20px;
+
+                &.btn-primary-outline {
+                    background: #ffffff;
+                    color: var(--text-color);
+                    margin-bottom: 20px;
+                }
+
+                &.btn-primary {
+                    margin-top: 5em;
+                }
             }
         }
     }

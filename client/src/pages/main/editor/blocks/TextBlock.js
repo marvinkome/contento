@@ -17,11 +17,12 @@ export default class TextBlock extends React.Component {
     };
 
     renderBlockHeader = () => {
+        const { blockData } = this.props;
         return (
             <input
                 className="form-input flat"
                 type="text"
-                id="textBlockTitle"
+                id={`textBlockTitle-${blockData.id}`}
                 placeholder="Click name of this block e.g: Header Title"
                 onChange={this.onTitleChange}
                 value={this.props.blockData.name}
@@ -41,7 +42,7 @@ export default class TextBlock extends React.Component {
                     <textarea
                         className="form-input flat"
                         type="text"
-                        id="textBlockContent"
+                        id={blockData.id}
                         placeholder="Text content..."
                         onChange={this.onContentChange}
                         value={blockData.content}

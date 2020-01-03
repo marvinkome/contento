@@ -10,8 +10,8 @@ export default class MainEditor extends React.Component {
         return (
             <div className="main-editor">
                 {/* handle error and loading case */}
-                {loading && <p>Fetching pages...</p>}
-                {error && <p>Error fetching pages. {error.message}</p>}
+                {loading && <p>Fetching page contents...</p>}
+                {error && <p>Error page contents. {error.message}</p>}
 
                 {data && (
                     <React.Fragment>
@@ -20,26 +20,26 @@ export default class MainEditor extends React.Component {
                         <div className="blocks">
                             {blocks.map((block) => {
                                 switch (block.type) {
-                                    case 'TEXT':
-                                        return (
-                                            <Text
-                                                key={block.id}
-                                                blockData={block}
-                                                removeBlock={removeBlock}
-                                                updateBlock={updateBlock}
-                                            />
-                                        );
-                                    case 'MEDIA':
-                                        return (
-                                            <Media
-                                                key={block.id}
-                                                blockData={block}
-                                                removeBlock={removeBlock}
-                                                updateBlock={updateBlock}
-                                            />
-                                        );
-                                    default:
-                                        return null;
+                                case 'TEXT':
+                                    return (
+                                        <Text
+                                            key={block.id}
+                                            blockData={block}
+                                            removeBlock={removeBlock}
+                                            updateBlock={updateBlock}
+                                        />
+                                    );
+                                case 'MEDIA':
+                                    return (
+                                        <Media
+                                            key={block.id}
+                                            blockData={block}
+                                            removeBlock={removeBlock}
+                                            updateBlock={updateBlock}
+                                        />
+                                    );
+                                default:
+                                    return null;
                                 }
                             })}
 
