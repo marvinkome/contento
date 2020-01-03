@@ -14,7 +14,7 @@ export const typeDef = `
     addPage(name: String!): Page
     updatePage(id: ID!, name: String): Page
     deletePage(id: ID!): ID
-    updateContents(id: ID!, blocks: [BlockInput]): [Content]
+    updateContents(id: ID!, blocks: [BlockInput]): Page
 `;
 
 export const resolver = {
@@ -76,7 +76,7 @@ export const resolver = {
             page.contents = data.blocks;
             await page.save();
 
-            return page.contents;
+            return page;
         }
     )
 };
