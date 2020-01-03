@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { inject } from 'mobx-react';
-import { MdAccountCircle } from 'react-icons/md';
+import { MdAccountCircle, MdMenu } from 'react-icons/md';
 import logo from 'assets/logo.png';
 import './style.scss';
 
@@ -12,6 +12,7 @@ class Topbar extends React.Component {
         return (
             <div className="main__topbar">
                 <div className="logo-area">
+                    <MdMenu className="icon" />
                     <img src={logo} alt="logo" />
                 </div>
 

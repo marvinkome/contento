@@ -10,9 +10,16 @@
     .logo-area {
         width: 30%;
         padding: 0px 5%;
+        display: flex;
+        align-items: center;
 
         img {
             width: 200px;
+        }
+
+        .icon {
+            color: var(--brand-color);
+            font-size: 2em;
         }
     }
 
