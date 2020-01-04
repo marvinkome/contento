@@ -12,7 +12,7 @@ class Topbar extends React.Component {
         return (
             <div className="main__topbar">
                 <div className="logo-area">
-                    <MdMenu className="icon" />
+                    <MdMenu onClick={this.props.toggleSidebar} className="icon" />
                     <img src={logo} alt="logo" />
                 </div>
 

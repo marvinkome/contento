@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { MdFolder, MdChevronRight, MdClose } from 'react-icons/md';
 import './style.scss';
 
 export default class Sidebar extends React.Component {
+    sidebarRef = createRef();
+
+    closeMenu = (e) => {
+        // if current target being clicked is not the sidebar div then toggle
+        if (e.target !== this.sidebarRef.current) {
+            this.props.toggleSidebar();
+        }
+    };
+
     render() {
         return (
-            <div className="sidebar-bg">
-                <div className="sidebar">
+            <div onClick={this.closeMenu} className="sidebar-bg">
+                <div className="sidebar" ref={this.sidebarRef}>
                     <div className="sidebar-header">
                         <h3>Sites</h3>
 
