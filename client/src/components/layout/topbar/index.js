@@ -32,9 +32,8 @@ class Topbar extends React.Component {
 }
 
 const mapStateToProps = ({ rootStore }) => {
-    const { updateProfile, profile } = rootStore.userStore;
+    const { profile } = rootStore.userStore;
     return {
-        setProfile: updateProfile,
         profile
     };
 };

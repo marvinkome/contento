@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { AUTH_TOKEN_KEY } from 'libs/keys';
 import { mainClient, authApi } from 'libs/api';
 import { setupApollo } from 'libs/graphql';
+import { GET_SITES } from './graphql';
 
 // pages
 import NoSite from './noSite';
@@ -22,25 +23,10 @@ class Main extends React.Component {
         const auth_message = 'Auth key not found. Redirecting to login page';
 
         try {
-            // get token
-            const token = localStorage.getItem(AUTH_TOKEN_KEY);
-
-            if (!token) {
-                toast.error(auth_message);
-                throw Error(auth_message);
-            }
-
-            // setup apollo client
-            const { client } = setupApollo(token);
-            this.setState({ client });
-
-            // add token to api instance
-            mainClient.setAccessToken(token);
-
-            // fetch and set profile
-            const { data } = await authApi.userProfile();
-
-            this.props.setProfile(data.user);
+            // setup auth
+            const token = await this.setupAuth();
+            const client = this.setupApolloClient(token);
+            this.setupSites(client);
         } catch (e) {
             // If there's an auth error then redirect user back to login
             if (e.message === auth_message || (e.response && e.response.status === 401)) {
@@ -52,6 +38,53 @@ class Main extends React.Component {
         }
     }
 
+    setupAuth = async () => {
+        const auth_message = 'Auth key not found. Redirecting to login page';
+
+        // get token
+        const token = localStorage.getItem(AUTH_TOKEN_KEY);
+
+        if (!token) {
+            toast.error(auth_message);
+            throw Error(auth_message);
+        }
+
+        // add token to api instance
+        mainClient.setAccessToken(token);
+
+        // fetch and set profile
+        const { data } = await authApi.userProfile();
+
+        this.props.setProfile(data.user);
+
+        return token;
+    };
+
+    setupApolloClient = (token) => {
+        // setup apollo client
+        const { client } = setupApollo(token);
+        this.setState({ client });
+
+        return client;
+    };
+
+    setupSites = async (client) => {
+        const { data } = await client.query({ query: GET_SITES });
+
+        if (!data.sites.length) {
+            return this.props.history.push('/');
+        }
+
+        // add list of sites to store
+        this.props.addSites(data.sites);
+
+        // redirect to the last site in the list
+        const { id } = data.sites[data.sites.length - 1];
+
+        // redirect to last site in the list
+        return this.props.history.push(`/sites/${id}/pages`);
+    };
+
     render() {
         const { client } = this.state;
 
@@ -60,10 +93,10 @@ class Main extends React.Component {
                 <ApolloProvider client={client}>
                     <Switch>
                         {/* editor */}
-                        <Route exact path="/sites/:sideid/editor/:pageid" component={Editor} />
+                        <Route exact path="/sites/:siteid/editor/:pageid" component={Editor} />
 
                         {/* pages */}
-                        <Route exact path="/sites/:sideid/pages" component={Pages} />
+                        <Route exact path="/sites/:siteid/pages" component={Pages} />
 
                         {/* no sites */}
                         <Route exact path="/" component={NoSite} />
@@ -85,8 +118,11 @@ class Main extends React.Component {
 
 const mapStateToProps = ({ rootStore }) => {
     const { updateProfile, profile } = rootStore.userStore;
+    const { addSites } = rootStore.siteStore;
+
     return {
         setProfile: updateProfile,
+        addSites,
         profile
     };
 };

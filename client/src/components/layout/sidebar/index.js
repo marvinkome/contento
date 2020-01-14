@@ -1,9 +1,12 @@
 import React, { createRef } from 'react';
+import classnames from 'classnames';
+import { Link, withRouter } from 'react-router-dom';
+import { inject } from 'mobx-react';
 import { MdFolder, MdChevronRight, MdClose } from 'react-icons/md';
 import NoSite from 'components/noSite';
 import './style.scss';
 
-export default class Sidebar extends React.Component {
+class Sidebar extends React.Component {
     sidebarRef = createRef();
 
     closeMenu = (e) => {
@@ -15,6 +18,9 @@ export default class Sidebar extends React.Component {
     };
 
     render() {
+        const sites = this.props.sites;
+        const { siteid } = this.props.match.params;
+
         return (
             <div onClick={this.closeMenu} className="sidebar-bg">
                 <div className="sidebar" ref={this.sidebarRef}>
@@ -25,16 +31,26 @@ export default class Sidebar extends React.Component {
                     </div>
 
                     <div className="sidebar-body">
-                        {/* <a href="/sites/myid">
-                            <div>
-                                <MdFolder className="icon" />
-                                Site name
-                            </div>
+                        {/* if no sites available */}
+                        {!sites.length && (
+                            <NoSite className="no-sites-sidebar" cb={this.props.toggleSidebar} />
+                        )}
 
-                            <MdChevronRight className="icon" />
-                        </a> */}
+                        {sites.map((site) => (
+                            <Link
+                                onClick={this.props.toggleSidebar}
+                                key={site.id}
+                                to={`/sites/${site.id}/pages`}
+                                className={classnames({ active: siteid === site.id })}
+                            >
+                                <div>
+                                    <MdFolder className="icon" />
+                                    {site.name}
+                                </div>
 
-                        <NoSite className="no-sites-sidebar" cb={this.props.toggleSidebar} />
+                                <MdChevronRight className="icon" />
+                            </Link>
+                        ))}
                     </div>
                 </div>
 
@@ -45,3 +61,11 @@ export default class Sidebar extends React.Component {
         );
     }
 }
+
+const mapStateToProps = ({ rootStore }) => {
+    const { sites } = rootStore.siteStore;
+    return {
+        sites
+    };
+};
+export default inject(mapStateToProps)(withRouter(Sidebar));
