@@ -1,5 +1,6 @@
 import { authenticated } from '@libs/auth';
 import Page from '@models/pages';
+import Site from '@models/sites';
 import { IContext } from '@gql/index';
 
 export const inputDef = `
@@ -11,17 +12,29 @@ export const inputDef = `
 `;
 
 export const typeDef = `
-    addPage(name: String!): Page
+    addPage(name: String!, siteId: String!): Page
     updatePage(id: ID!, name: String): Page
-    deletePage(id: ID!): ID
+    deletePage(id: ID!, siteId: String!): ID
     updateContents(id: ID!, blocks: [BlockInput]): Page
 `;
 
 export const resolver = {
     addPage: authenticated(async (_: any, data: any, context: IContext) => {
+        // get site
+        const site = await Site.findOne({
+            _id: data.siteId,
+            owner: context.currentUser
+        });
+
+        if (!site) {
+            throw Error(
+                'Site not found, possibly deleted or belongs to another user'
+            );
+        }
+
         const page = new Page({
             name: data.name,
-            owner: context.currentUser
+            site: site.id
         });
 
         return page.save();
@@ -45,9 +58,21 @@ export const resolver = {
     }),
 
     deletePage: authenticated(async (_: any, data: any, context: IContext) => {
+        // get site
+        const site = await Site.findOne({
+            _id: data.siteId,
+            owner: context.currentUser
+        });
+
+        if (!site) {
+            throw Error(
+                'Site not found, possibly deleted or belongs to another user'
+            );
+        }
+
         const page = await Page.findOne({
             _id: data.id,
-            owner: context.currentUser
+            site: site.id
         });
 
         if (!page) {

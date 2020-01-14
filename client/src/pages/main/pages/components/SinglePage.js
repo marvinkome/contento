@@ -1,21 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 import { FiTrash2 } from 'react-icons/fi';
-import { DELETE_PAGE, GET_PAGES } from '../graphql';
+import { DELETE_PAGE, GET_SITE_PAGES } from '../graphql';
 
 export default function SinglePage({ page }) {
+    const { siteid } = useParams();
+
     const [deletePage] = useMutation(DELETE_PAGE, {
+        // update after mutation
         update(cache, { data }) {
             // read current data from cache
-            const { pages } = cache.readQuery({ query: GET_PAGES });
+            const { site } = cache.readQuery({ query: GET_SITE_PAGES, variables: { siteid } });
 
             // re-write cache with new data from mutation
             cache.writeQuery({
-                query: GET_PAGES,
-                data: { pages: pages.filter((page) => page.id !== data.deletePage) }
+                query: GET_SITE_PAGES,
+                data: {
+                    site: {
+                        ...site,
+                        pages: site.pages.filter((page) => page.id !== data.deletePage)
+                    }
+                }
             });
-        }
+        },
+
+        // variable
+        variables: { siteid }
     });
 
     return (

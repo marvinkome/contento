@@ -1,4 +1,5 @@
 import React from 'react';
+import { MdKeyboardArrowRight } from 'react-icons/md';
 import SinglePage from './SinglePage';
 
 export default class MainSection extends React.Component {
@@ -21,23 +22,35 @@ export default class MainSection extends React.Component {
     render() {
         const { loading, error, data } = this.props.response;
 
+        if (loading) {
+            return (
+                <div className="all_pages_section">
+                    <p>Fetching pages...</p>
+                </div>
+            );
+        }
+
+        if (error) {
+            return (
+                <div className="all_pages_section">
+                    <p>Error fetching pages. {error.message}</p>
+                </div>
+            );
+        }
+
+        // handle data
+        const site = data?.site;
+
         return (
             <div className="all_pages_section">
-                <h2>All Pages</h2>
+                <h2>
+                    {site?.name} <MdKeyboardArrowRight className="icon" /> All Pages
+                </h2>
 
                 <div className="all-pages__list">
-                    {/* handle error and loading case */}
-                    {loading && <p>Fetching pages...</p>}
-                    {error && <p>Error fetching pages. {error.message}</p>}
+                    {!site?.pages.length && this.renderListEmpty()}
 
-                    {/* handle data case */}
-                    {data && (
-                        <React.Fragment>
-                            {data.pages.length
-                                ? data.pages.map((page) => <SinglePage key={page.id} page={page} />)
-                                : this.renderListEmpty()}
-                        </React.Fragment>
-                    )}
+                    {site?.pages?.map((page) => <SinglePage key={page.id} page={page} />)}
                 </div>
             </div>
         );
