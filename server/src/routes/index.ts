@@ -11,7 +11,7 @@ const router = Router();
 function generateJWT(user: IUser) {
     const today = new Date();
     const expirationDate = new Date(today);
-    expirationDate.setDate(today.getDate() + 60);
+    expirationDate.setDate(today.getDate() + 30); // set to expire in 30 days
 
     return jwt.sign(
         {
