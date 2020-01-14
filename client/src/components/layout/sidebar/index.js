@@ -1,13 +1,15 @@
-import React, { createRef } from 'react';
-import classnames from 'classnames';
-import { Link, withRouter } from 'react-router-dom';
-import { inject } from 'mobx-react';
-import { MdFolder, MdChevronRight, MdClose } from 'react-icons/md';
+import React from 'react';
 import NoSite from 'components/noSite';
+import classnames from 'classnames';
+import { inject } from 'mobx-react';
+import { openModal } from 'components/modal';
+import { Link, withRouter } from 'react-router-dom';
+import { MdFolder, MdChevronRight, MdClose } from 'react-icons/md';
+
 import './style.scss';
 
 class Sidebar extends React.Component {
-    sidebarRef = createRef();
+    sidebarRef = React.createRef();
 
     closeMenu = (e) => {
         // if current target being clicked is not the sidebar div
@@ -15,6 +17,12 @@ class Sidebar extends React.Component {
         if (e.target !== this.sidebarRef.current && !this.sidebarRef.current.contains(e.target)) {
             this.props.toggleSidebar();
         }
+    };
+
+    showCreateSiteModal = (e) => {
+        e.preventDefault();
+        openModal();
+        this.props.toggleSidebar();
     };
 
     render() {
@@ -27,7 +35,7 @@ class Sidebar extends React.Component {
                     <div className="sidebar-header">
                         <h3>Sites</h3>
 
-                        <a href="/create-site">+ Create site</a>
+                        <p onClick={this.showCreateSiteModal}>+ Create site</p>
                     </div>
 
                     <div className="sidebar-body">

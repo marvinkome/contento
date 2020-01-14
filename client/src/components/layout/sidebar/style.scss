@@ -37,8 +37,10 @@
             padding-bottom: 10px;
             border-bottom: 1px solid var(--grey2);
 
-            a {
+            p {
                 text-decoration: underline;
+                color: var(--blue-color);
+                cursor: pointer;
             }
         }
 
