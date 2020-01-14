@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from 'components/modal';
 import { Switch, Route } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { inject } from 'mobx-react';
@@ -9,7 +10,6 @@ import { setupApollo } from 'libs/graphql';
 
 // pages
 import NoSite from './noSite';
-import Sites from './sites';
 import Pages from './pages';
 import Editor from './editor';
 
@@ -65,15 +65,14 @@ class Main extends React.Component {
                         {/* pages */}
                         <Route exact path="/sites/:sideid/pages" component={Pages} />
 
-                        {/* sites */}
-                        <Route exact path="/sites/:siteid" component={Sites} />
-
                         {/* no sites */}
                         <Route exact path="/" component={NoSite} />
 
                         {/* 404 */}
                         <Route path="*" render={() => <p>Future 404 page</p>} />
                     </Switch>
+
+                    <Modal />
                 </ApolloProvider>
             </div>
         ) : (
