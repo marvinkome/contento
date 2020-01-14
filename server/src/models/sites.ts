@@ -1,30 +1,27 @@
 import { Schema, model, Document } from 'mongoose';
-import { contentSchema, IContent } from './content';
 
-export interface IPage extends Document {
+export interface ISite extends Document {
     name: string;
-    site: Schema.Types.ObjectId;
-    contents: [IContent];
+    owner: Schema.Types.ObjectId;
     createdAt: string;
     updatedAt: string;
 }
 
-export const pageSchema: Schema<IPage> = new Schema(
+export const siteSchema: Schema<ISite> = new Schema(
     {
         name: {
             type: String,
             minlength: 3,
             required: true
         },
-        site: {
+        owner: {
             type: Schema.Types.ObjectId,
             ref: 'User'
-        },
-        contents: [contentSchema]
+        }
     },
     {
         timestamps: true
     }
 );
 
-export default model<IPage>('Page', pageSchema);
+export default model<ISite>('Site', siteSchema);

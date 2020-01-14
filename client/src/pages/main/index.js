@@ -8,6 +8,8 @@ import { mainClient, authApi } from 'libs/api';
 import { setupApollo } from 'libs/graphql';
 
 // pages
+import NoSite from './noSite';
+import Sites from './sites';
 import Pages from './pages';
 import Editor from './editor';
 
@@ -58,10 +60,16 @@ class Main extends React.Component {
                 <ApolloProvider client={client}>
                     <Switch>
                         {/* editor */}
-                        <Route exact path="/editor/:pageid" component={Editor} />
+                        <Route exact path="/sites/:sideid/editor/:pageid" component={Editor} />
 
                         {/* pages */}
-                        <Route exact path="/" component={Pages} />
+                        <Route exact path="/sites/:sideid/pages" component={Pages} />
+
+                        {/* sites */}
+                        <Route exact path="/sites/:siteid" component={Sites} />
+
+                        {/* no sites */}
+                        <Route exact path="/" component={NoSite} />
 
                         {/* 404 */}
                         <Route path="*" render={() => <p>Future 404 page</p>} />

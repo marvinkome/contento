@@ -3,6 +3,7 @@ import { IContext } from '@gql/index';
 import { authenticated } from '@libs/auth';
 
 import Page from '@models/pages';
+import Site from '@models/sites';
 
 export const queryType = gql`
     type Query {
@@ -10,6 +11,8 @@ export const queryType = gql`
         user: User
         pages: [Page]
         page(id: String): Page
+        sites: [Site]
+        site(id: String): Site
     }
 `;
 
@@ -24,6 +27,9 @@ export const queryResolver = {
         }),
         page: authenticated(async (_: any, { id }: { id: string }, context: IContext) => {
             return Page.findOne({ owner: context.currentUser?.id, _id: id });
+        }),
+        sites: authenticated(async (_: any, __: any, context: IContext) => {
+            return Site.find({ owner: context.currentUser?.id });
         })
     }
 };

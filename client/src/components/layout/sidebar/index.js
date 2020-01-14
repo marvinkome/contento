@@ -1,13 +1,15 @@
 import React, { createRef } from 'react';
 import { MdFolder, MdChevronRight, MdClose } from 'react-icons/md';
+import NoSite from 'components/noSite';
 import './style.scss';
 
 export default class Sidebar extends React.Component {
     sidebarRef = createRef();
 
     closeMenu = (e) => {
-        // if current target being clicked is not the sidebar div then toggle
-        if (e.target !== this.sidebarRef.current) {
+        // if current target being clicked is not the sidebar div
+        // and is not a child of the sidebar div, then toggle
+        if (e.target !== this.sidebarRef.current && !this.sidebarRef.current.contains(e.target)) {
             this.props.toggleSidebar();
         }
     };
@@ -23,23 +25,16 @@ export default class Sidebar extends React.Component {
                     </div>
 
                     <div className="sidebar-body">
-                        <a href="/sites/myid">
+                        {/* <a href="/sites/myid">
                             <div>
                                 <MdFolder className="icon" />
                                 Site name
                             </div>
 
                             <MdChevronRight className="icon" />
-                        </a>
+                        </a> */}
 
-                        <a href="/sites/myid">
-                            <div>
-                                <MdFolder className="icon" />
-                                Site name
-                            </div>
-
-                            <MdChevronRight className="icon" />
-                        </a>
+                        <NoSite className="no-sites-sidebar" cb={this.props.toggleSidebar} />
                     </div>
                 </div>
 

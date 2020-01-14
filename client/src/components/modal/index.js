@@ -1,74 +1,14 @@
 import React, { createRef } from 'react';
-import { MdClear } from 'react-icons/md';
+import CreateSiteForm from './createSite';
+import ModalEventManager from './modalManager';
 import './style.scss';
 
-// variables
-const EVENTS = [];
-const MODAL_OPEN = 'OPEN MODAL';
-
-// implement Event Bus
-class ModalEventManager {
-    subscriptions = new Map();
-    openedModals = [];
-
-    modalIsOpen = () => this.openedModals.length > 0;
-
-    subscribe = (event, callback) => {
-        const id = Symbol();
-
-        // create new event if it's not available
-        if (!this.subscriptions.get(event)) {
-            this.subscriptions.set(event, new Map());
-        }
-
-        // register callback
-        this.subscriptions.get(event).set(id, callback);
-
-        return {
-            unsubscribe: () => {
-                // remove callback
-                this.subscriptions.get(event).delete(id);
-
-                if (Object.keys(this.subscriptions.get(event)).length === 0) {
-                    this.subscriptions.delete(event);
-                }
-            }
-        };
-    };
-
-    publish = (event, ...args) => {
-        if (!this.subscriptions.has(event)) {
-            return;
-        }
-
-        // go through each subscription and call each one
-        this.subscriptions.get(event).forEach((callback) => callback.call(null, ...args));
-    };
-
-    openModal = () => {
-        const id = Symbol();
-
-        // add id to list of opened modals
-        this.openedModals.push(id);
-
-        // emit to open modal
-        this.publish(MODAL_OPEN, this.modalIsOpen(), id);
-
-        // return callback
-        return () => closeModal(id);
-    };
-
-    closeModal = (id) => {
-        // get id of modal
-        const idx = this.openedModals.indexOf(id);
-        idx > -1 && this.openedModals.splice(idx, 1);
-
-        // emit to open modal
-        this.publish(MODAL_OPEN, this.modalIsOpen());
-    };
-}
-
+// setup manager
 const modalManager = new ModalEventManager();
+const EVENTS = []; // list of all mounted modals
+const MODAL_OPEN = 'OPEN MODAL'; // event
+
+// export toggle methods
 export const openModal = () => modalManager.openModal();
 export const closeModal = (id) => modalManager.closeModal(id);
 
@@ -116,27 +56,10 @@ export default class ModalManager extends React.Component {
         return (
             this.state.isOpen && (
                 <div className="modal-container" onClick={this.closeModal}>
-                    <div className="modal" ref={this.modalRef}>
-                        <div className="modal-header">
-                            <h2>Create a new site</h2>
-
-                            <MdClear className="icon" onClick={this.props.closeModal} />
-                        </div>
-
-                        <div className="modal-body">
-                            <form>
-                                <input
-                                    className="form-input flat"
-                                    type="text"
-                                    placeholder="Site name"
-                                    required
-                                />
-                                <button className="btn btn-primary" type="submit">
-                                    Create Site
-                                </button>
-                            </form>
-                        </div>
-                    </div>
+                    <CreateSiteForm
+                        modalRef={this.modalRef}
+                        closeModal={() => closeModal(this.state.currentEventId)}
+                    />
                 </div>
             )
         );

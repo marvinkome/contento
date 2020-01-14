@@ -3,6 +3,7 @@ import { Provider } from 'mobx-react';
 import { Router, Switch, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Loader from 'components/loader';
+import Modal from 'components/modal';
 
 // styles
 import 'react-toastify/dist/ReactToastify.css';
@@ -26,6 +27,7 @@ export default class App extends React.Component {
                             <Route path="/" component={Main} />
                         </Switch>
 
+                        <Modal />
                         <Loader />
                         <ToastContainer />
                     </div>
