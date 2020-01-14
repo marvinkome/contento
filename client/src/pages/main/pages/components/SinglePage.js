@@ -33,7 +33,7 @@ export default function SinglePage({ page }) {
         <div className="page">
             <div className="page-title">
                 <Link
-                    to={`/editor/${page.id}`}
+                    to={`/sites/${siteid}/editor/${page.id}`}
                     title={`Click to add contents to ${page.name} page`}
                 >
                     {page.name}
