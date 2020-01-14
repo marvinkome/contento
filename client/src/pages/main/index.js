@@ -62,7 +62,7 @@ class Main extends React.Component {
 
     setupApolloClient = (token) => {
         // setup apollo client
-        const { client } = setupApollo(token);
+        const client = setupApollo(token);
         this.setState({ client });
 
         return client;

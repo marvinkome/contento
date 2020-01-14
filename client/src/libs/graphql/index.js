@@ -1,15 +1,13 @@
-import ApolloClient from 'apollo-boost';
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloLink } from 'apollo-link';
+import { onErrorLink, httpLink, authLink, loaderLink } from './links';
 
 export const setupApollo = (token) => {
     const client = new ApolloClient({
-        request: (operation) => {
-            operation.setContext({
-                headers: {
-                    authorization: token ? `Bearer ${token}` : ''
-                }
-            });
-        }
+        link: ApolloLink.from([onErrorLink, loaderLink, authLink(token), httpLink]),
+        cache: new InMemoryCache()
     });
 
-    return { client };
+    return client;
 };

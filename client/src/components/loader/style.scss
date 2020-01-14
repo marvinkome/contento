@@ -2,7 +2,7 @@ $loader-line-height: 3px;
 $animation-speed: 1s;
 $color-main: #fefefe;
 $primary: #3d3d3d;
-$secondary: #f00;
+$secondary: var(--brand-color);
 
 .xhr-loader {
     $color-main: $primary;
