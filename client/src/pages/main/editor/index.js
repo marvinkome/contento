@@ -30,9 +30,9 @@ function formatContentsForSave(contents) {
 /* === Custom Hooks ==== */
 
 function useDataFetch() {
-    const { pageid } = useParams();
+    const { pageid, siteid } = useParams();
     const queryResponse = useQuery(GET_PAGE, {
-        variables: { pageId: pageid }
+        variables: { pageid, siteid }
     });
 
     return queryResponse;
@@ -40,7 +40,7 @@ function useDataFetch() {
 
 function useSave(blocks) {
     const [saveBlocks] = useMutation(SAVE_BLOCKS);
-    const { pageid } = useParams();
+    const { pageid, siteid } = useParams();
 
     return {
         saveBlocks: () => {
@@ -48,6 +48,7 @@ function useSave(blocks) {
             saveBlocks({
                 variables: {
                     pageid,
+                    siteid,
                     blocks: formatContentsForSave(blocks)
                 }
             });

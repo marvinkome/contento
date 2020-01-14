@@ -82,7 +82,10 @@ class Main extends React.Component {
         const { id } = data.sites[data.sites.length - 1];
 
         // redirect to last site in the list
-        return this.props.history.push(`/sites/${id}/pages`);
+        // check if it's the home page
+        if (this.props.location.pathname === '/') {
+            return this.props.history.push(`/sites/${id}/pages`);
+        }
     };
 
     render() {

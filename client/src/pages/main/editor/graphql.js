@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const GET_PAGE = gql`
-    query GetPage($pageId: String) {
-        page(id: $pageId) {
+    query GetPage($pageid: String, $siteid: String) {
+        page(id: $pageid, siteId: $siteid) {
             id
             name
             contents {
@@ -16,8 +16,8 @@ export const GET_PAGE = gql`
 `;
 
 export const SAVE_BLOCKS = gql`
-    mutation AddBlocksToPage($pageid: ID!, $blocks: [BlockInput!]) {
-        updateContents(id: $pageid, blocks: $blocks) {
+    mutation AddBlocksToPage($pageid: ID!, $siteid: ID!, $blocks: [BlockInput!]) {
+        updateContents(id: $pageid, siteId: $siteid, blocks: $blocks) {
             id
             contents {
                 id

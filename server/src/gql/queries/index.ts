@@ -12,7 +12,7 @@ export const queryType = gql`
         sites: [Site]
         site(id: String): Site
         pages(siteId: String): [Page]
-        page(id: String): Page
+        page(id: String, siteId: String): Page
     }
 `;
 
@@ -34,17 +34,24 @@ export const queryResolver = {
 
         pages: authenticated(async (_: any, {siteId}: any, context: IContext) => {
             // find pages for the site where owner matches current users
-            const site = Site.findOne({ _id: siteId, owner: context.currentUser?.id });
+            const site = await Site.findOne({ _id: siteId, owner: context.currentUser?.id });
 
             if (!site) {
                 throw Error('Site not found, possibly deleted or belongs to another user');
             }
 
-            return Page.find({ site: siteId });
+            return Page.find({ site: site.id });
         }),
 
-        page: authenticated(async (_: any, { id }: { id: string }, context: IContext) => {
-            return Page.findOne({ owner: context.currentUser?.id, _id: id });
+        page: authenticated(async (_: any, { id, siteId }: { id: string, siteId: string }, context: IContext) => {
+            // find pages for the site where owner matches current users
+            const site = await Site.findOne({ _id: siteId, owner: context.currentUser?.id });
+
+            if (!site) {
+                throw Error('Site not found, possibly deleted or belongs to another user');
+            }
+
+            return Page.findOne({ site: site.id, _id: id });
         }),
     }
 };

@@ -15,7 +15,7 @@ export const typeDef = `
     addPage(name: String!, siteId: String!): Page
     updatePage(id: ID!, name: String): Page
     deletePage(id: ID!, siteId: String!): ID
-    updateContents(id: ID!, blocks: [BlockInput]): Page
+    updateContents(id: ID! siteId: ID!, blocks: [BlockInput]): Page
 `;
 
 export const resolver = {
@@ -89,7 +89,7 @@ export const resolver = {
         async (_: any, data: any, context: IContext) => {
             const page = await Page.findOne({
                 _id: data.id,
-                owner: context.currentUser
+                site: data.siteId
             });
 
             if (!page) {
