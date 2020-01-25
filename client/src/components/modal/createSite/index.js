@@ -16,7 +16,7 @@ export default function CreateSiteForm(props) {
 
         input.value = '';
 
-        // redirect to created site
+        // TODO:: redirect to created site
         console.log(data?.addSite.id);
     };
 
