@@ -7,12 +7,6 @@ import auth, { generateJWT } from '@libs/auth';
 const router = Router();
 
 // all rest api routes
-router.get('/', auth.optional, (req, res) => {
-    res.send({
-        message: 'Hello friend!! You have reached the api for stark cms'
-    });
-});
-
 router.get('/my-profile', auth.required, async (req, res) => {
     // @ts-ignore
     const { id } = req.payload;
@@ -51,26 +45,22 @@ router.post('/register', auth.optional, async (req, res) => {
 });
 
 router.post('/login', auth.optional, (req, res, next) => {
-    return passport.authenticate(
-        'local',
-        { session: false },
-        (err, user: IUser, info) => {
-            if (err) {
-                return next(err);
-            }
+    return passport.authenticate('local', { session: false }, (err, user: IUser, info) => {
+        if (err) {
+            return next(err);
+        }
 
-            if (user) {
-                return res.send({
-                    token: generateJWT(user),
-                    user
-                });
-            }
-
-            return res.status(400).send({
-                error: info
+        if (user) {
+            return res.send({
+                token: generateJWT(user),
+                user
             });
         }
-    )(req, res, next);
+
+        return res.status(400).send({
+            error: info
+        });
+    })(req, res, next);
 });
 
 router.post('/google', auth.optional, (req, res, next) => {

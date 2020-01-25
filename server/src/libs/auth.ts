@@ -1,11 +1,12 @@
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
 import expressJWT from 'express-jwt';
+import moment from 'moment';
 import Strategies from './strategies';
-import { Request } from 'express';
-
+import { Request, Response } from 'express';
 import { IContext } from '@gql/index';
 import User, { IUser } from '@models/users';
+import Site from '@models/sites';
 
 export function setup_auth() {
     passport.use(Strategies.localStrategy);
@@ -63,6 +64,55 @@ export function authenticated(next: (...args: any[]) => any) {
 
         return next(root, args, context, info);
     };
+}
+
+export async function authorizedToSite(req: Request, res: Response, next: (...args: any[]) => any) {
+    // check if JWT token passed is valid
+    const token = getTokenFromHeaders(req);
+
+    if (!token) {
+        return res.status(401).send({
+            error: {
+                message: 'Token is required to access data'
+            }
+        });
+    }
+
+    // decode token
+    let payload: any = null;
+    try {
+        payload = jwt.verify(token, process.env.APP_KEY || '');
+    } catch (e) {
+        return res.status(400).send({
+            error: {
+                message: 'Invalid access token. Go to your app to get a new token'
+            }
+        });
+    }
+
+    // get site
+    const site = await Site.findById(payload.id);
+    if (!site) {
+        return res.status(401).send({
+            error: {
+                message: 'Invalid access token. Go to your app to get a new token'
+            }
+        });
+    }
+
+    // check the token date is after site last token reset time
+    // convert from seconds to miliseconds
+    const valid = moment(payload.iat * 1000).isAfter(site.lastTokenReset);
+
+    if (!valid) {
+        return res.status(401).send({
+            error: {
+                message: 'Invalid access token. Go to your app to get a new token'
+            }
+        });
+    }
+
+    return next();
 }
 
 export default {
