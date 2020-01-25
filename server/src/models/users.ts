@@ -5,25 +5,23 @@ export interface IUser extends Document {
     email: string;
     username: string;
     password: string;
+    googleId: string;
+    profile: { name: string; picture: string; location: string };
     verify_password: (password: string) => Promise<boolean>;
 }
 
 export const userSchema: Schema<IUser> = new Schema({
-    username: {
-        type: String,
-        unique: true,
-        minlength: 3,
-        required: true
-    },
     email: {
         type: String,
-        unique: true,
-        minlength: 3,
-        required: true
+        unique: true
     },
-    password: {
-        type: String,
-        required: true
+    password: String,
+    googleId: String,
+
+    profile: {
+        name: String,
+        picture: String,
+        location: String
     }
 });
 

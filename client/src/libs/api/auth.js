@@ -11,10 +11,14 @@ export default class AuthClient {
     }
 
     userProfile() {
-        return this.client.get('/my-profile');
+        return this.client.get('/auth/my-profile');
     }
 
     login(data) {
-        return this.client.post('/login', data);
+        return this.client.post('/auth/login', data);
+    }
+
+    loginGoogle(data) {
+        return this.client.post('/auth/google', data);
     }
 }

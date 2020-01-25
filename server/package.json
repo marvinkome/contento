@@ -19,6 +19,8 @@
         "module-alias": "^2.2.0",
         "mongoose": "^5.5.13",
         "passport": "^0.4.0",
+        "passport-google-oauth": "^2.0.0",
+        "passport-google-token": "^0.1.2",
         "passport-local": "^1.0.0",
         "tslint": "^5.20.1"
     },
@@ -30,6 +32,7 @@
         "@types/jsonwebtoken": "^8.3.2",
         "@types/mongoose": "^5.5.5",
         "@types/passport": "^1.0.0",
+        "@types/passport-google-oauth": "^1.0.41",
         "@types/passport-local": "^1.0.33",
         "tsconfig-paths": "^3.8.0",
         "typescript": "^3.7.2"

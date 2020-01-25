@@ -8,14 +8,26 @@ import LoginForm from './components/loginForm';
 import './styles.scss';
 
 class LoginPage extends React.Component {
-    loginUser = async (userData) => {
-        const { data } = await authApi.login(userData);
+    loginUser = async (data, authType) => {
+        let resp;
+
+        if (authType === 'local') {
+            resp = await authApi.login(data);
+        } else if (authType === 'google') {
+            resp = await authApi.loginGoogle({
+                access_token: data.accessToken
+            });
+        } else if (authType === 'github') {
+            //
+        }
+
+        if (!resp) return;
 
         // set token on localstorage
-        localStorage.setItem(AUTH_TOKEN_KEY, data.token);
+        localStorage.setItem(AUTH_TOKEN_KEY, resp.data.token);
 
         // add user profile to store
-        this.props.setProfile(data.user);
+        this.props.setProfile(resp.data.user);
 
         // redirect to dashboard
         this.props.history.push('/admin');
