@@ -8,12 +8,15 @@
   "scripts": {
     "build-server": "cd server && yarn install --network-concurrency 1 && yarn build",
     "build-client": "cd client && yarn install --network-concurrency 1 && yarn build",
+    "build-demo": "cd demo && yarn install --network-concurrency 1 && yarn build",
     "prod-server": "cd server && yarn start",
     "prod-client": "cd client && yarn start",
+    "prod-demo": "cd demo && yarn start",
     "dev-server": "cd server && yarn dev",
     "dev-client": "cd client && yarn start",
+    "dev-demo": "cd demo && yarn start",
     "start": "yarn prod-server",
-    "dev": "concurrently --kill-others-on-fail \"yarn dev-server\" \"yarn dev-client\"",
+    "dev": "concurrently --kill-others-on-fail \"yarn dev-server\" \"yarn dev-client\" \"yarn dev-demo\"",
     "heroku-postbuild": "yarn cache clean && concurrently --kill-others-on-fail \"yarn build-client\" \"yarn build-server\""
   },
   "dependencies": {
