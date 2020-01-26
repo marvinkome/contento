@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // main pages
 import Login from 'pages/login';
+import Register from 'pages/register';
 import Main from 'pages/main';
 
 // global variables
@@ -23,6 +24,7 @@ export default class App extends React.Component {
                     <div className="app">
                         <Switch>
                             <Route exact path="/login" component={Login} />
+                            <Route exact path="/register" component={Register} />
                             <Route path="/" component={Main} />
                         </Switch>
 

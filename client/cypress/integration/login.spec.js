@@ -1,6 +1,6 @@
-describe('Registration Page', () => {
+describe('Login Page', () => {
     beforeEach(() => {
-        cy.visit('/register');
+        cy.visit('/login');
     });
 
     it('should display registration form', () => {});
