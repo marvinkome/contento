@@ -1,6 +1,7 @@
 import React from 'react';
 import svg1 from 'assets/auth-svg1.svg';
 import svg2 from 'assets/auth-svg2.svg';
+import './styles.scss';
 
 export default function AboutSection() {
     return (

@@ -8,8 +8,8 @@ import Loader from 'components/loader';
 import 'react-toastify/dist/ReactToastify.css';
 
 // main pages
-import Login from 'pages/login';
-import Register from 'pages/register';
+import Login from 'pages/auth/login';
+import Register from 'pages/auth/register';
 import Main from 'pages/main';
 
 // global variables
