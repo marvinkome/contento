@@ -41,7 +41,7 @@ class Topbar extends React.Component {
                     <div className="notif-content">
                         {profile && (
                             <div className="profile-link">
-                                Howdy, {profile.profile.name}
+                                Howdy, {profile.profile?.name}
                                 <MdAccountCircle className="icon account-icon" />
                                 <MdKeyboardArrowDown
                                     onClick={this.toggleDropdown}

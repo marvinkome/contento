@@ -25,7 +25,6 @@ router.post('/register', auth.optional, async (req, res) => {
 
     try {
         const user = new User({
-            username: data.username,
             email: data.email,
             password: data.password
         });
