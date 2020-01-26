@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import apolloServer from '@gql/index';
 import { connect } from 'mongoose';
 
@@ -23,6 +24,7 @@ export default function createApp() {
     // body parser
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(cors());
 
     // setup graphql
     apolloServer.applyMiddleware({ app });
