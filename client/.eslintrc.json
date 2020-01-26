@@ -5,7 +5,7 @@
         "es6": true,
         "jest": true
     },
-    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:cypress/recommended"],
     "parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
@@ -14,7 +14,7 @@
         },
         "sourceType": "module"
     },
-    "plugins": ["react"],
+    "plugins": ["react", "cypress"],
     "rules": {
         "indent": ["error", 4],
         "linebreak-style": ["error", "unix"],
