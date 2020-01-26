@@ -1,0 +1,5 @@
+export default {
+    CONTENTO_API_KEY: '5e1e03e17879c1a6072cb857',
+    CONTENTO_API_SECRET:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMWUwM2UxNzg3OWMxYTYwNzJjYjg1NyIsImlhdCI6MTU3OTk5MDYxOX0.gyQEWpooAqzWCKJOxHFxtxrayPeR-g2o39mbWQd-c8g'
+};

@@ -2,9 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from 'libs/serviceWorker';
 import Home from 'pages/Home';
-import './styles/index.scss';
+import { ToastContainer } from 'react-toastify';
 
-ReactDOM.render(<Home />, document.getElementById('root'));
+// styles
+import './styles/index.scss';
+import 'react-toastify/dist/ReactToastify.css';
+
+ReactDOM.render(
+    <div>
+        <Home />
+        <ToastContainer />
+    </div>,
+    document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

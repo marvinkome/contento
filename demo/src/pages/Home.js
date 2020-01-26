@@ -1,15 +1,31 @@
 import React from 'react';
+import { mainApi } from 'libs/api';
 
 export default class HomePage extends React.Component {
-    componentDidMount() {
+    state = {
+        data: null
+    };
+
+    async componentDidMount() {
         // fetch the contents for this page
+        const { data } = await mainApi.getPage('home');
+
+        if (data) {
+            this.setState({ data });
+        }
     }
 
     render() {
+        const { data } = this.state;
+
+        if (!data) {
+            return <p>Loading contents</p>;
+        }
+
         return (
             <div className="home-page">
                 <header>
-                    <h1>This is the header title</h1>
+                    <h1>{data.contents['header_title'].content}</h1>
                     <p>This is the header sub title</p>
                 </header>
 
