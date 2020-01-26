@@ -3,6 +3,7 @@ import { contentSchema, IContent } from './content';
 
 export interface IPage extends Document {
     name: string;
+    slug: string;
     site: Schema.Types.ObjectId;
     contents: [IContent];
     createdAt: string;
@@ -14,6 +15,12 @@ export const pageSchema: Schema<IPage> = new Schema(
         name: {
             type: String,
             minlength: 3,
+            required: true
+        },
+        slug: {
+            type: String,
+            minlength: 3,
+            unique: true,
             required: true
         },
         site: {

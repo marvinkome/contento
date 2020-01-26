@@ -9,6 +9,7 @@
         "dev": "nodemon --exec ts-node -r dotenv/config -r tsconfig-paths/register index.ts"
     },
     "dependencies": {
+        "@types/shortid": "^0.0.29",
         "apollo-server-express": "^2.6.1",
         "bcrypt": "^3.0.6",
         "dotenv": "^8.0.0",
@@ -23,6 +24,7 @@
         "passport-google-oauth": "^2.0.0",
         "passport-google-token": "^0.1.2",
         "passport-local": "^1.0.0",
+        "shortid": "^2.2.15",
         "tslint": "^5.20.1"
     },
     "devDependencies": {

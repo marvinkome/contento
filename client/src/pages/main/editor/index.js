@@ -74,6 +74,7 @@ function useBlocks(queryResponse) {
             id: `${Math.floor(Math.random() * 1000)}`,
             type: blockType,
             name: '',
+            slug: '',
             content: ''
         };
 
@@ -88,7 +89,13 @@ function useBlocks(queryResponse) {
         updateBlockState(
             blocks.map((block) => {
                 if (block.id === blockId) {
-                    return Object.assign({}, block, { [blockField]: fieldValue });
+                    // return Object.assign({}, block, { [blockField]: fieldValue });
+                    return {
+                        ...block,
+                        [blockField]: fieldValue,
+                        // conditionaly update slug
+                        ...(blockField === 'name' ? { slug: fieldValue } : {})
+                    };
                 }
                 return block;
             })

@@ -58,7 +58,8 @@ router.get('/sites/:siteid/pages', authorizedToSite, async (req, res, next) => {
                 createdAt: page.createdAt,
                 updatedAt: page.updatedAt
             },
-            name: page.name
+            name: page.name,
+            slug: page.slug
         }))
     });
 });
@@ -69,8 +70,8 @@ router.get('/sites/:siteid/pages', authorizedToSite, async (req, res, next) => {
  * @param siteid: ID of the site to retrieve
  * @param pageid: ID of the page to retrieve
  */
-router.get('/sites/:siteid/pages/:pageid', authorizedToSite, async (req, res, next) => {
-    const page = await Page.findOne({ _id: req.params.pageid, site: req.params.siteid });
+router.get('/sites/:siteid/pages/:page_slug', authorizedToSite, async (req, res, next) => {
+    const page = await Page.findOne({ slug: req.params.page_slug, site: req.params.siteid });
 
     if (!page) {
         const error = handleError(404, 'Page not found');
@@ -85,6 +86,7 @@ router.get('/sites/:siteid/pages/:pageid', authorizedToSite, async (req, res, ne
             updatedAt: page.updatedAt
         },
         name: page.name,
+        slug: page.slug,
         contents: page.contents.map((content) => ({
             meta: {
                 type: 'Content',

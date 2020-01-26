@@ -8,6 +8,7 @@ export const GET_SITE_PAGES = gql`
             pages {
                 id
                 name
+                slug
             }
         }
     }
@@ -18,6 +19,7 @@ export const ADD_PAGE = gql`
         addPage(name: $name, siteId: $siteid) {
             id
             name
+            slug
         }
     }
 `;

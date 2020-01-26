@@ -38,6 +38,9 @@ export default function SinglePage({ page }) {
                 >
                     {page.name}
                 </Link>
+                <p title="Use slug to get this page on the API">
+                    <small>Slug: {page.slug}</small>
+                </p>
             </div>
 
             <div className="page-actions">

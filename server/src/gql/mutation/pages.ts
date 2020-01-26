@@ -1,7 +1,8 @@
-import { authenticated } from '@libs/auth';
 import Page from '@models/pages';
 import Site from '@models/sites';
+import { authenticated } from '@libs/auth';
 import { IContext } from '@gql/index';
+import { convertToSlug } from '@libs/helpers';
 
 export const inputDef = `
     input BlockInput {
@@ -27,13 +28,12 @@ export const resolver = {
         });
 
         if (!site) {
-            throw Error(
-                'Site not found, possibly deleted or belongs to another user'
-            );
+            throw Error('Site not found, possibly deleted or belongs to another user');
         }
 
         const page = new Page({
             name: data.name,
+            slug: convertToSlug(data.name),
             site: site.id
         });
 
@@ -47,12 +47,11 @@ export const resolver = {
         });
 
         if (!page) {
-            throw Error(
-                'Page not found, possibly deleted or belongs to another user'
-            );
+            throw Error('Page not found, possibly deleted or belongs to another user');
         }
 
         page.name = data.name;
+        page.slug = convertToSlug(data.name);
 
         return page.save();
     }),
@@ -65,9 +64,7 @@ export const resolver = {
         });
 
         if (!site) {
-            throw Error(
-                'Site not found, possibly deleted or belongs to another user'
-            );
+            throw Error('Site not found, possibly deleted or belongs to another user');
         }
 
         const page = await Page.findOne({
@@ -76,32 +73,26 @@ export const resolver = {
         });
 
         if (!page) {
-            throw Error(
-                'Page not found, possibly deleted or belongs to another user'
-            );
+            throw Error('Page not found, possibly deleted or belongs to another user');
         }
 
         await page.remove();
         return data.id;
     }),
 
-    updateContents: authenticated(
-        async (_: any, data: any, context: IContext) => {
-            const page = await Page.findOne({
-                _id: data.id,
-                site: data.siteId
-            });
+    updateContents: authenticated(async (_: any, data: any, context: IContext) => {
+        const page = await Page.findOne({
+            _id: data.id,
+            site: data.siteId
+        });
 
-            if (!page) {
-                throw Error(
-                    'Page not found, possibly deleted or belongs to another user'
-                );
-            }
-
-            page.contents = data.blocks;
-            await page.save();
-
-            return page;
+        if (!page) {
+            throw Error('Page not found, possibly deleted or belongs to another user');
         }
-    )
+
+        page.contents = data.blocks;
+        await page.save();
+
+        return page;
+    })
 };
