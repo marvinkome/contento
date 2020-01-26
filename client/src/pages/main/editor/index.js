@@ -5,6 +5,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import Layout from 'components/layout';
 import MainEditor from './components/MainEditor';
 import BlockPicker from './components/BlockPicker';
+import { convertToSlug } from 'libs/helpers';
 import { GET_PAGE, SAVE_BLOCKS } from './graphql';
 
 import './style.scss';
@@ -15,6 +16,7 @@ function formatContents(contents) {
         id: content.id,
         type: content.type,
         name: content.name,
+        slug: content.slug,
         content: content.content
     }));
 }
@@ -23,6 +25,7 @@ function formatContentsForSave(contents) {
     return contents.map((content) => ({
         type: content.type,
         name: content.name,
+        slug: content.slug,
         content: content.content
     }));
 }
@@ -94,7 +97,7 @@ function useBlocks(queryResponse) {
                         ...block,
                         [blockField]: fieldValue,
                         // conditionaly update slug
-                        ...(blockField === 'name' ? { slug: fieldValue } : {})
+                        ...(blockField === 'name' ? { slug: convertToSlug(fieldValue) } : {})
                     };
                 }
                 return block;

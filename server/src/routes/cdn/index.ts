@@ -1,8 +1,9 @@
 import Site from '@models/sites';
 import Page, { IPage } from '@models/pages';
+import { keyBy } from 'lodash';
 import { Router } from 'express';
 import { authorizedToSite } from '@libs/auth';
-import { handleError, ErrorHandler } from '@libs/errors';
+import { handleError } from '@libs/errors';
 const router = Router();
 
 /**
@@ -43,15 +44,8 @@ router.get('/sites/:siteid/pages', authorizedToSite, async (req, res, next) => {
     }
 
     const pages = await Page.find({ site: site.id }); // get all pages with this site
-
-    return res.send({
-        meta: {
-            type: 'Site',
-            id: site.id,
-            createdAt: site.createdAt,
-            updatedAt: site.updatedAt
-        },
-        pages: pages.map((page: IPage) => ({
+    const groupedPages = keyBy(
+        pages.map((page: IPage) => ({
             meta: {
                 type: 'Page',
                 id: page.id,
@@ -60,7 +54,18 @@ router.get('/sites/:siteid/pages', authorizedToSite, async (req, res, next) => {
             },
             name: page.name,
             slug: page.slug
-        }))
+        })),
+        'slug'
+    );
+
+    return res.send({
+        meta: {
+            type: 'Site',
+            id: site.id,
+            createdAt: site.createdAt,
+            updatedAt: site.updatedAt
+        },
+        pages: groupedPages
     });
 });
 
@@ -78,6 +83,22 @@ router.get('/sites/:siteid/pages/:page_slug', authorizedToSite, async (req, res,
         return res.status(error.statusCode).send(error.body);
     }
 
+    const contents = keyBy(
+        page.contents.map((content) => ({
+            meta: {
+                type: 'Content',
+                id: content.id,
+                createdAt: content.createdAt,
+                updatedAt: content.updatedAt
+            },
+            type: content.type,
+            name: content.name,
+            slug: content.slug,
+            content: content.content
+        })),
+        'slug'
+    );
+
     return res.send({
         meta: {
             type: 'Page',
@@ -87,17 +108,7 @@ router.get('/sites/:siteid/pages/:page_slug', authorizedToSite, async (req, res,
         },
         name: page.name,
         slug: page.slug,
-        contents: page.contents.map((content) => ({
-            meta: {
-                type: 'Content',
-                id: content.id,
-                createdAt: content.createdAt,
-                updatedAt: content.updatedAt
-            },
-            type: content.type,
-            name: content.name,
-            content: content.content
-        }))
+        contents
     });
 });
 

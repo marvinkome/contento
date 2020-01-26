@@ -8,6 +8,7 @@ export const inputDef = `
     input BlockInput {
         type: String!
         name: String
+        slug: String
         content: String
     }
 `;

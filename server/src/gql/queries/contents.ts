@@ -5,6 +5,7 @@ export const contentType = gql`
         id: ID!
         type: String!
         name: String!
+        slug: String!
         content: String!
     }
 `;

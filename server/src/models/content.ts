@@ -3,6 +3,7 @@ import { Schema, Document } from 'mongoose';
 export interface IContent extends Document {
     type: 'TEXT' | 'MEDIA';
     name: string;
+    slug: string;
     content: string;
     createdAt: string;
     updatedAt: string;
@@ -18,6 +19,12 @@ export const contentSchema: Schema<IContent> = new Schema(
         name: {
             type: String,
             minlength: 3,
+            required: true
+        },
+        slug: {
+            type: String,
+            minlength: 3,
+            unique: true,
             required: true
         },
         content: {
