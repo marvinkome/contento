@@ -3,7 +3,6 @@
     padding: 15px 3em;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 5px;
     outline: none;
 }
 
@@ -12,7 +11,7 @@
 }
 
 .btn-primary {
-    background: var(--brand-color);
+    background: var(--primary-color);
     color: #fff;
 }
 
@@ -20,12 +19,6 @@
     background: transparent;
     border: 1px solid var(--brand-color);
     color: var(--brand-color);
-}
-
-.btn-secondary {
-}
-
-.btn-secondary-outline {
 }
 
 .btn-delete {
@@ -37,4 +30,11 @@
     background: transparent;
     border: 1px solid var(--red-color);
     color: var(--red-color);
+}
+
+.btn-white {
+    background: #fff;
+    color: #000;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
 }

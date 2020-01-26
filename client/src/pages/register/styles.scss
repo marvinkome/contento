@@ -1,0 +1,112 @@
+.auth__container {
+    display: flex;
+    height: 100vh;
+    position: relative;
+
+    .form-section {
+        flex: 1;
+        background: var(--bg-color);
+        padding: 2em 3em;
+        height: 100%;
+        overflow: auto;
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            a {
+                color: var(--secondary-color);
+            }
+        }
+
+        .form-container {
+            margin: 4em 0px;
+            width: 60%;
+
+            .form-header h1 {
+                font-weight: bold;
+                color: #000;
+                font-size: var(--heading-3);
+                padding: 15px 0px;
+                text-align: center;
+            }
+
+            .divider {
+                text-transform: uppercase;
+                font-size: var(--small-text);
+            }
+
+            .oauth-button-group {
+                display: flex;
+                justify-content: space-around;
+                padding: 2em 0px;
+
+                .btn {
+                    display: flex;
+
+                    .svg-icon {
+                        margin-right: 7px;
+                    }
+                }
+            }
+
+            .form {
+                margin-top: 15px;
+
+                .btn {
+                    width: 100%;
+                }
+            }
+
+            .term-and-conditions {
+                margin-top: 2em;
+                text-align: center;
+                font-size: var(--small-text);
+                a {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    .about-section {
+        display: flex;
+        flex: 1;
+        position: relative;
+        background-color: #000;
+        color: #fff;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+
+        .about-information {
+            width: 60%;
+
+            h1 {
+                font-size: var(--heading-2);
+                margin-bottom: 1em;
+            }
+
+            p {
+                border-left: 1px solid #fff;
+                padding-left: 10px;
+            }
+        }
+
+        .svg-icon {
+            position: absolute;
+            width: 100%;
+
+            &.icon1 {
+                top: -20%;
+            }
+
+            &.icon2 {
+                left: -6%;
+                bottom: -8%;
+                width: 55%;
+            }
+        }
+    }
+}

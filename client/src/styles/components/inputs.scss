@@ -5,16 +5,18 @@ label {
     padding-bottom: 5px;
 }
 
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
 .form-input {
-    border: none;
+    border: 0.5px solid #000000;
     width: 100%;
-    padding: 15px;
-    background: var(--color1);
+    padding: 10px;
     outline: none;
-    margin-bottom: 2rem;
+    margin: 0.5rem 0rem;
     font-size: 18px;
     transition: all ease-in-out 0.5s;
-    border-radius: 13px;
     color: var(--color3);
     opacity: 1;
 
@@ -28,6 +30,11 @@ label {
         &:focus {
             border-bottom-color: var(--brand-color);
         }
+    }
+
+    & ~ small {
+        color: red;
+        font-style: italic;
     }
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { inject } from 'mobx-react';
 import { MdAccountCircle, MdMenu, MdKeyboardArrowDown } from 'react-icons/md';
-import logo from 'assets/logo.png';
+import logo from 'assets/logo_old.png';
 import './style.scss';
 
 class Topbar extends React.Component {
