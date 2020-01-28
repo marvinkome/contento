@@ -2,7 +2,7 @@ import { Router } from 'express';
 import passport from 'passport';
 
 import User, { IUser } from '@models/users';
-import auth, { generateJWT } from '@libs/auth';
+import auth, { generateJWT, formatUserProfile } from '@libs/auth';
 
 const router = Router();
 
@@ -14,10 +14,11 @@ router.get('/my-profile', auth.required, async (req, res) => {
     const user = await User.findById(id);
 
     if (!user) {
-        res.sendStatus(400);
+        return res.sendStatus(400);
     }
 
-    res.send({ user });
+    console.log(formatUserProfile(user));
+    res.send({ user: formatUserProfile(user) });
 });
 
 router.post('/register', auth.optional, async (req, res) => {
@@ -29,16 +30,21 @@ router.post('/register', auth.optional, async (req, res) => {
             password: data.password
         });
 
+        user.profile.name = data.fullName;
+
         await user.save();
 
         return res.send({
             token: generateJWT(user),
-            user
+            user: formatUserProfile(user)
         });
     } catch (e) {
-        console.error(e);
+        const message = e.message;
+
         return res.status(400).send({
-            error: 'Error processing data'
+            error: 'Error processing data',
+            message:
+                message.indexOf('duplicate key error') !== -1 ? 'Email is already taken' : message
         });
     }
 });
@@ -52,7 +58,7 @@ router.post('/login', auth.optional, (req, res, next) => {
         if (user) {
             return res.send({
                 token: generateJWT(user),
-                user
+                user: formatUserProfile(user)
             });
         }
 

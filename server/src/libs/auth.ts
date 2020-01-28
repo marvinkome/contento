@@ -66,6 +66,14 @@ export function authenticated(next: (...args: any[]) => any) {
     };
 }
 
+export function formatUserProfile(user: IUser) {
+    return {
+        id: user.id,
+        email: user.email,
+        profile: user.profile
+    };
+}
+
 export async function authorizedToSite(req: Request, res: Response, next: (...args: any[]) => any) {
     // check if JWT token passed is valid
     const token = getTokenFromHeaders(req);

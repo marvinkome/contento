@@ -32,17 +32,18 @@ mainInstance.interceptors.response.use(undefined, function(error) {
     let message;
 
     switch (true) {
-    case !!data.error:
-        message = data.error.message;
-        break;
-    case !!data.message:
-        message = data.message;
-        break;
-    case !!data.info:
-        message = data.info;
-        break;
-    default:
-        message = `[${error.response.status}] An error occurred`;
+        case !!data.message:
+            message = data.message;
+            break;
+        case !!data.error:
+            message = data.error.message;
+            break;
+
+        case !!data.info:
+            message = data.info;
+            break;
+        default:
+            message = `[${error.response.status}] An error occurred`;
     }
 
     toast.error(message);

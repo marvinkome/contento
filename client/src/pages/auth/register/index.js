@@ -6,7 +6,7 @@ import './styles.scss';
 export default class RegistrationPage extends React.Component {
     render() {
         return (
-            <main className="auth__register_container">
+            <main data-testid="registration-page" className="auth__register_container">
                 <FormSection />
                 <AboutSection />
             </main>

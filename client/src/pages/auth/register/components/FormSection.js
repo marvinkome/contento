@@ -2,8 +2,31 @@ import React from 'react';
 import logo from 'assets/logo.png';
 import googleIcon from 'assets/google.svg';
 import githubIcon from 'assets/github.svg';
+import { inject } from 'mobx-react';
+import { withRouter } from 'react-router-dom';
+import { authApi } from 'libs/api';
+import { AUTH_TOKEN_KEY } from 'libs/keys';
 
-export default class FormSection extends React.Component {
+class FormSection extends React.Component {
+    onSubmit = async (e) => {
+        e.preventDefault();
+
+        const fullName = e.target['fullName'].value;
+        const email = e.target['email'].value;
+        const password = e.target['password'].value;
+
+        const resp = await authApi.register({ fullName, email, password });
+
+        // set token on localstorage
+        localStorage.setItem(AUTH_TOKEN_KEY, resp.data.token);
+
+        // add user profile to store
+        this.props.setProfile(resp.data.user);
+
+        // redirect to dashboard
+        this.props.history.push('/');
+    };
+
     render() {
         return (
             <section className="form-section">
@@ -36,26 +59,25 @@ export default class FormSection extends React.Component {
 
                     <p className="divider">Or</p>
 
-                    <form className="form">
+                    <form onSubmit={this.onSubmit} className="form">
                         <div className="form-group">
-                            <label>Full Name</label>
-                            <input className="form-input" type="text" />
-                            <small className="error">Field is required</small>
+                            <label htmlFor="fullName">Full Name</label>
+                            <input className="form-input" id="fullName" type="text" required />
                         </div>
 
                         <div className="form-group">
-                            <label>Email address</label>
-                            <input className="form-input" type="text" />
-                            <small className="error">Email is invalid</small>
+                            <label htmlFor="email">Email address</label>
+                            <input className="form-input" id="email" type="email" required />
                         </div>
 
                         <div className="form-group">
-                            <label>Password</label>
-                            <input className="form-input" type="text" />
-                            <small className="error">Password is invalid</small>
+                            <label htmlFor="password">Password</label>
+                            <input className="form-input" id="password" type="password" required />
                         </div>
 
-                        <button className="btn btn-primary">Create account</button>
+                        <button data-testid="submit-btn" type="submit" className="btn btn-primary">
+                            Create account
+                        </button>
                     </form>
 
                     <p className="term-and-conditions">
@@ -67,3 +89,10 @@ export default class FormSection extends React.Component {
         );
     }
 }
+
+const mapStateToProps = ({ rootStore }) => {
+    return {
+        setProfile: rootStore.userStore.updateProfile
+    };
+};
+export default inject(mapStateToProps)(withRouter(FormSection));

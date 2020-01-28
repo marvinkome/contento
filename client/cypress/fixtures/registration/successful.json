@@ -1,0 +1,10 @@
+{
+    "token": "user token",
+    "user": {
+        "id": "5e2f46bde8ok9d6737bd209a9",
+        "email": "testuser@gmail.com",
+        "profile": {
+            "name": "Test User"
+        }
+    }
+}

@@ -18,6 +18,10 @@ export default class AuthClient {
         return this.client.post('/auth/login', data);
     }
 
+    register(data) {
+        return this.client.post('/auth/register', data);
+    }
+
     loginGoogle(data) {
         return this.client.post('/auth/google', data);
     }

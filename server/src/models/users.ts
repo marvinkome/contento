@@ -3,7 +3,6 @@ import { hash, compare } from 'bcrypt';
 
 export interface IUser extends Document {
     email: string;
-    username: string;
     password: string;
     googleId: string;
     profile: { name: string; picture: string; location: string };
