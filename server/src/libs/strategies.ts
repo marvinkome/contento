@@ -1,6 +1,8 @@
 import LocalStrategy from 'passport-local';
 // @ts-ignore
 import GoogleStrategy from 'passport-google-token';
+// @ts-ignore
+import GithubStrategy from 'passport-github-token';
 import User from '@models/users';
 
 const localStrategy = new LocalStrategy.Strategy(
@@ -69,7 +71,40 @@ const googleStrategy = new GoogleStrategy.Strategy(
     }
 );
 
-const githubStrategy = null;
+const githubStrategy = new GithubStrategy(
+    {
+        clientID: process.env.GITHUB_CLIENT_ID,
+        clientSecret: process.env.GITHUB_CLIENT_SECRET
+    },
+    async (_: any, __: any, profile: any, done: any) => {
+        const email = profile.emails ? profile.emails[0].value : '';
+        let user = await User.findOne({ githubId: profile.id });
+
+        if (user) {
+            return done(null, user);
+        }
+
+        user = await User.findOne({ email });
+
+        if (user) {
+            return done(null, false, {
+                message: 'An account already exists with this email'
+            });
+        }
+
+        user = new User({
+            email,
+            gitubId: profile.id,
+            profile: {
+                name: profile.displayName,
+                picture: profile._json.avatar_url
+            }
+        });
+
+        await user.save();
+        return done(null, user);
+    }
+);
 
 export default {
     localStrategy,

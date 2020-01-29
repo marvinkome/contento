@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import passport from 'passport';
+import axios, { AxiosResponse } from 'axios';
 
 import User, { IUser } from '@models/users';
 import auth, { generateJWT, formatUserProfile } from '@libs/auth';
@@ -17,7 +18,6 @@ router.get('/my-profile', auth.required, async (req, res) => {
         return res.sendStatus(400);
     }
 
-    console.log(formatUserProfile(user));
     res.send({ user: formatUserProfile(user) });
 });
 
@@ -69,28 +69,81 @@ router.post('/login', auth.optional, (req, res, next) => {
 });
 
 router.post('/google', auth.optional, (req, res, next) => {
-    return passport.authenticate(
-        'google-token',
-        {
-            session: false
-        },
-        (err, user: IUser, info) => {
-            if (err) {
-                return next(err);
-            }
+    return passport.authenticate('google-token', { session: false }, (err, user: IUser, info) => {
+        if (err) {
+            return next(err);
+        }
 
-            if (user) {
-                return res.send({
-                    token: generateJWT(user),
-                    user
-                });
-            }
-
-            return res.status(400).send({
-                error: info
+        if (user) {
+            return res.send({
+                token: generateJWT(user),
+                user: formatUserProfile(user)
             });
         }
-    )(req, res, next);
+
+        return res.status(400).send({
+            error: info
+        });
+    })(req, res, next);
 });
 
+router.post('/github', auth.optional, async (req, res, next) => {
+    const { code } = req.body;
+
+    if (!code) {
+        return res.status(400).send({
+            message: 'No code in request'
+        });
+    }
+
+    // Get access token from github
+    let resp: AxiosResponse<any>;
+
+    try {
+        resp = await axios.post(
+            'https://github.com/login/oauth/access_token',
+            {
+                client_id: process.env.GITHUB_CLIENT_ID,
+                client_secret: process.env.GITHUB_CLIENT_SECRET,
+                code
+            },
+            {
+                headers: { Accept: 'application/json' }
+            }
+        );
+    } catch (e) {
+        return res.status(e.response.status).send({
+            message: `Github Error: ${e.message}`
+        });
+    }
+
+    if (resp.data.error) {
+        return res.status(400).send({
+            message: resp.data.error_description
+        });
+    }
+
+    // add access token to body
+    req.body = {
+        ...req.body,
+        access_token: resp.data.access_token
+    };
+
+    return passport.authenticate('github-token', { session: false }, (err, user: IUser, info) => {
+        if (err) {
+            return next(err);
+        }
+
+        if (user) {
+            return res.send({
+                token: generateJWT(user),
+                user
+            });
+        }
+
+        return res.status(400).send({
+            error: info
+        });
+    })(req, res, next);
+});
 export default router;

@@ -79,27 +79,25 @@ exports[`Registration Page > should display registration form <snapshot> #0`] = 
       <header class="form-header"><h1>Get started for free</h1></header>
       <p class="divider">Register With</p>
       <section class="oauth-button-group">
-        <a class="btn btn-white" href="/"
-          ><img
+        <button class="btn btn-white">
+          <img
             class="svg-icon"
+            alt="Github Icon"
             src="/static/media/github.1b510489.svg"
-          />Github</a
-        ><a class="btn btn-white" href="/"
-          ><img
+          />Github</button
+        ><button data-testid="googleOauthBtn" class="btn btn-white">
+          <img
+            alt="Google Icon"
             class="svg-icon"
             src="/static/media/google.6bb8c994.svg"
-          />Google</a
-        >
+          />Google
+        </button>
       </section>
       <p class="divider">Or</p>
       <form class="form">
         <div class="form-group">
           <label for="fullName">Full Name</label
-          ><input class="form-input" id="fullName" type="text" /><small
-            data-testid="fullNameError"
-            class="error-text"
-            >Name is required</small
-          >
+          ><input class="form-input" id="fullName" type="text" required="" />
         </div>
         <div class="form-group">
           <label for="email">Email address</label

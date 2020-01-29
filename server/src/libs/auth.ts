@@ -11,6 +11,7 @@ import Site from '@models/sites';
 export function setup_auth() {
     passport.use(Strategies.localStrategy);
     passport.use(Strategies.googleStrategy);
+    passport.use(Strategies.githubStrategy);
 }
 
 export function generateJWT(user: IUser) {

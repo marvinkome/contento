@@ -8,7 +8,7 @@ describe('Registration Page', () => {
     });
 
     it('should display registration form <snapshot>', () => {
-        // cy.get('[data-testid="registration-page"]').toMatchSnapshot();
+        cy.get('[data-testid="registration-page"]').toMatchSnapshot();
     });
 
     it('should register a new user with complete details', () => {
@@ -62,8 +62,4 @@ describe('Registration Page', () => {
             expect(xhr.status, 'Bad Request', 400);
         });
     });
-
-    it('should authenticate with google', () => {});
-
-    it('should authenticate with github', () => {});
 });

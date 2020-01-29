@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from 'assets/logo.png';
-import googleIcon from 'assets/google.svg';
-import githubIcon from 'assets/github.svg';
+import OAuthButtons from '../../components/oauth-buttons';
 import { inject } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
 import { authApi } from 'libs/api';
@@ -15,7 +14,25 @@ class FormSection extends React.Component {
         const email = e.target['email'].value;
         const password = e.target['password'].value;
 
-        const resp = await authApi.register({ fullName, email, password });
+        this.register({ fullName, email, password }, 'local');
+    };
+
+    register = async (data, authType) => {
+        let resp;
+
+        if (authType === 'local') {
+            resp = await authApi.register(data);
+        } else if (authType === 'google') {
+            resp = await authApi.loginGoogle({
+                access_token: data.accessToken
+            });
+        } else if (authType === 'github') {
+            resp = await authApi.loginGithub({
+                code: data.code
+            });
+        }
+
+        if (!resp) return;
 
         // set token on localstorage
         localStorage.setItem(AUTH_TOKEN_KEY, resp.data.token);
@@ -45,17 +62,7 @@ class FormSection extends React.Component {
 
                     <p className="divider">Register With</p>
 
-                    <section className="oauth-button-group">
-                        <a className="btn btn-white" href="/">
-                            <img className="svg-icon" src={githubIcon} />
-                            Github
-                        </a>
-
-                        <a className="btn btn-white" href="/">
-                            <img className="svg-icon" src={googleIcon} />
-                            Google
-                        </a>
-                    </section>
+                    <OAuthButtons login={this.register} />
 
                     <p className="divider">Or</p>
 

@@ -37,20 +37,6 @@
                 font-size: var(--small-text);
             }
 
-            .oauth-button-group {
-                display: flex;
-                justify-content: space-around;
-                padding: 2em 0px;
-
-                .btn {
-                    display: flex;
-
-                    .svg-icon {
-                        margin-right: 7px;
-                    }
-                }
-            }
-
             .form {
                 margin-top: 15px;
 

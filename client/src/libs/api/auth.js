@@ -25,4 +25,8 @@ export default class AuthClient {
     loginGoogle(data) {
         return this.client.post('/auth/google', data);
     }
+
+    loginGithub(data) {
+        return this.client.post('/auth/github', data);
+    }
 }
