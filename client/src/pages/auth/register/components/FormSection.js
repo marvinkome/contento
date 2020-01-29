@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from 'assets/logo.png';
-import OAuthButtons from '../../components/oauth-buttons';
+import OAuthButtons from 'components/oauth-buttons';
 import { inject } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
 import { authApi } from 'libs/api';

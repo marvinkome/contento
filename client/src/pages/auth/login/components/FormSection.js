@@ -1,9 +1,48 @@
 import React from 'react';
 import logo from 'assets/logo.png';
-import googleIcon from 'assets/google.svg';
-import githubIcon from 'assets/github.svg';
+import OAuthButtons from 'components/oauth-buttons';
+import { inject } from 'mobx-react';
+import { withRouter } from 'react-router-dom';
+import { authApi } from 'libs/api';
+import { AUTH_TOKEN_KEY } from 'libs/keys';
 
-export default class FormSection extends React.Component {
+class FormSection extends React.Component {
+    onSubmit = async (e) => {
+        e.preventDefault();
+
+        const email = e.target['email'].value;
+        const password = e.target['password'].value;
+
+        this.login({ email, password }, 'local');
+    };
+
+    login = async (data, authType) => {
+        let resp;
+
+        if (authType === 'local') {
+            resp = await authApi.login(data);
+        } else if (authType === 'google') {
+            resp = await authApi.loginGoogle({
+                access_token: data.accessToken
+            });
+        } else if (authType === 'github') {
+            resp = await authApi.loginGithub({
+                code: data.code
+            });
+        }
+
+        if (!resp) return;
+
+        // set token on localstorage
+        localStorage.setItem(AUTH_TOKEN_KEY, resp.data.token);
+
+        // add user profile to store
+        this.props.setProfile(resp.data.user);
+
+        // redirect to dashboard
+        this.props.history.push('/');
+    };
+
     render() {
         return (
             <section className="form-section">
@@ -23,25 +62,14 @@ export default class FormSection extends React.Component {
 
                     <p className="divider">Login With</p>
 
-                    <section className="oauth-button-group">
-                        <a className="btn btn-white" href="/">
-                            <img className="svg-icon" src={githubIcon} />
-                            Github
-                        </a>
-
-                        <a className="btn btn-white" href="/">
-                            <img className="svg-icon" src={googleIcon} />
-                            Google
-                        </a>
-                    </section>
+                    <OAuthButtons />
 
                     <p className="divider">Or</p>
 
-                    <form className="form">
+                    <form onSubmit={this.onSubmit} className="form">
                         <div className="form-group">
-                            <label>Email address</label>
-                            <input className="form-input" type="text" />
-                            <small className="error">Email is invalid</small>
+                            <label htmlFor="email">Email address</label>
+                            <input className="form-input" id="email" type="email" required />
                         </div>
 
                         <div className="form-group">
@@ -49,14 +77,22 @@ export default class FormSection extends React.Component {
                                 <span>Password</span>
                                 <a href="/forgot-password">Forgot password?</a>
                             </label>
-                            <input className="form-input" type="text" />
-                            <small className="error">Password is invalid</small>
+                            <input className="form-input" id="password" type="text" required />
                         </div>
 
-                        <button className="btn btn-primary">Log In</button>
+                        <button type="submit" data-testid="submit-btn" className="btn btn-primary">
+                            Log In
+                        </button>
                     </form>
                 </article>
             </section>
         );
     }
 }
+
+const mapStateToProps = ({ rootStore }) => {
+    return {
+        setProfile: rootStore.userStore.updateProfile
+    };
+};
+export default inject(mapStateToProps)(withRouter(FormSection));
