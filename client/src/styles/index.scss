@@ -2,6 +2,7 @@
 @import './components/inputs.scss';
 @import './components/button.scss';
 @import './components//misc.scss';
+@import './components/typography.scss';
 
 // utils
 @import './utils/mixins.scss';
@@ -45,27 +46,6 @@ code {
 ul {
     list-style: none;
     padding: 0;
-}
-
-a {
-    text-decoration: none;
-    color: var(--purple-color);
-}
-
-h1 {
-    font-size: var(--heading-1);
-}
-
-h2 {
-    font-size: var(--heading-2);
-}
-
-h3 {
-    font-size: var(--heading-3);
-}
-
-h4 {
-    font-size: var(--heading-4);
 }
 
 .icon {
