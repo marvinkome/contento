@@ -77,7 +77,7 @@ class FormSection extends React.Component {
                                 <span>Password</span>
                                 <a href="/forgot-password">Forgot password?</a>
                             </label>
-                            <input className="form-input" id="password" type="text" required />
+                            <input className="form-input" id="password" type="password" required />
                         </div>
 
                         <button type="submit" data-testid="submit-btn" className="btn btn-primary">
