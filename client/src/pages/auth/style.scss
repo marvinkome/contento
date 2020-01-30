@@ -83,6 +83,15 @@
             .form {
                 margin-top: 15px;
 
+                label {
+                    display: flex;
+                    justify-content: space-between;
+
+                    a {
+                        text-decoration: underline;
+                    }
+                }
+
                 .btn {
                     width: 100%;
                 }
