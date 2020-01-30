@@ -4,11 +4,11 @@ describe('Registration Page', () => {
         cy.fixture('registration/successful.json').as('successJSON');
         cy.fixture('registration/dup-email.json').as('dupEmailJSON');
 
-        cy.visit('/register');
+        cy.visit('/auth/register');
     });
 
     it('should display registration form <snapshot>', () => {
-        cy.get('[data-testid="registration-page"]').toMatchSnapshot();
+        cy.get('.auth__container').toMatchSnapshot();
     });
 
     it('should register a new user with complete details', () => {

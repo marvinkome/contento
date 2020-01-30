@@ -4,11 +4,11 @@ describe('Login Page', () => {
         cy.fixture('login/successful.json').as('successJSON');
         cy.fixture('login/wrong-details.json').as('wrongDetailsJSON');
 
-        cy.visit('/login');
+        cy.visit('/auth/login');
     });
 
     it('should display login form', () => {
-        // cy.get('[data-testid="login-page"]').toMatchSnapshot();
+        cy.get('.auth__container').toMatchSnapshot();
     });
 
     it('should fail to login a user with wrong details', () => {

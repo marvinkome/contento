@@ -8,8 +8,7 @@ import Loader from 'components/loader';
 import 'react-toastify/dist/ReactToastify.css';
 
 // main pages
-import Login from 'pages/auth/login';
-import Register from 'pages/auth/register';
+import Auth from 'pages/auth';
 import Main from 'pages/main';
 
 // global variables
@@ -22,10 +21,19 @@ export default class App extends React.Component {
             <Provider rootStore={store}>
                 <Router history={history}>
                     <div className="app">
+                        {/* declare sub routes */}
                         <Switch>
-                            <Route exact path="/login" component={Login} />
-                            <Route exact path="/register" component={Register} />
-                            <Route path="/" component={Main} />
+                            {/* auth dashboard */}
+                            <Route path="/auth" component={Auth} />
+
+                            {/* app dashboard */}
+                            <Route path="/app" component={() => <p>App pages</p>} />
+
+                            {/* public pages*/}
+                            <Route path="/" component={() => <p>Public pages</p>} />
+
+                            {/* 404 */}
+                            <Route path="*" render={() => <p>Future 404 page</p>} />
                         </Switch>
 
                         <Loader />

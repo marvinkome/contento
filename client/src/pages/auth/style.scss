@@ -1,7 +1,47 @@
-.auth__login_container {
+.auth__container {
     display: flex;
     height: 100vh;
     position: relative;
+
+    .about-section {
+        display: flex;
+        flex: 1;
+        position: relative;
+        background-color: #000;
+        color: #fff;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+
+        .about-information {
+            width: 60%;
+
+            h1 {
+                font-size: var(--heading-2);
+                margin-bottom: 1em;
+            }
+
+            p {
+                border-left: 1px solid #fff;
+                padding-left: 10px;
+            }
+        }
+
+        .svg-icon {
+            position: absolute;
+            width: 100%;
+
+            &.icon1 {
+                top: -20%;
+            }
+
+            &.icon2 {
+                left: -6%;
+                bottom: -8%;
+                width: 55%;
+            }
+        }
+    }
 
     .form-section {
         flex: 1;
@@ -40,31 +80,8 @@
                 font-size: var(--small-text);
             }
 
-            .oauth-button-group {
-                display: flex;
-                justify-content: space-around;
-                padding: 2em 0px;
-
-                .btn {
-                    display: flex;
-
-                    .svg-icon {
-                        margin-right: 7px;
-                    }
-                }
-            }
-
             .form {
-                margin: 15px 0px;
-
-                label {
-                    display: flex;
-                    justify-content: space-between;
-
-                    a {
-                        text-decoration: underline;
-                    }
-                }
+                margin-top: 15px;
 
                 .btn {
                     width: 100%;

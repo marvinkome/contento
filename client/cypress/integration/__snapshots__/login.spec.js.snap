@@ -1,0 +1,67 @@
+exports[`Login Page > should display login form #0`] = `
+<main class="auth__container">
+  <section class="form-section">
+    <header class="header">
+      <img
+        src="data:image/png;base64,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"
+        class="logo"
+      />
+      <p>New to Contento? <a href="/auth/register">Register</a></p>
+    </header>
+    <article class="form-container">
+      <header class="form-header">
+        <h1>Welcome back!</h1>
+        <p>Log in to your Contento account.</p>
+      </header>
+      <p class="divider">Login With</p>
+      <section class="oauth-button-group">
+        <button class="btn btn-white">
+          <img
+            class="svg-icon"
+            alt="Github Icon"
+            src="/static/media/github.1b510489.svg"
+          />Github</button
+        ><button data-testid="googleOauthBtn" class="btn btn-white">
+          <img
+            alt="Google Icon"
+            class="svg-icon"
+            src="/static/media/google.6bb8c994.svg"
+          />Google
+        </button>
+      </section>
+      <p class="divider">Or</p>
+      <form class="form">
+        <div class="form-group">
+          <label for="email">Email address</label
+          ><input class="form-input" id="email" type="email" required="" />
+        </div>
+        <div class="form-group">
+          <label
+            ><span>Password</span
+            ><a href="/forgot-password">Forgot password?</a></label
+          ><input
+            class="form-input"
+            id="password"
+            type="password"
+            required=""
+          />
+        </div>
+        <button type="submit" data-testid="submit-btn" class="btn btn-primary">
+          Log In
+        </button>
+      </form>
+    </article>
+  </section>
+  <aside class="about-section">
+    <img src="/static/media/auth-svg1.a68e392c.svg" class="svg-icon icon1" />
+    <section class="about-information">
+      <h1>The new standard in content management</h1>
+      <p>
+        Finally, the freedom to use your favorite tools and frameworks without
+        CMS technical debt.
+      </p>
+    </section>
+    <img src="/static/media/auth-svg2.0ca4be78.svg" class="svg-icon icon2" />
+  </aside>
+</main>
+`;

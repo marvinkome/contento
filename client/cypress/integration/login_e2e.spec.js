@@ -1,4 +1,4 @@
-describe('Register page tests [E2E]', () => {
+describe('Login page tests [E2E]', () => {
     beforeEach(() => {
         // create new user for login
         cy.request('POST', '/api/auth/register', {
@@ -10,7 +10,7 @@ describe('Register page tests [E2E]', () => {
 
     it('login a user and set auth token', () => {
         // visit page
-        cy.visit('/login');
+        cy.visit('/auth/login');
 
         // server setup
         cy.server();
