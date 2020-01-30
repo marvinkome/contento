@@ -27,7 +27,7 @@ export default class App extends React.Component {
                             <Route path="/auth" component={Auth} />
 
                             {/* app dashboard */}
-                            <Route path="/app" component={() => <p>App pages</p>} />
+                            <Route path="/app" component={Main} />
 
                             {/* public pages*/}
                             <Route path="/" component={() => <p>Public pages</p>} />

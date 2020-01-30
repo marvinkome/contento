@@ -30,7 +30,7 @@ class Main extends React.Component {
         } catch (e) {
             // If there's an auth error then redirect user back to login
             if (e.message === auth_message || (e.response && e.response.status === 401)) {
-                return this.props.history.push('/login');
+                return this.props.history.push('/auth/login');
             } else {
                 // TODO:: Redirect user to error page
                 console.error(e); // eslint-disable-line
@@ -72,7 +72,7 @@ class Main extends React.Component {
         const { data } = await client.query({ query: GET_SITES });
 
         if (!data.sites.length) {
-            return this.props.history.push('/');
+            return this.props.history.push('/app');
         }
 
         // add list of sites to store
@@ -84,7 +84,7 @@ class Main extends React.Component {
         // redirect to last site in the list
         // check if it's the home page
         if (this.props.location.pathname === '/') {
-            return this.props.history.push(`/sites/${id}/pages`);
+            return this.props.history.push(`/app/sites/${id}/pages`);
         }
     };
 
@@ -96,16 +96,16 @@ class Main extends React.Component {
                 <ApolloProvider client={client}>
                     <Switch>
                         {/* editor */}
-                        <Route exact path="/sites/:siteid/editor/:pageid" component={Editor} />
+                        <Route exact path="/app/sites/:siteid/editor/:pageid" component={Editor} />
 
                         {/* pages */}
-                        <Route exact path="/sites/:siteid/pages" component={Pages} />
+                        <Route exact path="/app/sites/:siteid/pages" component={Pages} />
 
                         {/* no sites */}
-                        <Route exact path="/" component={NoSite} />
+                        <Route exact path="/app" component={NoSite} />
 
                         {/* 404 */}
-                        <Route path="*" render={() => <p>Future 404 page</p>} />
+                        <Route path="/app/*" render={() => <p>Future 404 page</p>} />
                     </Switch>
 
                     <Modal />
