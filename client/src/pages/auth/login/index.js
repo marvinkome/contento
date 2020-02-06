@@ -77,7 +77,7 @@ class LoginPage extends React.Component {
                             <div className="form-group">
                                 <label>
                                     <span>Password</span>
-                                    <a href="/forgot-password">Forgot password?</a>
+                                    <Link to="/auth/forgot-password">Forgot password?</Link>
                                 </label>
                                 <input
                                     className="form-input"

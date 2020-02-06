@@ -1,26 +1,17 @@
 import { Router } from 'express';
 import passport from 'passport';
+import jwt from 'jsonwebtoken';
 import axios, { AxiosResponse } from 'axios';
 
 import User, { IUser } from '@models/users';
 import auth, { generateJWT, formatUserProfile } from '@libs/auth';
+import { sendPasswordResetLink } from '@libs/emails';
 
 const router = Router();
 
-// all rest api routes
-router.get('/my-profile', auth.required, async (req, res) => {
-    // @ts-ignore
-    const { id } = req.payload;
-
-    const user = await User.findById(id);
-
-    if (!user) {
-        return res.sendStatus(400);
-    }
-
-    res.send({ user: formatUserProfile(user) });
-});
-
+/**
+ * Email/Password Auth Routes
+ */
 router.post('/register', auth.optional, async (req, res) => {
     const data = req.body;
 
@@ -49,25 +40,6 @@ router.post('/register', auth.optional, async (req, res) => {
     }
 });
 
-/**
- * For test use only please disable before pushing to production
- */
-router.delete('/user', auth.optional, async (req, res) => {
-    const data = req.body;
-
-    try {
-        await User.findOneAndDelete({ email: data.email });
-        return res.send({
-            message: 'User profile deleted'
-        });
-    } catch (e) {
-        console.log(e);
-        return res.status(400).send({
-            error: 'Invalid email address'
-        });
-    }
-});
-
 router.post('/login', auth.optional, (req, res, next) => {
     return passport.authenticate('local', { session: false }, (err, user: IUser, info) => {
         if (err) {
@@ -87,6 +59,9 @@ router.post('/login', auth.optional, (req, res, next) => {
     })(req, res, next);
 });
 
+/**
+ * Oauth Login routes
+ */
 router.post('/google', auth.optional, (req, res, next) => {
     return passport.authenticate('google-token', { session: false }, (err, user: IUser, info) => {
         if (err) {
@@ -165,4 +140,134 @@ router.post('/github', auth.optional, async (req, res, next) => {
         });
     })(req, res, next);
 });
+
+/**
+ * Forget password routes
+ */
+router.post('/forget-password', auth.optional, async (req, res) => {
+    // get user model
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+
+    if (!user) {
+        return res.status(400).send({
+            error: {
+                message: 'No user found with this email '
+            }
+        });
+    }
+
+    if (!user.password) {
+        return res.status(400).send({
+            error: {
+                message: 'Seems you signed up with either Google or Github. Please Login with that'
+            }
+        });
+    }
+
+    // generate JWT token to reset the password
+    const token = generateJWT(user, 'reset-password');
+
+    try {
+        await sendPasswordResetLink({
+            to: email,
+            data: {
+                resetLink: process.env.CLIENT_PASSWORD_RESET_URL + '/' + token,
+                name: user.profile.name
+            }
+        });
+    } catch (e) {
+        console.log(e);
+        return res.status(500).send({
+            error: {
+                message: 'Error sending email'
+            }
+        });
+    }
+
+    return res.send({
+        message: 'A reset link has been sent to your email'
+    });
+});
+
+router.post('/reset-password', auth.optional, async (req, res) => {
+    const { password, token } = req.body;
+
+    // check if token is valid
+    if (!token) {
+        return res.status(401).send({
+            error: {
+                message: 'Token is required to reset password'
+            }
+        });
+    }
+
+    // decode token to get id
+    let payload: any = null;
+    payload = jwt.decode(token);
+
+    // get user id from token
+    const userId = payload.id;
+    const user = await User.findOne({ _id: userId });
+
+    if (!user) {
+        return res.status(400).send({
+            error: {
+                message: 'Invalid reset token'
+            }
+        });
+    }
+
+    // verify token
+    try {
+        payload = jwt.verify(token, user.password);
+    } catch (e) {
+        return res.status(400).send({
+            error: {
+                message: 'Invalid reset token'
+            }
+        });
+    }
+
+    user.password = password;
+    user.save();
+
+    return res.send({
+        message: 'You can now login with your new password'
+    });
+});
+
+// all rest api routes
+router.get('/my-profile', auth.required, async (req, res) => {
+    // @ts-ignore
+    const { id } = req.payload;
+
+    const user = await User.findById(id);
+
+    if (!user) {
+        return res.sendStatus(400);
+    }
+
+    res.send({ user: formatUserProfile(user) });
+});
+
+/**
+ * For test use only please disable before pushing to production
+ */
+router.delete('/user', auth.optional, async (req, res) => {
+    const data = req.body;
+
+    try {
+        await User.findOneAndDelete({ email: data.email });
+        return res.send({
+            message: 'User profile deleted'
+        });
+    } catch (e) {
+        console.log(e);
+        return res.status(400).send({
+            error: 'Invalid email address'
+        });
+    }
+});
+
 export default router;

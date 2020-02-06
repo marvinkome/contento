@@ -29,4 +29,12 @@ export default class AuthClient {
     loginGithub(data) {
         return this.client.post('/auth/github', data);
     }
+
+    forgetPassword(data) {
+        return this.client.post('/auth/forget-password', data);
+    }
+
+    resetPassword(data) {
+        return this.client.post('/auth/reset-password', data);
+    }
 }

@@ -14,18 +14,30 @@ export function setup_auth() {
     passport.use(Strategies.githubStrategy);
 }
 
-export function generateJWT(user: IUser) {
+export function generateJWT(user: IUser, useCase = 'login') {
     const today = new Date();
     const expirationDate = new Date(today);
-    expirationDate.setDate(today.getDate() + 30); // set to expire in 30 days
+    let signingKey = process.env.APP_KEY || '';
+
+    switch (useCase) {
+        case 'reset-password': {
+            const time = 1 * 60 * 60 * 1000;
+            expirationDate.setTime(today.getTime() + time); // set to expire in 1hr
+            signingKey = user.password;
+            break;
+        }
+        default: {
+            expirationDate.setDate(today.getDate() + 30); // set to expire in 30 days
+            break;
+        }
+    }
 
     return jwt.sign(
         {
-            email: user.email,
             id: user._id,
             exp: expirationDate.getTime() / 1000
         },
-        process.env.APP_KEY || ''
+        signingKey
     );
 }
 

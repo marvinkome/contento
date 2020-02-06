@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <p>Hi <%= name %>,</p>
+
+        <p>
+            You requested a password reset <br />
+            Use the link below to reset your password <br />
+        </p>
+
+        <p>
+            <a href="<%= resetLink %>">
+                <%= resetLink %>
+            </a>
+        </p>
+
+        <p>If you did not make this request please ignore this email</p>
+    </body>
+</html>
