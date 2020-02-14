@@ -10,7 +10,7 @@ export const GET_SITES = gql`
 `;
 
 export const ADD_SITE = gql`
-    mutation AddSiten($name: String!, $description: String) {
+    mutation AddSite($name: String!, $description: String) {
         addSite(name: $name, description: $description) {
             id
         }
