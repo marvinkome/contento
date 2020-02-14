@@ -6,13 +6,14 @@ import { MdClose } from 'react-icons/md';
 ReactModal.setAppElement('#root');
 
 export default class CreateSiteModal extends React.Component {
-    onSubmit = (e) => {
+    onSubmit = async (e) => {
         e.preventDefault();
 
-        const siteName = e.target['site-name'].value;
-        const siteDescription = e.target['site-description'].value;
+        const name = e.target['site-name'].value;
+        const description = e.target['site-description'].value;
 
-        console.log({ siteName, siteDescription });
+        await this.props.addSite({ variables: { name, description } });
+        this.props.toggleModal();
     };
 
     render() {
