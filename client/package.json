@@ -29,6 +29,7 @@
         "react-github-login": "^1.0.3",
         "react-google-login": "^5.0.7",
         "react-icons": "^3.8.0",
+        "react-modal": "^3.11.1",
         "react-router-dom": "^5.1.2",
         "react-scripts": "3.2.0",
         "react-toastify": "^5.4.0",

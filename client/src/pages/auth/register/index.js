@@ -50,7 +50,7 @@ class RegistrationPage extends React.Component {
             <>
                 <section className="form-section">
                     <header className="header">
-                        <img src={logo} className="logo" />
+                        <img alt="logo" src={logo} className="logo" />
 
                         <p>
                             Already a member? <Link to="/auth/login">Log In</Link>

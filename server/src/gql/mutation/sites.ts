@@ -3,8 +3,8 @@ import Site from '@models/sites';
 import { IContext } from '@gql/index';
 
 export const typeDef = `
-    addSite(name: String!): Site
-    updateSite(id: ID!, name: String): Site
+    addSite(name: String!, description: String): Site
+    updateSite(id: ID!, name: String, description: String): Site
     revokeSiteToken(id: ID!): Site
     deleteSite(id: ID!): ID
 `;
@@ -13,6 +13,7 @@ export const resolver = {
     addSite: authenticated(async (_: any, data: any, context: IContext) => {
         const site = new Site({
             name: data.name,
+            description: data.description,
             owner: context.currentUser
         });
 
@@ -29,7 +30,13 @@ export const resolver = {
             throw Error('Site not found, possibly deleted or belongs to another user');
         }
 
-        site.name = data.name;
+        if (data.name) {
+            site.name = data.name;
+        }
+
+        if (data.description) {
+            site.description = data.description;
+        }
 
         return site.save();
     }),

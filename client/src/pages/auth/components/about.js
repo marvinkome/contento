@@ -5,7 +5,7 @@ import svg2 from 'assets/auth-svg2.svg';
 export default function AboutSection() {
     return (
         <aside className="about-section">
-            <img src={svg1} className="svg-icon icon1" />
+            <img alt="svg1" src={svg1} className="svg-icon icon1" />
             <section className="about-information">
                 <h1>The new standard in content management</h1>
                 <p>
@@ -13,7 +13,7 @@ export default function AboutSection() {
                     technical debt.
                 </p>
             </section>
-            <img src={svg2} className="svg-icon icon2" />
+            <img alt="svg2" src={svg2} className="svg-icon icon2" />
         </aside>
     );
 }

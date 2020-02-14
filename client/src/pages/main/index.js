@@ -1,5 +1,4 @@
 import React from 'react';
-import Modal from 'components/modal';
 import { Switch, Route } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { inject } from 'mobx-react';
@@ -7,10 +6,9 @@ import { toast } from 'react-toastify';
 import { AUTH_TOKEN_KEY } from 'libs/keys';
 import { mainClient, authApi } from 'libs/api';
 import { setupApollo } from 'libs/graphql';
-import { GET_SITES } from './graphql';
 
 // pages
-import NoSite from './noSite';
+import Sites from './sites';
 import Pages from './pages';
 import Editor from './editor';
 
@@ -25,8 +23,7 @@ class Main extends React.Component {
         try {
             // setup auth
             const token = await this.setupAuth();
-            const client = this.setupApolloClient(token);
-            this.setupSites(client);
+            this.setupApolloClient(token);
         } catch (e) {
             // If there's an auth error then redirect user back to login
             if (e.message === auth_message || (e.response && e.response.status === 401)) {
@@ -68,26 +65,6 @@ class Main extends React.Component {
         return client;
     };
 
-    setupSites = async (client) => {
-        const { data } = await client.query({ query: GET_SITES });
-
-        if (!data.sites.length) {
-            return this.props.history.push('/app');
-        }
-
-        // add list of sites to store
-        this.props.addSites(data.sites);
-
-        // redirect to the last site in the list
-        const { id } = data.sites[data.sites.length - 1];
-
-        // redirect to last site in the list
-        // check if it's the home page
-        if (this.props.location.pathname === '/') {
-            return this.props.history.push(`/app/sites/${id}/pages`);
-        }
-    };
-
     render() {
         const { client } = this.state;
 
@@ -101,14 +78,12 @@ class Main extends React.Component {
                         {/* pages */}
                         <Route exact path="/app/sites/:siteid/pages" component={Pages} />
 
-                        {/* no sites */}
-                        <Route exact path="/app" component={NoSite} />
+                        {/* sites */}
+                        <Route exact path="/app/sites" component={Sites} />
 
                         {/* 404 */}
                         <Route path="/app/*" render={() => <p>Future 404 page</p>} />
                     </Switch>
-
-                    <Modal />
                 </ApolloProvider>
             </div>
         ) : (
@@ -121,11 +96,9 @@ class Main extends React.Component {
 
 const mapStateToProps = ({ rootStore }) => {
     const { updateProfile, profile } = rootStore.userStore;
-    const { addSites } = rootStore.siteStore;
 
     return {
         setProfile: updateProfile,
-        addSites,
         profile
     };
 };
