@@ -64,7 +64,7 @@ class LoginPage extends React.Component {
 
                         <p className="divider">Login With</p>
 
-                        <OAuthButtons />
+                        <OAuthButtons login={this.login} />
 
                         <p className="divider">Or</p>
 
