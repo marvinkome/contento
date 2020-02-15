@@ -2,7 +2,6 @@ import Page from '@models/pages';
 import Site from '@models/sites';
 import { authenticated } from '@libs/auth';
 import { IContext } from '@gql/index';
-import { convertToSlug } from '@libs/helpers';
 
 export const inputDef = `
     input BlockInput {
@@ -14,7 +13,7 @@ export const inputDef = `
 `;
 
 export const typeDef = `
-    addPage(name: String!, siteId: String!): Page
+    addPage(name: String!, slug: String! siteId: String!): Page
     updatePage(id: ID!, name: String): Page
     deletePage(id: ID!, siteId: String!): ID
     updateContents(id: ID! siteId: ID!, blocks: [BlockInput]): Page
@@ -34,7 +33,7 @@ export const resolver = {
 
         const page = new Page({
             name: data.name,
-            slug: convertToSlug(data.name),
+            slug: data.slug,
             site: site.id
         });
 
@@ -52,7 +51,6 @@ export const resolver = {
         }
 
         page.name = data.name;
-        page.slug = convertToSlug(data.name);
 
         return page.save();
     }),

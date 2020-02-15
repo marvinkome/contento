@@ -33,7 +33,11 @@ label {
     }
 
     & ~ small {
-        color: red;
+        &.error {
+            color: red;
+        }
+
+        font-size: var(--small-text);
         font-style: italic;
     }
 }

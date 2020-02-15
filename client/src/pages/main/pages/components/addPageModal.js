@@ -4,14 +4,14 @@ import { MdClose } from 'react-icons/md';
 
 ReactModal.setAppElement('#root');
 
-export default class CreateSiteModal extends React.Component {
+export default class AddPageModal extends React.Component {
     onSubmit = async (e) => {
         e.preventDefault();
 
-        const name = e.target['site-name'].value;
-        const description = e.target['site-description'].value;
+        const name = e.target['page-name'].value;
+        const slug = e.target['page-slug'].value;
 
-        await this.props.addSite({ variables: { name, description } });
+        await this.props.addPage({ variables: { name, slug } });
         this.props.toggleModal();
     };
 
@@ -20,12 +20,12 @@ export default class CreateSiteModal extends React.Component {
             <ReactModal
                 isOpen={this.props.isOpen}
                 onRequestClose={this.props.toggleModal}
-                id="create-site-modal"
+                id="add-page-modal"
                 overlayClassName="modal-overlay"
                 className="modal-container"
             >
                 <header className="modal-header">
-                    <h2>{"Let's"} name your site</h2>
+                    <h2>Add a new page</h2>
                     <MdClose className="close-icon icon" onClick={this.props.toggleModal} />
                 </header>
 
@@ -38,20 +38,20 @@ export default class CreateSiteModal extends React.Component {
 
                         <form onSubmit={this.onSubmit} className="form">
                             <div className="form-group">
-                                <label htmlFor="site-name">Site Name</label>
-                                <input className="form-input" id="site-name" type="text" required />
+                                <label htmlFor="page-name">Page Name</label>
+                                <input className="form-input" id="page-name" type="text" required />
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="site-description">
-                                    Site Description - <i>Optional</i>
-                                </label>
-                                <textarea
+                                <label htmlFor="page-slug">Page Slug (API Identifier)</label>
+                                <input
                                     className="form-input"
-                                    id="site-description"
+                                    id="page-slug"
                                     type="text"
-                                    rows="3"
+                                    pattern="[a-z]+((\d)|([A-Z0-9][a-z0-9]+))*([A-Z])?"
+                                    required
                                 />
+                                <small>must be camelCase (e.g pageSlug)</small>
                             </div>
 
                             <button
@@ -59,14 +59,10 @@ export default class CreateSiteModal extends React.Component {
                                 data-testid="submit-btn"
                                 className="btn btn-primary"
                             >
-                                Create Site
+                                Add Page
                             </button>
                         </form>
                     </article>
-
-                    <aside className="modal-aside">
-                        {/* <img alt="modal-svg" src={modalSvg} /> */}
-                    </aside>
                 </section>
             </ReactModal>
         );

@@ -15,8 +15,8 @@ export const GET_SITE_PAGES = gql`
 `;
 
 export const ADD_PAGE = gql`
-    mutation AddPage($name: String!, $siteid: String!) {
-        addPage(name: $name, siteId: $siteid) {
+    mutation AddPage($name: String!, $siteid: String!, $slug: String!) {
+        addPage(name: $name, siteId: $siteid, slug: $slug) {
             id
             name
             slug
