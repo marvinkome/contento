@@ -60,6 +60,7 @@
     },
     "devDependencies": {
         "@babel/plugin-proposal-optional-chaining": "^7.6.0",
+        "@iam4x/cypress-graphql-mock": "0.0.1",
         "babel-eslint": "^10.0.3",
         "customize-cra": "^0.8.0",
         "cypress": "^3.8.3",
