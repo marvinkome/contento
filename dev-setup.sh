@@ -1,5 +1,7 @@
 #! /bin/bash
 
+yarn install # first install modules in the root folder
+
 # Let's setup the server first
 cd server # go to the server directory
 yarn install # install packagees
