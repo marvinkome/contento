@@ -8,6 +8,7 @@ import { mainClient, authApi } from 'libs/api';
 import { setupApollo } from 'libs/graphql';
 
 // pages
+import Profile from './profile';
 import Sites from './sites';
 import Pages from './pages';
 import Editor from './editor';
@@ -80,6 +81,9 @@ class Main extends React.Component {
 
                         {/* sites */}
                         <Route exact path="/app/sites" component={Sites} />
+
+                        {/* profile */}
+                        <Route exact path="/app/profile" component={Profile} />
 
                         {/* 404 */}
                         <Route path="/app/*" render={() => <p>Future 404 page</p>} />

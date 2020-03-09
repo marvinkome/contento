@@ -6,6 +6,7 @@ import axios, { AxiosResponse } from 'axios';
 import User, { IUser } from '@models/users';
 import auth, { generateJWT, formatUserProfile } from '@libs/auth';
 import { sendPasswordResetLink } from '@libs/emails';
+import { multerUploads, dataUri, uploader } from '@libs/images';
 
 const router = Router();
 
@@ -250,6 +251,47 @@ router.get('/my-profile', auth.required, async (req, res) => {
 
     res.send({ user: formatUserProfile(user) });
 });
+
+router.put(
+    '/update-profile',
+    auth.required,
+    multerUploads.single('profileImage'),
+    async (req, res) => {
+        // @ts-ignore
+        const { id } = req.payload;
+        const { fullName, email } = req.body;
+
+        const user = await User.findById(id);
+
+        if (!user) {
+            return res.sendStatus(400);
+        }
+
+        if (fullName) {
+            user.profile.name = fullName;
+        }
+
+        if (email) {
+            user.email = email;
+        }
+
+        if (req.file) {
+            const file = dataUri(req).content;
+
+            try {
+                const result = await uploader.upload(file);
+                user.profile.picture = result.url;
+            } catch (e) {
+                console.log(e);
+                return res.status(400).send({ message: 'Error uploading image' });
+            }
+        }
+
+        await user.save();
+
+        res.send({ user: formatUserProfile(user) });
+    }
+);
 
 /**
  * For test use only please disable before pushing to production

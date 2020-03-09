@@ -5,6 +5,7 @@ import apolloServer from '@gql/index';
 import { connect } from 'mongoose';
 
 import { setup_auth } from '@libs/auth';
+import { setup_cloudinary } from '@libs/images';
 import routes from '@routes/index';
 
 export default function createApp() {
@@ -31,6 +32,9 @@ export default function createApp() {
 
     // setup passport
     setup_auth();
+
+    // setup cloudinary
+    setup_cloudinary();
 
     // api routes
     app.use('/api', routes);

@@ -37,4 +37,8 @@ export default class AuthClient {
     resetPassword(data) {
         return this.client.post('/auth/reset-password', data);
     }
+
+    updateProfile(data, config = {}) {
+        return this.client.put('/auth/update-profile', data, config);
+    }
 }
