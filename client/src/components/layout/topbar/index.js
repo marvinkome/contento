@@ -1,32 +1,12 @@
 import React from 'react';
-import classnames from 'classnames';
-import { inject } from 'mobx-react';
-import { MdAccountCircle, MdKeyboardArrowDown } from 'react-icons/md';
 import logo from 'assets/logo.png';
+import TopbarDropdown from './dropdown';
+import { inject } from 'mobx-react';
+import { MdAccountCircle } from 'react-icons/md';
+
 import './style.scss';
 
 class Topbar extends React.Component {
-    state = {
-        dropdownOpen: false
-    };
-
-    toggleDropdown = () => {
-        this.setState({ dropdownOpen: !this.state.dropdownOpen });
-    };
-
-    renderDropdown = () => {
-        return (
-            <div className={classnames('dropdown-container', { isOpen: this.state.dropdownOpen })}>
-                <div className="clip-arrow" />
-                <div className="dropdown">
-                    <a href="/">Site settings</a>
-                    <hr />
-                    <a href="/">Profile settings</a>
-                </div>
-            </div>
-        );
-    };
-
     render() {
         const userProfile = this.props.profile;
 
@@ -42,11 +22,7 @@ class Topbar extends React.Component {
                             <div className="profile-link">
                                 {userProfile.profile?.name}
                                 <MdAccountCircle className="icon account-icon" />
-                                <MdKeyboardArrowDown
-                                    onClick={this.toggleDropdown}
-                                    className="icon dropdown-icon"
-                                />
-                                {this.renderDropdown()}
+                                <TopbarDropdown />
                             </div>
                         )}
                     </div>
