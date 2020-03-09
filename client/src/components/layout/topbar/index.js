@@ -13,7 +13,9 @@ class Topbar extends React.Component {
         return (
             <div className="main__topbar">
                 <div className="logo-area">
-                    <img src={logo} alt="logo" />
+                    <a href="/app/sites">
+                        <img src={logo} alt="logo" />
+                    </a>
                 </div>
 
                 <div className="topbar-links">
@@ -21,7 +23,13 @@ class Topbar extends React.Component {
                         {userProfile && (
                             <div className="profile-link">
                                 {userProfile.profile?.name}
-                                <MdAccountCircle className="icon account-icon" />
+                                {userProfile.profile?.picture ? (
+                                    <div className="image">
+                                        <img src={userProfile.profile.picture} alt="Your profile" />
+                                    </div>
+                                ) : (
+                                    <MdAccountCircle className="icon" />
+                                )}
                                 <TopbarDropdown />
                             </div>
                         )}
