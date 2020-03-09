@@ -82,6 +82,8 @@ export function authenticated(next: (...args: any[]) => any) {
 export function formatUserProfile(user: IUser) {
     return {
         id: user.id,
+        googleId: user.googleId,
+        githubId: user.githubId,
         email: user.email,
         profile: user.profile
     };

@@ -39,24 +39,57 @@ const googleStrategy = new GoogleStrategy.Strategy(
     {
         clientID: process.env.GOOGLE_CLIENT_ID || '',
         clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-        callbackURL: '/api/auth/google/callback'
+        callbackURL: '/api/auth/google/callback',
+        passReqToCallback: true
     },
-    async (_: any, __: any, profile: any, done: any) => {
+    async (req: any, _: any, __: any, profile: any, done: any) => {
         const email = profile.emails ? profile.emails[0].value : '';
-        let user = await User.findOne({ googleId: profile.id });
+        let user = await User.findOne({
+            googleId: profile.id
+        });
 
+        // if user is logged in and wants to link account
+        if (req.payload?.id) {
+            // if existing user has a github linked already
+            if (user) {
+                return done(null, false, {
+                    message: 'There is already a Google account that belongs to you'
+                });
+            }
+
+            // link account
+            user = await User.findById(req.payload.id);
+
+            if (!user) {
+                return done(null, false);
+            }
+
+            user.googleId = profile.id;
+            user.profile.name = user.profile.name || profile.displayName;
+            user.profile.picture = user.profile.picture || profile._json.picture;
+
+            await user.save();
+            return done(null, user);
+        }
+
+        // if user is not logged in
         if (user) {
             return done(null, user);
         }
 
-        user = await User.findOne({ email });
+        // if no user found
+        user = await User.findOne({
+            email
+        });
 
+        // check if the email is already registered
         if (user) {
             return done(null, false, {
                 message: 'An account already exists with this email'
             });
         }
 
+        // if it isn't registered create new account
         user = new User({
             email,
             googleId: profile.id,
@@ -74,24 +107,53 @@ const googleStrategy = new GoogleStrategy.Strategy(
 const githubStrategy = new GithubStrategy(
     {
         clientID: process.env.GITHUB_CLIENT_ID,
-        clientSecret: process.env.GITHUB_CLIENT_SECRET
+        clientSecret: process.env.GITHUB_CLIENT_SECRET,
+        passReqToCallback: true
     },
-    async (_: any, __: any, profile: any, done: any) => {
+    async (req: any, _: any, __: any, profile: any, done: any) => {
         const email = profile.emails ? profile.emails[0].value : '';
         let user = await User.findOne({ githubId: profile.id });
 
+        // if user is logged in and wants to link account
+        if (req.payload?.id) {
+            // if existing user has a github linked already
+            if (user) {
+                return done(null, false, {
+                    message: 'There is already a Github account that belongs to you'
+                });
+            }
+
+            // link account
+            user = await User.findById(req.payload.id);
+
+            if (!user) {
+                return done(null, false);
+            }
+
+            user.githubId = profile.id;
+            user.profile.name = user.profile.name || profile.displayName;
+            user.profile.picture = user.profile.picture || profile._json.avatar_url;
+
+            await user.save();
+            return done(null, user);
+        }
+
+        // if user is not logged in
         if (user) {
             return done(null, user);
         }
 
+        // if no user found
         user = await User.findOne({ email });
 
+        // check if the email is already registered
         if (user) {
             return done(null, false, {
                 message: 'An account already exists with this email'
             });
         }
 
+        // if it isn't registered create new account
         user = new User({
             email,
             gitubId: profile.id,

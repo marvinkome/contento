@@ -4,9 +4,9 @@ import { hash, compare } from 'bcrypt';
 export interface IUser extends Document {
     email: string;
     password: string;
-    googleId: string;
-    githubId: string;
-    profile: { name: string; picture: string; location: string };
+    googleId?: string;
+    githubId?: string;
+    profile: { name?: string; picture?: string };
     verify_password: (password: string) => Promise<boolean>;
 }
 
@@ -21,8 +21,7 @@ export const userSchema: Schema<IUser> = new Schema({
 
     profile: {
         name: String,
-        picture: String,
-        location: String
+        picture: String
     }
 });
 

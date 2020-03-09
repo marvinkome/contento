@@ -132,7 +132,7 @@ router.post('/github', auth.optional, async (req, res, next) => {
         if (user) {
             return res.send({
                 token: generateJWT(user),
-                user
+                user: formatUserProfile(user)
             });
         }
 
@@ -292,6 +292,44 @@ router.put(
         res.send({ user: formatUserProfile(user) });
     }
 );
+
+router.post('/unlink-github', auth.required, async (req, res) => {
+    // @ts-ignore
+    const { id } = req.payload;
+
+    const user = await User.findById(id);
+
+    if (!user) {
+        return res.status(400).send({ message: 'User not found' });
+    }
+
+    user.githubId = undefined;
+
+    await user.save();
+
+    return res.send({ user: formatUserProfile(user) });
+});
+
+router.post('/unlink-google', auth.required, async (req, res) => {
+    // @ts-ignore
+    const { id } = req.payload;
+
+    const user = await User.findById(id);
+
+    if (!user) {
+        return res.status(400).send({
+            message: 'User not found'
+        });
+    }
+
+    user.googleId = undefined;
+
+    await user.save();
+
+    return res.send({
+        user: formatUserProfile(user)
+    });
+});
 
 /**
  * For test use only please disable before pushing to production

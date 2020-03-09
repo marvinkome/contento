@@ -41,4 +41,12 @@ export default class AuthClient {
     updateProfile(data, config = {}) {
         return this.client.put('/auth/update-profile', data, config);
     }
+
+    unlinkGithub() {
+        return this.client.post('/auth/unlink-github');
+    }
+
+    unlinkGoogle() {
+        return this.client.post('/auth/unlink-google');
+    }
 }
