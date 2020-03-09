@@ -1,26 +1,30 @@
 .collapsible-card {
-    box-shadow: var(--card-shadow);
-    margin: 20px 0px;
-    border-radius: 5px;
+    margin: 25px 0px;
 
-    .header {
+    & > header {
+        background-color: var(--primary-color);
+        color: var(--white-color);
         display: flex;
-        justify-content: space-between;
-        border-radius: 5px 5px 0px 0px;
-        background: var(--secondary-color);
-        color: var(--semi-white);
-        padding: 15px 20px;
-        cursor: pointer;
+        flex-direction: row;
+        padding: 20px 25px;
+        align-items: center;
 
-        h4 {
-            font-size: var(--normal-text);
+        .title-and-toggle {
+            width: 95%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+
+            h3 {
+                font-size: var(--heading-5);
+            }
         }
 
-        .collapse-control {
-            display: flex;
-            align-items: center;
-            color: var(--white-color);
-            padding-left: 30px;
+        .delete {
+            width: 5%;
+            padding-top: 4px;
+            cursor: pointer;
         }
     }
 

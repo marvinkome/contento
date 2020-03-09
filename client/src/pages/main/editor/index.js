@@ -5,19 +5,19 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import Layout from 'components/layout';
 import MainEditor from './components/MainEditor';
 import BlockPicker from './components/BlockPicker';
-import { convertToSlug } from 'libs/helpers';
 import { GET_PAGE, SAVE_BLOCKS } from './graphql';
 
 import './style.scss';
+import { toast } from 'react-toastify';
 
 /* === Utils === */
 function formatContents(contents) {
     return contents.map((content) => ({
         id: content.id,
         type: content.type,
-        name: content.name,
-        slug: content.slug,
-        content: content.content
+        name: content.name || '',
+        slug: content.slug || '',
+        content: content.content || ''
     }));
 }
 
@@ -46,15 +46,19 @@ function useSave(blocks) {
     const { pageid, siteid } = useParams();
 
     return {
-        saveBlocks: () => {
+        saveBlocks: async () => {
             // call mutation function
-            saveBlocks({
-                variables: {
-                    pageid,
-                    siteid,
-                    blocks: formatContentsForSave(blocks)
-                }
-            });
+            try {
+                await saveBlocks({
+                    variables: {
+                        pageid,
+                        siteid,
+                        blocks: formatContentsForSave(blocks)
+                    }
+                });
+            } catch (e) {
+                toast.error('Error saving. Make sure all required fields are set');
+            }
         }
     };
 }
@@ -92,13 +96,7 @@ function useBlocks(queryResponse) {
         updateBlockState(
             blocks.map((block) => {
                 if (block.id === blockId) {
-                    // return Object.assign({}, block, { [blockField]: fieldValue });
-                    return {
-                        ...block,
-                        [blockField]: fieldValue,
-                        // conditionaly update slug
-                        ...(blockField === 'name' ? { slug: convertToSlug(fieldValue) } : {})
-                    };
+                    return Object.assign({}, block, { [blockField]: fieldValue });
                 }
                 return block;
             })
@@ -120,18 +118,25 @@ export default function EditorHooks() {
 
     return (
         <Layout>
-            <div className="editor-container">
-                {/* main editor */}
-                <MainEditor
-                    blocks={blocks}
-                    removeBlock={removeBlock}
-                    updateBlock={updateBlock}
-                    response={queryResponse}
-                />
+            <main className="editor-page">
+                <section className="main-section">
+                    <header className="page-header">
+                        <h1>Home</h1>
+                    </header>
 
-                {/* block picker */}
-                <BlockPicker addBlock={addBlock} saveBlocks={saveBlocks} />
-            </div>
+                    {/* main editor */}
+                    <MainEditor
+                        blocks={blocks}
+                        removeBlock={removeBlock}
+                        updateBlock={updateBlock}
+                        response={queryResponse}
+                    />
+                </section>
+
+                <aside className="block-picker-section">
+                    <BlockPicker addBlock={addBlock} saveBlocks={saveBlocks} />
+                </aside>
+            </main>
         </Layout>
     );
 }

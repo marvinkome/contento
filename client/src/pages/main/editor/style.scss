@@ -1,68 +1,103 @@
-.editor-container {
+.editor-page {
+    padding: 5% 6%;
     display: flex;
     height: 90vh;
     overflow: auto;
     position: relative;
 
-    .main-editor {
-        flex: 4;
-        padding: 3.5%;
-        padding-left: 6%;
-        padding-right: 2%;
-        max-height: 100%;
-        overflow: auto;
+    ::-webkit-scrollbar {
+        display: none;
+    }
 
-        h2 {
-            text-transform: uppercase;
-            margin-bottom: 1.5em;
-            border-bottom: 1px solid #bdc3c7;
-            padding-bottom: 10px;
-            width: 60%;
+    .main-section {
+        flex: 4;
+
+        .page-header {
+            margin-bottom: 25px;
+
+            h1 {
+                font-size: var(--heading-3);
+                font-weight: bold;
+                color: #000;
+            }
         }
 
-        .blocks {
-            .header input {
-                width: 50%;
-                margin-bottom: 0px;
-                color: var(--white-color);
-                border-bottom: none;
+        .blocks-container {
+            max-height: 100%;
+            overflow: auto;
 
-                &::placeholder {
-                    color: var(--white-color);
-                    font-style: italic;
-                }
+            .blocks {
+                .block {
+                    width: 70%;
 
-                &:focus {
-                    border-bottom: 1px solid var(--white-color);
-                }
-            }
+                    .body {
+                        padding: 32px 0px 0px;
+                        border: 0.5px solid var(--primary-color);
+                        border-top: none;
 
-            .text-block {
-                width: 70%;
+                        .block-header {
+                            display: flex;
+                            border-bottom: 0.5px solid var(--primary-color);
 
-                .body {
-                    border: 1px solid var(--brand-color);
-                    border-top: none;
+                            .form-group {
+                                flex: 1;
+                                padding: 0px 24px;
+                            }
+                        }
 
-                    textarea {
-                        max-height: 150px;
+                        textarea {
+                            min-height: 200px;
+                            padding: 24px;
+                            border: none;
+
+                            &:focus {
+                                border: none;
+                            }
+                        }
                     }
-                }
-            }
-
-            .media-block {
-                width: 70%;
-
-                .body {
-                    padding: 0px;
-                    border: 1px dashed var(--brand-color);
-                    border-top: none;
                 }
             }
         }
     }
 
-    .block-picker {
+    .block-picker-section {
+        flex: 1;
+
+        .block-picker {
+            flex: 1;
+            padding: 3.5%;
+            padding-right: 6%;
+            padding-left: 2%;
+            height: 100%;
+            overflow: auto;
+
+            h3 {
+                font-weight: bold;
+                color: #000;
+            }
+
+            .block-list {
+                margin-top: 25px;
+
+                .btn {
+                    width: 85%;
+
+                    &.btn-primary-outline {
+                        background: #ffffff;
+                        color: var(--text-color);
+                        margin-bottom: 20px;
+                        border: 1px dashed #000;
+                    }
+
+                    &.btn-primary {
+                        margin-top: 3em;
+                    }
+                }
+            }
+        }
+    }
+
+    .block-p0icker {
         flex: 1;
         background: var(--grey1);
         padding: 3.5%;

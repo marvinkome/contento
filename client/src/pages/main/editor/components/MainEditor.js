@@ -8,18 +8,15 @@ export default class MainEditor extends React.Component {
         const { loading, error, data } = response;
 
         return (
-            <div className="main-editor">
+            <article className="blocks-container">
                 {/* handle error and loading case */}
                 {loading && <p>Fetching page contents...</p>}
                 {error && <p>Error page contents. {error.message}</p>}
 
                 {data && (
-                    <React.Fragment>
-                        <h2>{data.page.name}</h2>
-
-                        <div className="blocks">
-                            {blocks.map((block) => {
-                                switch (block.type) {
+                    <div className="blocks">
+                        {blocks.map((block) => {
+                            switch (block.type) {
                                 case 'TEXT':
                                     return (
                                         <Text
@@ -40,16 +37,15 @@ export default class MainEditor extends React.Component {
                                     );
                                 default:
                                     return null;
-                                }
-                            })}
+                            }
+                        })}
 
-                            {!blocks.length && (
-                                <p>No block added. Use the buttons on the right to add blocks </p>
-                            )}
-                        </div>
-                    </React.Fragment>
+                        {!blocks.length && (
+                            <p>No block added. Use the buttons on the right to add blocks </p>
+                        )}
+                    </div>
                 )}
-            </div>
+            </article>
         );
     }
 }

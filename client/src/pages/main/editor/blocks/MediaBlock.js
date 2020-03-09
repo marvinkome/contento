@@ -2,7 +2,7 @@ import React from 'react';
 import CollapsibleCard from 'components/collapsibleCard';
 import FileDropZone from 'components/fileDropzone';
 
-export default class TextBlock extends React.Component {
+export default class MediaBlock extends React.Component {
     onTitleChange = (e) => {
         const { blockData } = this.props;
         const { value } = e.target;
@@ -32,11 +32,32 @@ export default class TextBlock extends React.Component {
         const { removeBlock, blockData } = this.props;
 
         return (
-            <div className="media-block">
-                <CollapsibleCard
-                    header={this.renderBlockHeader()}
-                    onDelete={() => removeBlock(blockData.id)}
-                >
+            <div className="media-block block">
+                <CollapsibleCard title="Media Block" onDelete={() => removeBlock(blockData.id)}>
+                    <header className="block-header">
+                        <div className="form-group">
+                            <label htmlFor="block-name">Block Name:</label>
+                            <input
+                                className="form-input"
+                                id="block-name"
+                                type="text"
+                                placeholder="eg: Header Text"
+                                required
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="block-clug">Block Slug (API Identifier):</label>
+                            <input
+                                className="form-input"
+                                id="block-slug"
+                                type="text"
+                                placeholder="eg: headerText"
+                                required
+                            />
+                        </div>
+                    </header>
+
                     <FileDropZone />
                 </CollapsibleCard>
             </div>

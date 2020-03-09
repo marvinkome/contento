@@ -9,6 +9,7 @@ export const GET_PAGE = gql`
                 id
                 type
                 name
+                slug
                 content
             }
         }
@@ -23,6 +24,7 @@ export const SAVE_BLOCKS = gql`
                 id
                 name
                 content
+                slug
                 type
             }
         }
