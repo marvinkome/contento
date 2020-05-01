@@ -1,7 +1,9 @@
+const serverUrl = Cypress.env('serverUrl');
+
 describe('Login page tests [E2E]', () => {
     beforeEach(() => {
         // create new user for login
-        cy.request('POST', '/api/auth/register', {
+        cy.request('POST', `${serverUrl}/api/auth/register`, {
             email: 'testuser@gmail.com',
             password: 'this is the password for test user',
             fullName: 'Test User'
@@ -14,7 +16,7 @@ describe('Login page tests [E2E]', () => {
 
         // server setup
         cy.server();
-        cy.route('POST', '/api/auth/login').as('loginE2EApi');
+        cy.route('POST', `${serverUrl}/api/auth/login`).as('loginE2EApi');
 
         // type in email
         cy.get('input#email').type('testuser@gmail.com');
@@ -37,7 +39,7 @@ describe('Login page tests [E2E]', () => {
 
     afterEach(() => {
         // remove test user from DB
-        cy.request('DELETE', '/api/auth/user', {
+        cy.request('DELETE', `${serverUrl}/api/auth/user`, {
             email: 'testuser@gmail.com'
         });
     });

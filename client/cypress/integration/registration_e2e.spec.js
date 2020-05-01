@@ -1,7 +1,9 @@
+const serverUrl = Cypress.env('serverUrl');
+
 describe('Register page tests [E2E]', () => {
     beforeEach(() => {
         // remove test user from DB
-        cy.request('DELETE', '/api/auth/user', {
+        cy.request('DELETE', `${serverUrl}/api/auth/user`, {
             email: 'johndoe@gmail.com'
         });
     });
@@ -12,7 +14,7 @@ describe('Register page tests [E2E]', () => {
 
         // server setup
         cy.server();
-        cy.route('POST', '/api/auth/register').as('registerE2EApi');
+        cy.route('POST', `${serverUrl}/api/auth/register`).as('registerE2EApi');
 
         // type in full name
         cy.get('input#fullName').type('John Doe');
@@ -38,7 +40,7 @@ describe('Register page tests [E2E]', () => {
 
     afterEach(() => {
         // remove test user from DB
-        cy.request('DELETE', '/api/auth/user', {
+        cy.request('DELETE', `${serverUrl}/api/auth/user`, {
             email: 'johndoe@gmail.com'
         });
     });

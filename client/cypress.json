@@ -1,5 +1,5 @@
 {
-    "baseUrl": "http://localhost:3000",
+    "baseUrl": "http://localhost:3033",
     "env": {
         "serverUrl": "http://localhost:7077",
         "cypress-plugin-snapshots": {

@@ -4,7 +4,7 @@ import AuthClient from './auth';
 import { startLoader } from 'components/loader';
 
 const mainInstance = axios.create({
-    baseURL: '/api'
+    baseURL: 'http://localhost:7077/api'
 });
 
 // interceptors

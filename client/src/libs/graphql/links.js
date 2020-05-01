@@ -14,7 +14,7 @@ export const onErrorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 export const httpLink = new HttpLink({
-    uri: '/graphql'
+    uri: 'http://localhost:7077/graphql'
 });
 
 export const authLink = (token) => {
