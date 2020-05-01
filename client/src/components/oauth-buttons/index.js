@@ -14,7 +14,7 @@ export default function OAuthButtons(props) {
             <GithubLogin
                 className="btn btn-white"
                 clientId={GITHUB_CLIENT_KEY}
-                redirectUri="http://localhost:3000"
+                redirectUri="http://localhost:3033"
                 onFailure={() => toast.error('Error occured while trying to login')}
                 onSuccess={(resp) => props.login(resp, 'github')}
             >
