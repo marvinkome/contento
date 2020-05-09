@@ -1,14 +1,17 @@
 .oauth-button-group {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.2em 0px;
+
+  .btn {
     display: flex;
-    justify-content: space-around;
-    padding: 2em 0px;
+    padding: 15px 2em;
+    width: 200px;
+    align-items: center;
+    justify-content: center;
 
-    .btn {
-        display: flex;
-        padding: 15px 2em;
-
-        .svg-icon {
-            margin-right: 7px;
-        }
+    .svg-icon {
+      margin-right: 7px;
     }
+  }
 }
