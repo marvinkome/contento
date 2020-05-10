@@ -8,19 +8,30 @@ on:
 
 jobs:
   ci:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-18.04
     container:
       image: node:11.15.0
 
     steps:
+      - name: install os deps
+        run: apt-get install \
+          libgtk2.0-0 \
+          libgtk-3-0 \
+          libnotify-dev \
+          libgconf-2-4 \
+          libnss3 \
+          libxss1 \
+          libasound2 \
+          libxtst6 \
+          xauth \
+          xvfb
       - uses: actions/checkout@v2
       - name: Cypress test
         uses: cypress-io/github-action@v1
         with:
           working-directory: client
-          # command
   cd:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-18.04
     needs: ci
 
     steps:
