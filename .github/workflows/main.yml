@@ -37,5 +37,5 @@ jobs:
           docker tag contento_server ${{ secrets.DOCKER_USER }}/contento_server:latest
       - name: Push
         run: |
-          docker push contento_server ${{ secrets.DOCKER_USER }}/contento_server:${{ github.sha }}
-          docker push contento_server ${{ secrets.DOCKER_USER }}/contento_server:latest
+          docker push ${{ secrets.DOCKER_USER }}/contento_server:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USER }}/contento_server:latest
