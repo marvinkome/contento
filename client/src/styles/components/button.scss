@@ -18,6 +18,39 @@
 .btn-primary {
     background: var(--primary-color);
     color: #fff;
+    position: relative;
+
+    transition-duration: 0.2;
+    -webkit-transition-duration: 0.2s; /* Safari */
+    overflow: hidden;
+
+    &:hover {
+        background: rgba(0, 0, 0, 0.8);
+    }
+
+    &:after {
+        content: '';
+        background: rgba(0, 0, 0, 0.7);
+        display: block;
+        position: absolute;
+        padding-top: 500%;
+        padding-left: 350%;
+        margin-left: -5px !important;
+        margin-top: -90%;
+        opacity: 0;
+        transition: all 0.8s;
+    }
+
+    &:active:after {
+        padding: 0;
+        margin: 0;
+        opacity: 1;
+        transition: 0s;
+    }
+
+    &:focus {
+        background: rgba(0, 0, 0, 0.7);
+    }
 }
 
 .btn-primary-outline {

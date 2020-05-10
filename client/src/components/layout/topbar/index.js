@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from 'assets/logo.png';
 import TopbarDropdown from './dropdown';
 import { inject } from 'mobx-react';
 import { MdAccountCircle } from 'react-icons/md';
