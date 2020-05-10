@@ -14,11 +14,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: install and test
-        run: |
-          cd client
-          yarn install --frozen-lockfile
-          yarn ci:test
+      - name: Cypress test
+        uses: cypress-io/github-action@v1
+        with:
+          working-directory: client
+          # command
   cd:
     runs-on: ubuntu-16.04
     needs: ci
