@@ -4,7 +4,7 @@ import githubIcon from 'assets/github.svg';
 import GithubLogin from 'react-github-login';
 import GoogleLogin from 'react-google-login';
 import { toast } from 'react-toastify';
-import { GOOGLE_CLIENT_KEY, GITHUB_CLIENT_KEY } from 'libs/keys';
+import { GOOGLE_CLIENT_KEY, GITHUB_CLIENT_KEY, APP_URL } from 'libs/keys';
 
 import './styles.scss';
 
@@ -14,7 +14,7 @@ export default function OAuthButtons(props) {
             <GithubLogin
                 className="btn btn-white"
                 clientId={GITHUB_CLIENT_KEY}
-                redirectUri="http://localhost:3033"
+                redirectUri={APP_URL}
                 onFailure={() => toast.error('Error occured while trying to login')}
                 onSuccess={(resp) => props.login(resp, 'github')}
             >
