@@ -29,7 +29,7 @@ jobs:
           config-file: cypress.ci.json
   cd:
     runs-on: ubuntu-18.04
-    if: github.ref == 'refs/heads/master'
+    if: github.event.push.ref == 'refs/heads/master' || github.ref == 'refs/heads/master'
     needs: ci
 
     steps:
