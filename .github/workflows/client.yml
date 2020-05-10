@@ -1,4 +1,4 @@
-name: Backend CI/CD
+name: Client CI/CD
 
 on:
   push:
@@ -10,15 +10,15 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     container:
-      image: node:10
+      image: node:11.15.0
 
     steps:
       - uses: actions/checkout@v2
       - name: install and test
         run: |
-          cd server
+          cd client
           yarn install --frozen-lockfile
-          yarn test
+          yarn ci:test
   cd:
     runs-on: ubuntu-latest
     needs: ci
@@ -29,13 +29,13 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build
-        run: docker build -t contento_server ./server
+        run: docker build -t contento_client ./client
 
       - name: Tags
         run: |
-          docker tag contento_server ${{ secrets.DOCKER_USER }}/contento_server:${{ github.sha }}
-          docker tag contento_server ${{ secrets.DOCKER_USER }}/contento_server:latest
+          docker tag contento_client ${{ secrets.DOCKER_USER }}/contento_client:${{ github.sha }}
+          docker tag contento_client ${{ secrets.DOCKER_USER }}/contento_client:latest
       - name: Push
         run: |
-          docker push ${{ secrets.DOCKER_USER }}/contento_server:${{ github.sha }}
-          docker push ${{ secrets.DOCKER_USER }}/contento_server:latest
+          docker push ${{ secrets.DOCKER_USER }}/contento_client:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USER }}/contento_client:latest

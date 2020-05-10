@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:11.15.0
 RUN curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 0.26.1
 
 # create app directory

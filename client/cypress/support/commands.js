@@ -25,3 +25,7 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 import '@iam4x/cypress-graphql-mock';
+
+Cypress.Screenshot.defaults({
+    screenshotOnRunFailure: false
+});
