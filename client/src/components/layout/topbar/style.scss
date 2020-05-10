@@ -1,121 +1,50 @@
-.main__topbar {
-    display: flex;
-    align-items: center;
-    padding: 15px 20px;
-    justify-content: space-between;
-    z-index: 4;
-    background: var(--white-color);
-    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
+.dropdown-icon {
+    margin-left: 0px;
+    font-size: 2em;
+    cursor: pointer;
+}
 
-    .logo-area {
-        width: 30%;
-        padding: 0px 5%;
-        display: flex;
-        align-items: center;
+.dropdown-container {
+    position: absolute;
+    right: 37px;
+    z-index: 10;
+    margin-top: 8em;
+    display: none;
 
-        img {
-            width: 200px;
-        }
-
-        .icon {
-            color: var(--brand-color);
-            font-size: 2em;
-            cursor: pointer;
-        }
+    &.isOpen {
+        display: block;
     }
 
-    .topbar-links {
-        width: 70%;
-        display: flex;
-        justify-items: flex-end;
-
-        .notif-content {
-            display: flex;
-            align-items: center;
-            margin-left: auto;
-            padding-right: 2em;
-
-            .profile-link {
-                position: relative;
-                display: flex;
-                align-items: center;
-                padding-inline-end: 1em;
-                color: var(--text-color);
-                font-size: var(--normal-text);
-
-                .image {
-                    width: 2.8em;
-                    margin-left: 10px;
-
-                    img {
-                        width: 100%;
-                        border-radius: 50%;
-                        object-fit: cover;
-                    }
-                }
-
-                .icon {
-                    font-size: 2.5em;
-                }
-
-                .account-icon {
-                    margin-left: 10px;
-                    margin-right: 0px;
-                }
-            }
-        }
-    }
-
-    .dropdown-icon {
-        margin-left: 0px;
-        font-size: 2em;
-        cursor: pointer;
-    }
-
-    .dropdown-container {
+    .clip-arrow {
         position: absolute;
-        width: 70%;
-        top: 40px;
-        right: 10px;
-        z-index: 10;
-        margin-top: 15px;
-        display: none;
+        width: 53px;
+        height: 53px;
+        top: 0;
+        right: 25px;
+        margin-top: -7px;
+        transform: rotate(45deg);
+        z-index: -1;
+        background-color: var(--primary-color);
+    }
 
-        &.isOpen {
+    .dropdown {
+        background-color: var(--primary-color);
+        box-shadow: 0px 5px 20px rgba(44, 62, 80, 0.05);
+        padding: 10px 0px;
+
+        hr {
+            border-style: solid;
+            border-color: #b3b3b3;
+            border-width: 1px;
+            height: 1px;
+            margin: 5px 0px;
+        }
+
+        a {
             display: block;
-        }
-
-        .clip-arrow {
-            position: absolute;
-            width: 53px;
-            height: 53px;
-            top: 0;
-            right: 25px;
-            margin-top: -7px;
-            transform: rotate(45deg);
-            z-index: -1;
-            background-color: var(--primary-color);
-        }
-
-        .dropdown {
-            background-color: var(--primary-color);
-            box-shadow: 0px 5px 20px rgba(44, 62, 80, 0.05);
-            padding: 10px 0px;
-
-            hr {
-                border-style: solid;
-                border-color: #b3b3b3;
-                border-width: 1px;
-                height: 1px;
-                margin: 5px 0px;
-            }
-
-            a {
-                display: block;
-                color: #fff;
-                font-size: var(--small-text);
-                padding: 10px 20px;
-            }
+            color: #fff;
+            font-size: var(--small-text);
+            padding: 10px 20px;
         }
     }
 }
