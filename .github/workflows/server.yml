@@ -3,6 +3,9 @@ name: Server CI/CD
 on:
   push:
     branches: [master]
+    paths:
+      - "server/**"
+      - ".github/workflows/server*"
   pull_request:
     branches: [master]
 
