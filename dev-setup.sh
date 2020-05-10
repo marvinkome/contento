@@ -9,6 +9,7 @@ cp .env.example .env # create env file
 
 # Let's setup the client
 cd ../client
+cp .env.example .env # create env file
 yarn install
 
 # Then demo
