@@ -15,6 +15,9 @@ import Main from 'pages/main';
 import history from 'libs/history';
 import store from 'store';
 
+//Website
+import Public from 'pages/public/index';
+
 export default class App extends React.Component {
     render() {
         return (
@@ -30,7 +33,7 @@ export default class App extends React.Component {
                             <Route path="/app" component={Main} />
 
                             {/* public pages*/}
-                            <Route path="/" component={() => <p>Public pages</p>} />
+                            <Route path="/" component={Public} />
 
                             {/* 404 */}
                             <Route path="*" render={() => <p>Future 404 page</p>} />

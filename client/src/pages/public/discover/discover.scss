@@ -1,0 +1,38 @@
+.discover--container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+}
+
+.vid-grid {
+    padding-left: 4em;
+}
+
+.h1-text {
+    width: 700px;
+}
+
+.bottom--image {
+    display: flex;
+    align-self: flex-end;
+    background: url('../img/bottomImage.png') no-repeat bottom right;
+    padding-right: 3em;
+    height: 90%;
+    width: 800px;
+}
+
+.video--player {
+    margin-top: 1em;
+    height: 500px;
+    width: 200px;
+}
+
+.paragraph--text {
+    margin-top: 150px;
+    width: 440px;
+    padding-bottom: 1em;
+}
+
+.text-grid {
+    padding: 3em;
+}
