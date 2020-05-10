@@ -3878,7 +3878,7 @@ cypress-plugin-snapshots@^1.2.9:
     utf-8-validate "^5.0.2"
     uws "^100.0.1"
 
-cypress@^3.8.3:
+cypress@^3.8.2:
   version "3.8.3"
   resolved "https://registry.yarnpkg.com/cypress/-/cypress-3.8.3.tgz#e921f5482f1cbe5814891c878f26e704bbffd8f4"
   integrity sha512-I9L/d+ilTPPA4vq3NC1OPKmw7jJIpMKNdyfR8t1EXYzYCjyqbc59migOm1YSse/VRbISLJ+QGb5k4Y3bz2lkYw==
