@@ -8,7 +8,7 @@ on:
 
 jobs:
   ci:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
     container:
       image: node:11.15.0
 
@@ -20,7 +20,7 @@ jobs:
           yarn install --frozen-lockfile
           yarn ci:test
   cd:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
     needs: ci
 
     steps:
