@@ -6,8 +6,6 @@ services:
     restart: always
     ports:
       - "7077:7077"
-    depends_on:
-      - db
     env_file:
       - ./server/.env
 
@@ -18,16 +16,3 @@ services:
       - "3033:3033"
     depends_on:
       - server
-
-  db:
-    container_name: contento_db
-    image: mongo:latest
-    env_file:
-      - .env
-    ports:
-      - 27018:27017
-    volumes:
-      - mongodb_data_container:/data/db
-
-volumes:
-  mongodb_data_container:
