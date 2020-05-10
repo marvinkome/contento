@@ -10,46 +10,66 @@
 @import './utils/theme.scss';
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 *:before,
 *:after {
-    box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 html,
 body {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 }
 
 body {
-    margin: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background: var(--bg-color);
-    color: var(--text-color);
-    position: relative;
-    line-height: 1.5;
-    font-weight: 400;
-    overflow-x: hidden;
-    font-size: calc(14px + 0.25vw);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-color);
+  color: var(--text-color);
+  position: relative;
+  line-height: 1.5;
+  font-weight: 400;
+  overflow-x: hidden;
+  font-size: calc(14px + 0.25vw);
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .icon {
-    font-size: 1.5em;
-    margin-inline-end: 0.5em;
+  font-size: 1.5em;
+  margin-inline-end: 0.5em;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  transition: 0.8;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #eee;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  opacity: 0.5;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
 }

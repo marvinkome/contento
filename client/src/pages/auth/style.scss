@@ -48,6 +48,7 @@
         background: var(--bg-color);
         padding: 2em 3em;
         height: 100%;
+
         overflow: auto;
 
         .header {
@@ -66,18 +67,26 @@
 
             .form-header {
                 padding: 15px 0px;
-                text-align: center;
+                text-align: left;
 
                 h1 {
                     font-weight: bold;
                     color: #000;
                     font-size: var(--heading-3);
                 }
+
+                .register--h1--cta {
+                    text-align: center;
+                }
             }
 
-            .divider {
-                text-transform: uppercase;
-                font-size: var(--small-text);
+            .divider--container {
+                margin-top: 2em;
+
+                .divider {
+                    text-transform: uppercase;
+                    font-size: var(--small-text);
+                }
             }
 
             .form {
@@ -89,11 +98,13 @@
 
                     a {
                         text-decoration: underline;
+                        color: var(--grey-color);
                     }
                 }
 
                 .btn {
                     width: 100%;
+                    border-radius: 5px;
                 }
             }
 

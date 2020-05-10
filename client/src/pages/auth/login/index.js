@@ -59,14 +59,8 @@ class LoginPage extends React.Component {
                     <article className="form-container">
                         <header className="form-header">
                             <h1>Welcome back!</h1>
-                            <p>Log in to your Contento account.</p>
+                            <p>Log into your Contento account.</p>
                         </header>
-
-                        <p className="divider">Login With</p>
-
-                        <OAuthButtons login={this.login} />
-
-                        <p className="divider">Or</p>
 
                         <form onSubmit={this.onSubmit} className="form">
                             <div className="form-group">
@@ -95,6 +89,12 @@ class LoginPage extends React.Component {
                                 Log In
                             </button>
                         </form>
+
+                        <div className="divider--container">
+                            <p className="divider">Or Login With</p>
+
+                            <OAuthButtons login={this.login} />
+                        </div>
                     </article>
                 </section>
 
