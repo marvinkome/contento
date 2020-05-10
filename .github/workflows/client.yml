@@ -16,6 +16,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Copy env
+        run: cp ./client/.env.example ./client/.env
       - name: Cypress test
         uses: cypress-io/github-action@v1
         with:
