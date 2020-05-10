@@ -2,9 +2,10 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import AuthClient from './auth';
 import { startLoader } from 'components/loader';
+import { API_URL } from 'libs/keys';
 
 const mainInstance = axios.create({
-    baseURL: 'http://localhost:7077/api'
+    baseURL: `${API_URL}/api`
 });
 
 // interceptors
