@@ -2,6 +2,8 @@ name: Server CI/CD
 
 on:
   push:
+    branches:
+      - master
     paths:
       - "server/**"
       - ".github/workflows/server*"
@@ -23,6 +25,7 @@ jobs:
           yarn test
   cd:
     runs-on: ubuntu-18.04
+    if: github.event.push.ref == 'ref/head/master'
     needs: ci
 
     steps:
@@ -31,7 +34,7 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build
-        run: docker build -t contento_server ./server
+        run: docker build -f ./server/Dockerfile.prod -t contento_server ./server
 
       - name: Tags
         run: |
