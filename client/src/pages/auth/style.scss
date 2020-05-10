@@ -1,121 +1,121 @@
 .auth__container {
-  display: flex;
-  height: 100vh;
-  position: relative;
-
-  .about-section {
     display: flex;
-    flex: 1;
+    height: 100vh;
     position: relative;
-    background-color: #000;
-    color: #fff;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
 
-    .about-information {
-      width: 60%;
+    .about-section {
+        display: flex;
+        flex: 1;
+        position: relative;
+        background-color: #000;
+        color: #fff;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
 
-      h1 {
-        font-size: var(--heading-2);
-        margin-bottom: 1em;
-      }
+        .about-information {
+            width: 60%;
 
-      p {
-        border-left: 1px solid #fff;
-        padding-left: 10px;
-      }
+            h1 {
+                font-size: var(--heading-2);
+                margin-bottom: 1em;
+            }
+
+            p {
+                border-left: 1px solid #fff;
+                padding-left: 10px;
+            }
+        }
+
+        .svg-icon {
+            position: absolute;
+            width: 100%;
+
+            &.icon1 {
+                top: -20%;
+            }
+
+            &.icon2 {
+                left: -6%;
+                bottom: -8%;
+                width: 55%;
+            }
+        }
     }
 
-    .svg-icon {
-      position: absolute;
-      width: 100%;
+    .form-section {
+        flex: 1;
+        background: var(--bg-color);
+        padding: 2em 3em;
+        height: 100%;
 
-      &.icon1 {
-        top: -20%;
-      }
+        overflow: auto;
 
-      &.icon2 {
-        left: -6%;
-        bottom: -8%;
-        width: 55%;
-      }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            a {
+                color: var(--secondary-color);
+            }
+        }
+
+        .form-container {
+            margin: 4em 0px;
+            width: 60%;
+
+            .form-header {
+                padding: 15px 0px;
+                text-align: left;
+
+                h1 {
+                    font-weight: bold;
+                    color: #000;
+                    font-size: var(--heading-3);
+                }
+
+                .register--h1--cta {
+                    text-align: center;
+                }
+            }
+
+            .divider--container {
+                margin-top: 2em;
+
+                .divider {
+                    text-transform: uppercase;
+                    font-size: var(--small-text);
+                }
+            }
+
+            .form {
+                margin-top: 15px;
+
+                label {
+                    display: flex;
+                    justify-content: space-between;
+
+                    a {
+                        text-decoration: underline;
+                        color: var(--grey-color);
+                    }
+                }
+
+                .btn {
+                    width: 100%;
+                    border-radius: 5px;
+                }
+            }
+
+            .term-and-conditions {
+                margin-top: 2em;
+                text-align: center;
+                font-size: var(--small-text);
+                a {
+                    text-decoration: underline;
+                }
+            }
+        }
     }
-  }
-
-  .form-section {
-    flex: 1;
-    background: var(--bg-color);
-    padding: 2em 3em;
-    height: 100%;
-
-    overflow: auto;
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      a {
-        color: var(--secondary-color);
-      }
-    }
-
-    .form-container {
-      margin: 4em 0px;
-      width: 60%;
-
-      .form-header {
-        padding: 15px 0px;
-        text-align: left;
-
-        h1 {
-          font-weight: bold;
-          color: #000;
-          font-size: var(--heading-3);
-        }
-
-        .register--h1--cta {
-          text-align: center;
-        }
-      }
-
-      .divider--container {
-        margin-top: 2em;
-
-        .divider {
-          text-transform: uppercase;
-          font-size: var(--small-text);
-        }
-      }
-
-      .form {
-        margin-top: 15px;
-
-        label {
-          display: flex;
-          justify-content: space-between;
-
-          a {
-            text-decoration: underline;
-            color: var(--grey-color);
-          }
-        }
-
-        .btn {
-          width: 100%;
-          border-radius: 5px;
-        }
-      }
-
-      .term-and-conditions {
-        margin-top: 2em;
-        text-align: center;
-        font-size: var(--small-text);
-        a {
-          text-decoration: underline;
-        }
-      }
-    }
-  }
 }

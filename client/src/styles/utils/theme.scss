@@ -1,51 +1,51 @@
 :root {
-  // Colors
-  --bg-color: linear-gradient(218.66deg, #ffffff 28.07%, #f8faff 100%);
-  --brand-color: #0ae596;
-  --secondary-color: #2c3e50;
-  --white-color: #ffffff;
-  --red-color: #e84274;
-  --blue-color: #418af2;
-  --purple-color: #6c5ce7;
-  --text-color: #2c3e50;
-  --grey-color: #898f97;
+    // Colors
+    --bg-color: linear-gradient(218.66deg, #ffffff 28.07%, #f8faff 100%);
+    --brand-color: #0ae596;
+    --secondary-color: #2c3e50;
+    --white-color: #ffffff;
+    --red-color: #e84274;
+    --blue-color: #418af2;
+    --purple-color: #6c5ce7;
+    --text-color: #2c3e50;
+    --grey-color: #898f97;
 
-  --primary-color: #000;
-  --secondary-color: #f79f1f;
+    --primary-color: #000;
+    --secondary-color: #f79f1f;
 
-  --grey0: #000;
-  --grey1: #f4f7fa;
-  --grey2: #dce1ea;
+    --grey0: #000;
+    --grey1: #f4f7fa;
+    --grey2: #dce1ea;
 
-  // Button Shadows
-  --btn-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
-  --btn-hover-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
+    // Button Shadows
+    --btn-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+    --btn-hover-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
 
-  // Card Shadows
-  --card-shadow: 0px 15px 30px rgba(0, 0, 0, 0.15);
-  --card-shadow-hover: 0px 30px 60px rgba(0, 0, 0, 0.2);
+    // Card Shadows
+    --card-shadow: 0px 15px 30px rgba(0, 0, 0, 0.15);
+    --card-shadow-hover: 0px 30px 60px rgba(0, 0, 0, 0.2);
 
-  // background reset
-  --bg-no-repeat: no-repeat;
-  --bg-center-X-Y: center center;
-  --bg-cover: cover;
-  --bg-contain: contain;
+    // background reset
+    --bg-no-repeat: no-repeat;
+    --bg-center-X-Y: center center;
+    --bg-cover: cover;
+    --bg-contain: contain;
 
-  // Grid Theming
-  --g-temp-col-1: repeat(1, 1fr);
-  --g-temp-col-2: repeat(2, 1fr);
-  --g-temp-col-3: repeat(3, 1fr);
-  --g-temp-col-4: repeat(4, 1fr);
-  --responsive-grid-1cols: repeat(auto-fit, minmax(19rem, 1fr));
-  --responsive-grid-2cols: repeat(auto-fit, minmax(14rem, 1fr));
+    // Grid Theming
+    --g-temp-col-1: repeat(1, 1fr);
+    --g-temp-col-2: repeat(2, 1fr);
+    --g-temp-col-3: repeat(3, 1fr);
+    --g-temp-col-4: repeat(4, 1fr);
+    --responsive-grid-1cols: repeat(auto-fit, minmax(19rem, 1fr));
+    --responsive-grid-2cols: repeat(auto-fit, minmax(14rem, 1fr));
 
-  // Fonts Styles
-  --heading-1: 40px;
-  --heading-2: 30px;
-  --heading-3: 24px;
-  --heading-4: 20px;
-  --meduim-text: 18px;
-  --body-text: 16px;
-  --small-text: 14px;
-  --smaller-text: 12px;
+    // Fonts Styles
+    --heading-1: 40px;
+    --heading-2: 30px;
+    --heading-3: 24px;
+    --heading-4: 20px;
+    --meduim-text: 18px;
+    --body-text: 16px;
+    --small-text: 14px;
+    --smaller-text: 12px;
 }
