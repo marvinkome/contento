@@ -24,9 +24,10 @@ jobs:
         uses: cypress-io/github-action@v1
         with:
           working-directory: client
+          config-file: cypress.ci.json
           start: yarn start
           wait-on: "http://localhost:3033"
-          config-file: cypress.ci.json
+
   cd:
     runs-on: ubuntu-18.04
     if: github.event.push.ref == 'refs/heads/master' || github.ref == 'refs/heads/master'
