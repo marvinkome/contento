@@ -25,6 +25,7 @@ jobs:
           yarn test
   cd:
     runs-on: ubuntu-18.04
+    if: github.event.push.branch == master
     needs: ci
 
     steps:
