@@ -13,7 +13,6 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-18.04
-    if: github.ref == 'refs/heads/master'
     container:
       image: node:11.15.0
 
@@ -26,7 +25,7 @@ jobs:
           yarn test
   cd:
     runs-on: ubuntu-18.04
-    if: github.event.push.ref == 'master'
+    if: github.ref == 'refs/heads/master'
     needs: ci
 
     steps:
