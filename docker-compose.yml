@@ -22,7 +22,7 @@ services:
       - ./client:/app/
       - /app/node_modules
     ports:
-      - "3033:3000"
+      - "3033:3033"
     depends_on:
       - server
 

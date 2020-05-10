@@ -20,6 +20,9 @@ jobs:
         uses: cypress-io/github-action@v1
         with:
           working-directory: client
+          start: yarn start
+          wait-on: "http://localhost:3033"
+          wait-on-timeout: 120
   cd:
     runs-on: ubuntu-18.04
     needs: ci
