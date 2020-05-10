@@ -26,7 +26,7 @@ jobs:
           working-directory: client
           start: yarn start
           wait-on: "http://localhost:3033"
-          config-file: ./client/cypress.ci.json
+          config-file: cypress.ci.json
   cd:
     runs-on: ubuntu-18.04
     needs: ci
