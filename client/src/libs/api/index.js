@@ -5,7 +5,7 @@ import { startLoader } from 'components/loader';
 import { API_URL } from 'libs/keys';
 
 const mainInstance = axios.create({
-    baseURL: API_URL
+    baseURL: `${API_URL}/api`
 });
 
 // interceptors
