@@ -13,10 +13,10 @@ export default function createApp() {
 
     // setup mongoose
     // @ts-ignore
-    const mongoUrl = process.env.DB_URL + process.env.DB_NAME;
-    connect(mongoUrl, {
+    connect(process.env.DB_URL || '', {
         user: process.env.DB_USERNAME,
         pass: process.env.DB_PASSWORD,
+        dbName: process.env.DB_NAME,
         useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true

@@ -156,7 +156,7 @@ const githubStrategy = new GithubStrategy(
         // if it isn't registered create new account
         user = new User({
             email,
-            gitubId: profile.id,
+            githubId: profile.id,
             profile: {
                 name: profile.displayName,
                 picture: profile._json.avatar_url
