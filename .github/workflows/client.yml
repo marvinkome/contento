@@ -12,7 +12,7 @@ jobs:
   ci:
     runs-on: ubuntu-18.04
     container:
-      image: node:11.15.0
+      image: cypress/base:11.13.0
 
     steps:
       - uses: actions/checkout@v2
