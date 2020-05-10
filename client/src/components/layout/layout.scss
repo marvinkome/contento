@@ -9,9 +9,9 @@
     height: 100vh;
 }
 
-.dashboard__sidebar,
-.dashboard__topbar {
+.dashboard__sidebar {
     background-color: var(--white-color);
+    border-top: 1px solid #000000;
 }
 
 .dashboard__sidebar {
@@ -22,6 +22,55 @@
         width: 70px;
         background-color: var(--primary-color);
         color: #ffffff;
+
+        display: flex;
+        justify-content: center;
+        padding-top: 30px;
+
+        .aside--btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            position: relative;
+
+            border: none;
+            color: #ffffff;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            outline-color: #0000;
+            cursor: pointer;
+            transition-duration: 0.2;
+            -webkit-transition-duration: 0.2s; /* Safari */
+            overflow: hidden;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.18);
+            }
+
+            &:after {
+                content: '';
+                background: rgba(255, 255, 255, 0.22);
+                display: block;
+                position: absolute;
+                padding-top: 300%;
+                padding-left: 350%;
+                margin-left: -20px !important;
+                margin-top: -90%;
+                opacity: 0;
+                transition: all 0.8s;
+            }
+
+            &:active:after {
+                padding: 0;
+                margin: 0;
+                opacity: 1;
+                transition: 0s;
+            }
+        }
     }
 }
 
@@ -31,6 +80,8 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    height: 10vh;
+    border-top: 1px solid #000000;
 
     .user--avatar {
         & img {
@@ -39,8 +90,6 @@
             border-radius: 50%;
             object-fit: cover;
             border: 1.5px solid #000000;
-
-            margin-inline-end: 10px;
         }
     }
 
@@ -54,12 +103,18 @@
         margin-left: auto;
         padding: 0 5% 0 0;
     }
+
+    .topbar--username {
+        word-break: keep-all;
+        display: inline-block;
+        margin: 0 10px;
+        font-size: 16px;
+    }
 }
 
 .dashboard__main {
     grid-area: main;
     margin: 0 auto;
     width: 100%;
-    padding-top: 2em;
     background: var(--bg-color);
 }

@@ -4,6 +4,11 @@
     font-size: 16px;
     cursor: pointer;
     outline: none;
+    border-radius: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-sm {

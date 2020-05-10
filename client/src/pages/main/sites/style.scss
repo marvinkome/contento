@@ -6,8 +6,14 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 25px;
+        border-bottom: 0.5px solid var(--primary-color);
+
+        & p {
+            padding-bottom: 5px;
+        }
 
         h1 {
+            font-family: 'Playfair Display', serif;
             font-size: var(--heading-3);
             font-weight: bold;
             color: #000;

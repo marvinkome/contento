@@ -22,7 +22,7 @@ class Topbar extends React.Component {
                             ) : (
                                 <MdAccountCircle className="icon" />
                             )}
-                            {userProfile.profile?.name}
+                            <span className="topbar--username">{userProfile.profile?.name}</span>
 
                             <TopbarDropdown />
                         </div>
