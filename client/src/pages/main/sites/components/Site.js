@@ -7,7 +7,7 @@ export default class Site extends React.Component {
         return (
             <Link className="site-container" to={`/app/sites/${site.id}/pages`}>
                 <div className="site">
-                    <p className="site-name">Manage {site.name}</p>
+                    <button className="site--name__btn">Manage {site.name}</button>
                 </div>
             </Link>
         );

@@ -63,10 +63,6 @@ export default class CreateSiteModal extends React.Component {
                             </button>
                         </form>
                     </article>
-
-                    <aside className="modal-aside">
-                        {/* <img alt="modal-svg" src={modalSvg} /> */}
-                    </aside>
                 </section>
             </ReactModal>
         );
