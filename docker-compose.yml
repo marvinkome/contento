@@ -2,40 +2,17 @@ version: "3"
 
 services:
   server:
-    build: ./server
     container_name: contento_server
     restart: always
-    volumes:
-      - ./server:/app/
-      - /app/node_modules
     ports:
       - "7077:7077"
-    depends_on:
-      - db
     env_file:
       - ./server/.env
 
   client:
-    build: ./client
     container_name: contento_client
-    volumes:
-      - ./client:/app/
-      - /app/node_modules
+    restart: always
     ports:
-      - "3033:3000"
+      - "3033:3033"
     depends_on:
       - server
-
-  db:
-    container_name: contento_db
-    image: mongo:latest
-    env_file:
-      - .env
-    ports:
-      - 27018:27017
-    volumes:
-      - mongodb_data_container:/data/db
-
-volumes:
-  mongodb_data_container:
-  server:

@@ -6,7 +6,7 @@ import GoogleLogin from 'react-google-login';
 import { inject } from 'mobx-react';
 import { authApi } from 'libs/api';
 import { toast } from 'react-toastify';
-import { GOOGLE_CLIENT_KEY, GITHUB_CLIENT_KEY } from 'libs/keys';
+import { GOOGLE_CLIENT_KEY, GITHUB_CLIENT_KEY, APP_URL } from 'libs/keys';
 
 class OAuthConnect extends React.Component {
     connectGithub = async (data) => {
@@ -49,7 +49,7 @@ class OAuthConnect extends React.Component {
                     <GithubLogin
                         className="btn btn-white"
                         clientId={GITHUB_CLIENT_KEY}
-                        redirectUri="http://localhost:3000"
+                        redirectUri={APP_URL}
                         onFailure={() =>
                             toast.error('Error occured while trying to connect your Github account')
                         }

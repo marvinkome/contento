@@ -12,7 +12,9 @@ RUN yarn
 # Bundle app source
 COPY . .
 
-# RUN yarn build
+# yarn build
+RUN yarn build
 
-EXPOSE 3030
-CMD ["yarn", "start"]
+# expose port
+EXPOSE ${PORT}
+CMD ["yarn", "serve"]

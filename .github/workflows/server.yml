@@ -1,0 +1,46 @@
+name: Server CI/CD
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "server/**"
+      - ".github/workflows/server*"
+  pull_request:
+    branches: [master]
+
+jobs:
+  ci:
+    runs-on: ubuntu-18.04
+    container:
+      image: node:11.15.0
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: install and test
+        run: |
+          cd server
+          yarn install --frozen-lockfile
+          yarn test
+  cd:
+    runs-on: ubuntu-18.04
+    if: github.event.push.ref == 'refs/heads/master' || github.ref == 'refs/heads/master'
+    needs: ci
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Docker login
+        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build
+        run: docker build -f ./server/Dockerfile.prod -t contento_server ./server
+
+      - name: Tags
+        run: |
+          docker tag contento_server ${{ secrets.DOCKER_USER }}/contento_server:${{ github.sha }}
+          docker tag contento_server ${{ secrets.DOCKER_USER }}/contento_server:latest
+      - name: Push
+        run: |
+          docker push ${{ secrets.DOCKER_USER }}/contento_server:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USER }}/contento_server:latest

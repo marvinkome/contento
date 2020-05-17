@@ -2,6 +2,7 @@ import { onError } from 'apollo-link-error';
 import { HttpLink } from 'apollo-link-http';
 import { ApolloLink } from 'apollo-link';
 import { startLoader } from 'components/loader';
+import { API_URL } from 'libs/keys';
 
 export const onErrorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors)
@@ -14,7 +15,7 @@ export const onErrorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 export const httpLink = new HttpLink({
-    uri: 'http://localhost:7077/graphql'
+    uri: `${API_URL}/graphql`
 });
 
 export const authLink = (token) => {
