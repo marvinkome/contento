@@ -1,0 +1,180 @@
+.dashboard__container {
+    // Dashboard Layout
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: 90px 1fr;
+    grid-template-areas:
+        'sidebar topbar'
+        'sidebar main';
+    height: 100vh;
+}
+
+.dashboard__sidebar {
+    grid-area: sidebar;
+    background-color: var(--white-color);
+    border-top: 1px solid #000000;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    width: 300px;
+
+    z-index: 4;
+
+    .dashboard--aside {
+        height: 100%;
+        width: 70px;
+        background-color: var(--primary-color);
+        color: #ffffff;
+
+        display: flex;
+        justify-content: center;
+        padding-top: 30px;
+
+        .aside--btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            position: relative;
+
+            border: none;
+            color: #ffffff;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            outline-color: #0000;
+            cursor: pointer;
+            transition-duration: 0.2;
+            -webkit-transition-duration: 0.2s; /* Safari */
+            overflow: hidden;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.18);
+            }
+
+            &:after {
+                content: '';
+                background: rgba(255, 255, 255, 0.22);
+                display: block;
+                position: absolute;
+                padding-top: 500%;
+                padding-left: 350%;
+                margin-left: -5px !important;
+                margin-top: -90%;
+                opacity: 0;
+                transition: all 0.8s;
+            }
+
+            &:active:after {
+                padding: 0;
+                margin: 0;
+                opacity: 1;
+                transition: 0s;
+            }
+
+            &:focus {
+                background: rgba(255, 255, 255, 0.22);
+            }
+        }
+
+        .aside--tooltip__container {
+            position: relative;
+            display: inline-block;
+
+            & .aside--tooltip__text {
+                visibility: hidden;
+                width: 230px;
+                background-color: #000000;
+
+                backdrop-filter: blur(20px);
+                color: #fff;
+                text-align: center;
+                border-radius: 5px;
+                padding: 5px 0;
+                font-size: 14px;
+                line-height: 21px;
+
+                /* Position the tooltip */
+                position: absolute;
+                left: 4.4em;
+                top: 5px;
+                z-index: 1;
+
+                // Add tooltip animation
+                opacity: 0;
+                transition: opacity 1s;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    right: 100%;
+                    margin-top: -5px;
+                    border-width: 5px;
+                    border-style: solid;
+                    border-color: transparent black transparent transparent;
+                }
+            }
+
+            &:hover .aside--tooltip__text {
+                visibility: visible;
+                opacity: 0.8;
+            }
+        }
+    }
+}
+
+.dashboard__topbar {
+    grid-area: topbar;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 10vh;
+    border-top: 1px solid #000000;
+    background: var(--bg-color);
+
+    z-index: 2;
+
+    position: fixed;
+    top: 0;
+
+    .user--avatar {
+        & img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1.5px solid #000000;
+        }
+    }
+
+    .profile-link {
+        display: flex;
+        align-items: center;
+        user-select: none;
+    }
+
+    .notif-content {
+        margin-left: auto;
+        padding: 0 5% 0 0;
+    }
+
+    .topbar--username {
+        word-break: keep-all;
+        display: inline-block;
+        margin: 0 10px;
+        font-size: 16px;
+        width: 155px;
+    }
+}
+
+.dashboard__main {
+    grid-area: main;
+    margin: 0 auto;
+    width: 100%;
+    background: var(--bg-color);
+}

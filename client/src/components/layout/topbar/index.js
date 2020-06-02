@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from 'assets/logo.png';
 import TopbarDropdown from './dropdown';
 import { inject } from 'mobx-react';
 import { MdAccountCircle } from 'react-icons/md';
@@ -11,29 +10,22 @@ class Topbar extends React.Component {
         const userProfile = this.props.profile;
 
         return (
-            <div className="main__topbar">
-                <div className="logo-area">
-                    <a href="/app/sites">
-                        <img src={logo} alt="logo" />
-                    </a>
-                </div>
+            <div className="dashboard__topbar">
+                <div className="notif-content">
+                    {userProfile && (
+                        <div className="profile-link">
+                            {userProfile.profile?.picture ? (
+                                <div className="user--avatar">
+                                    <img src={userProfile.profile.picture} alt="Your profile" />
+                                </div>
+                            ) : (
+                                <MdAccountCircle className="icon" />
+                            )}
+                            <span className="topbar--username">{userProfile.profile?.name}</span>
 
-                <div className="topbar-links">
-                    <div className="notif-content">
-                        {userProfile && (
-                            <div className="profile-link">
-                                {userProfile.profile?.name}
-                                {userProfile.profile?.picture ? (
-                                    <div className="image">
-                                        <img src={userProfile.profile.picture} alt="Your profile" />
-                                    </div>
-                                ) : (
-                                    <MdAccountCircle className="icon" />
-                                )}
-                                <TopbarDropdown />
-                            </div>
-                        )}
-                    </div>
+                            <TopbarDropdown />
+                        </div>
+                    )}
                 </div>
             </div>
         );

@@ -60,7 +60,7 @@ class TopbarDropdown extends React.Component {
 
                         <hr />
 
-                        <Link to="/contact-us">Get help</Link>
+                        <Link to="/contact-us">Contact us</Link>
                         <Link to="/documentation">Documentation</Link>
 
                         <hr />
