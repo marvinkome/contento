@@ -1,0 +1,20 @@
+.footer--container {
+    padding-top: 500px;
+    height: 70vh;
+
+    .footer--background {
+        height: 20vh;
+        background: #cccccc;
+        width: 50%;
+        padding-bottom: 200px;
+        z-index: 2;
+        position: relative;
+    }
+}
+
+.footer-background--light {
+    padding-top: 4em;
+    height: 30vh;
+    background: #c4c4c4;
+    width: 100%;
+}
