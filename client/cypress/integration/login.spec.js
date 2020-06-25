@@ -4,7 +4,7 @@ describe('Login Page', () => {
         cy.fixture('login/successful.json').as('successJSON');
         cy.fixture('login/wrong-details.json').as('wrongDetailsJSON');
 
-        cy.visit('/auth/login');
+        cy.visit('/login');
     });
 
     it('should display login form', () => {

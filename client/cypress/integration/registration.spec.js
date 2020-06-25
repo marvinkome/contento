@@ -4,7 +4,7 @@ describe('Registration Page', () => {
         cy.fixture('registration/successful.json').as('successJSON');
         cy.fixture('registration/dup-email.json').as('dupEmailJSON');
 
-        cy.visit('/auth/register');
+        cy.visit('/register');
     });
 
     it('should display registration form <snapshot>', () => {

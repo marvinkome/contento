@@ -28,7 +28,7 @@ class Main extends React.Component {
         } catch (e) {
             // If there's an auth error then redirect user back to login
             if (e.message === auth_message || (e.response && e.response.status === 401)) {
-                return this.props.history.push('/auth/login');
+                return this.props.history.push('/login');
             } else {
                 // TODO:: Redirect user to error page
                 console.error(e); // eslint-disable-line

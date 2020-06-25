@@ -23,7 +23,7 @@ export default class ForgetPassword extends React.Component {
                         <img alt="logo" src={logo} className="logo" />
 
                         <p>
-                            New to Contento? <Link to="/auth/register">Register</Link>
+                            New to Contento? <Link to="/register">Register</Link>
                         </p>
                     </header>
 

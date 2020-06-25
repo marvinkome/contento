@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import './style.scss';
 
 // pages
@@ -12,22 +12,17 @@ export default class AuthPages extends React.Component {
     render() {
         return (
             <main className="auth__container">
-                <Switch>
-                    {/* login page */}
-                    <Route exact path="/auth/login" component={Login} />
+                {/* login page */}
+                <Route exact path="/login" component={Login} />
 
-                    {/* register page */}
-                    <Route exact path="/auth/register" component={Register} />
+                {/* register page */}
+                <Route exact path="/register" component={Register} />
 
-                    {/* forget password page */}
-                    <Route exact path="/auth/forgot-password" component={ForgotPassword} />
+                {/* forget password page */}
+                <Route exact path="/forgot-password" component={ForgotPassword} />
 
-                    {/* reset password page */}
-                    <Route exact path="/auth/reset-password/:token" component={ResetPassword} />
-
-                    {/* common 404 page */}
-                    <Route exact path="/auth/*" component={() => <p>404 page</p>} />
-                </Switch>
+                {/* reset password page */}
+                <Route exact path="/reset-password/:token" component={ResetPassword} />
             </main>
         );
     }

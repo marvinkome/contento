@@ -1,6 +1,6 @@
 describe('Forget Password Page', () => {
     beforeEach(() => {
-        cy.visit('/auth/forgot-password');
+        cy.visit('/forgot-password');
     });
 
     it('should display forgot password form', () => {

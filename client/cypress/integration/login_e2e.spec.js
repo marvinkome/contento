@@ -12,7 +12,7 @@ describe('Login page tests [E2E]', () => {
 
     it('login a user and set auth token', () => {
         // visit page
-        cy.visit('/auth/login');
+        cy.visit('/login');
 
         // server setup
         cy.server();

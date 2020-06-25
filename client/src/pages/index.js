@@ -19,6 +19,17 @@ import store from 'store';
 import Public from 'pages/public/index';
 
 export default class App extends React.Component {
+    renderPublicPages() {
+        return (
+            <Switch>
+                <Route exact path="/" component={Public} />
+
+                {/* Auth pages */}
+                <Auth />
+            </Switch>
+        );
+    }
+
     render() {
         return (
             <Provider rootStore={store}>
@@ -26,14 +37,11 @@ export default class App extends React.Component {
                     <div className="app">
                         {/* declare sub routes */}
                         <Switch>
-                            {/* auth dashboard */}
-                            <Route path="/auth" component={Auth} />
-
                             {/* app dashboard */}
                             <Route path="/app" component={Main} />
 
                             {/* public pages*/}
-                            <Route path="/" component={Public} />
+                            <Route path="/" render={this.renderPublicPages} />
 
                             {/* 404 */}
                             <Route path="*" render={() => <p>Future 404 page</p>} />

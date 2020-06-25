@@ -10,7 +10,7 @@ describe('Register page tests [E2E]', () => {
 
     it('creates a new user profile and set auth token', () => {
         // visit page
-        cy.visit('/auth/register');
+        cy.visit('/register');
 
         // server setup
         cy.server();
