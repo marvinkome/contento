@@ -41,7 +41,7 @@ class LoginPage extends React.Component {
         this.props.setProfile(resp.data.user);
 
         // redirect to dashboard
-        this.props.history.push('/');
+        this.props.history.push('/app/sites');
     };
 
     render() {
@@ -49,7 +49,9 @@ class LoginPage extends React.Component {
             <>
                 <section className="form-section">
                     <header className="header">
-                        <img alt="logo" src={logo} className="logo" />
+                        <Link to="/">
+                            <img alt="logo" src={logo} className="logo" />
+                        </Link>
 
                         <p>
                             New to Contento? <Link to="/register">Register</Link>

@@ -21,7 +21,9 @@ export default class ResetPassword extends React.Component {
             <>
                 <section className="form-section">
                     <header className="header">
-                        <img alt="logo" src={logo} className="logo" />
+                        <Link to="/">
+                            <img alt="logo" src={logo} className="logo" />
+                        </Link>
 
                         <p>
                             New to Contento? <Link to="/register">Register</Link>

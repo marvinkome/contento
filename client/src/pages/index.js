@@ -10,19 +10,17 @@ import 'react-toastify/dist/ReactToastify.css';
 // main pages
 import Auth from 'pages/auth';
 import Main from 'pages/main';
+import LandingPage from 'pages/public/landing-page';
 
 // global variables
 import history from 'libs/history';
 import store from 'store';
 
-//Website
-import Public from 'pages/public/index';
-
 export default class App extends React.Component {
     renderPublicPages() {
         return (
             <Switch>
-                <Route exact path="/" component={Public} />
+                <Route exact path="/" component={LandingPage} />
 
                 {/* Auth pages */}
                 <Auth />
