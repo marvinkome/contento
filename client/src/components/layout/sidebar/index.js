@@ -1,17 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-// import SidebarRoutes from './partials/sidebarRoutes';
+import { useQuery } from '@apollo/react-hooks';
 import SidebarAside from './sidebarAside';
+import { GET_SITES } from './graphql';
 
-export default class Sidebar extends React.Component {
-    render() {
-        return (
-            <div className="dashboard__sidebar">
-                <SidebarAside />
-                {/* {routes.map((route, index) => (
-                    <SidebarRoutes key={index} item={route} />
-                ))} */}
-            </div>
-        );
+export default function Sidebar() {
+    const { data, error, loading } = useQuery(GET_SITES);
+
+    if (loading) {
+        return null;
     }
+
+    if (error) {
+        console.log(error);
+    }
+
+    return (
+        <div className="dashboard__sidebar">
+            <SidebarAside />
+
+            <div className="sidebar__main">
+                <p>SideBar Main</p>
+            </div>
+        </div>
+    );
 }
