@@ -14,9 +14,8 @@
         width: 100%;
         padding: 10px;
         outline: none;
-        font-size: 18px;
+        font-size: 16px;
         transition: all ease-in-out 0.5s;
-        color: var(--color3);
         opacity: 1;
 
         &:focus {
@@ -37,7 +36,7 @@
 
         & ~ small {
             &.error {
-                color: red;
+                color: var(--red-color);
             }
 
             font-size: var(--small-text);
