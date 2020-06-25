@@ -7,6 +7,7 @@ import User, { IUser } from '@models/users';
 import auth, { generateJWT, formatUserProfile } from '@libs/auth';
 import { sendPasswordResetLink } from '@libs/emails';
 import { multerUploads, dataUri, uploader } from '@libs/images';
+import { setupUserAfterSignUp } from "@libs/userSetup";
 
 const router = Router();
 
@@ -25,6 +26,8 @@ router.post('/register', auth.optional, async (req, res) => {
         user.profile.name = data.fullName;
 
         await user.save();
+
+        await setupUserAfterSignUp(user);
 
         return res.send({
             token: generateJWT(user),
@@ -334,20 +337,22 @@ router.post('/unlink-google', auth.required, async (req, res) => {
 /**
  * For test use only please disable before pushing to production
  */
-router.delete('/user', auth.optional, async (req, res) => {
-    const data = req.body;
+if (process.env.NODE_ENV !== 'production') {
+    router.delete('/user', auth.optional, async (req, res) => {
+        const data = req.body;
 
-    try {
-        await User.findOneAndDelete({ email: data.email });
-        return res.send({
-            message: 'User profile deleted'
-        });
-    } catch (e) {
-        console.log(e);
-        return res.status(400).send({
-            error: 'Invalid email address'
-        });
-    }
-});
+        try {
+            await User.findOneAndDelete({ email: data.email });
+            return res.send({
+                message: 'User profile deleted'
+            });
+        } catch (e) {
+            console.log(e);
+            return res.status(400).send({
+                error: 'Invalid email address'
+            });
+        }
+    });
+}
 
 export default router;

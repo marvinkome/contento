@@ -4,6 +4,7 @@ import GoogleStrategy from 'passport-google-token';
 // @ts-ignore
 import GithubStrategy from 'passport-github-token';
 import User from '@models/users';
+import { setupUserAfterSignUp } from '@libs/userSetup';
 
 const localStrategy = new LocalStrategy.Strategy(
     {
@@ -100,6 +101,7 @@ const googleStrategy = new GoogleStrategy.Strategy(
         });
 
         await user.save();
+        await setupUserAfterSignUp(user);
         return done(null, user);
     }
 );
@@ -164,6 +166,7 @@ const githubStrategy = new GithubStrategy(
         });
 
         await user.save();
+        await setupUserAfterSignUp(user);
         return done(null, user);
     }
 );

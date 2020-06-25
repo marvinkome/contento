@@ -5,8 +5,8 @@ export interface IContent extends Document {
     name: string;
     slug: string;
     content: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export const contentSchema: Schema<IContent> = new Schema(

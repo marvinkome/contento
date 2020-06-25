@@ -22,7 +22,12 @@ export default function createApp() {
     // body parser
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
-    app.use(cors());
+    app.use(
+        cors({
+            origin: '*',
+            optionsSuccessStatus: 200
+        })
+    );
 
     // setup graphql
     apolloServer.applyMiddleware({ app });
