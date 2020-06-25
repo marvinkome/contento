@@ -3,7 +3,6 @@ version: "3"
 services:
   server:
     container_name: contento_server
-    restart: always
     ports:
       - "7077:7077"
     env_file:
@@ -11,7 +10,6 @@ services:
 
   client:
     container_name: contento_client
-    restart: always
     ports:
       - "3033:3033"
     depends_on:
