@@ -16,6 +16,7 @@
             margin-bottom: 25px;
 
             h1 {
+                font-family: 'Playfair Display', serif;
                 font-size: var(--heading-3);
                 font-weight: bold;
                 color: #000;
@@ -25,33 +26,50 @@
         .blocks-container {
             max-height: 100%;
             overflow: auto;
+            margin-top: -20px;
 
             .blocks {
                 .block {
-                    width: 70%;
+                    width: 80%;
 
                     .body {
-                        padding: 32px 0px 0px;
-                        border: 0.5px solid var(--primary-color);
+                        padding: 20px 0px;
+                        padding-bottom: 0px;
+                        border-radius: 0px 0px 10px 10px;
+                        border: 1px solid #ccc;
                         border-top: none;
 
                         .block-header {
                             display: flex;
-                            border-bottom: 0.5px solid var(--primary-color);
+                            border: none;
 
                             .form-group {
                                 flex: 1;
                                 padding: 0px 24px;
+
+                                label {
+                                    padding-bottom: 5px;
+                                }
                             }
                         }
 
-                        textarea {
-                            min-height: 200px;
-                            padding: 24px;
-                            border: none;
+                        .form-group {
+                            flex: 1;
+                            padding: 0px;
+                            margin: 0px;
+                            label {
+                                padding-bottom: 5px;
+                            }
 
-                            &:focus {
+                            textarea {
+                                min-height: 120px;
+                                padding: 24px;
                                 border: none;
+                                background-color: transparent;
+
+                                &:focus {
+                                    border: none;
+                                }
                             }
                         }
                     }
@@ -72,6 +90,7 @@
             overflow: auto;
 
             h3 {
+                font-family: 'Playfair Display', serif;
                 font-weight: bold;
                 color: #000;
             }
@@ -92,39 +111,6 @@
                     &.btn-primary {
                         margin-top: 3em;
                     }
-                }
-            }
-        }
-    }
-
-    .block-p0icker {
-        flex: 1;
-        background: var(--grey1);
-        padding: 3.5%;
-        padding-right: 6%;
-        padding-left: 2%;
-        height: 100%;
-        overflow: auto;
-
-        h3 {
-            text-transform: uppercase;
-        }
-
-        .block-list {
-            margin-top: 3em;
-
-            .btn {
-                width: 80%;
-                text-transform: uppercase;
-
-                &.btn-primary-outline {
-                    background: #ffffff;
-                    color: var(--text-color);
-                    margin-bottom: 20px;
-                }
-
-                &.btn-primary {
-                    margin-top: 5em;
                 }
             }
         }

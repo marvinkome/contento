@@ -2,29 +2,43 @@
     margin: 25px 0px;
 
     & > header {
-        background-color: var(--primary-color);
-        color: var(--white-color);
+        background-color: transparent;
+        color: var(--primary-color);
+        padding: 15px 25px;
+        border: 1px solid #ccc;
+        border-radius: 10px 10px 0px 0px;
+
+        &.collapsed {
+            border-radius: 10px;
+        }
+
         display: flex;
-        flex-direction: row;
-        padding: 20px 25px;
         align-items: center;
 
         .title-and-toggle {
             width: 95%;
+            margin-right: auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
 
-            h3 {
+            p {
                 font-size: var(--heading-5);
+            }
+
+            .icon {
+                font-size: 1.3em;
             }
         }
 
         .delete {
-            width: 5%;
             padding-top: 4px;
             cursor: pointer;
+
+            .icon {
+                font-size: 1.3em;
+            }
         }
     }
 

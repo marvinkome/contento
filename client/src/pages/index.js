@@ -16,40 +16,38 @@ import LandingPage from 'pages/public/landing-page';
 import history from 'libs/history';
 import store from 'store';
 
-export default class App extends React.Component {
-    renderPublicPages() {
-        return (
-            <Switch>
-                <Route exact path="/" component={LandingPage} />
+function renderPublicPages() {
+    return (
+        <Switch>
+            <Route exact path="/" component={LandingPage} />
 
-                {/* Auth pages */}
-                <Auth />
-            </Switch>
-        );
-    }
+            {/* Auth pages */}
+            <Auth />
+        </Switch>
+    );
+}
 
-    render() {
-        return (
-            <Provider rootStore={store}>
-                <Router history={history}>
-                    <div className="app">
-                        {/* declare sub routes */}
-                        <Switch>
-                            {/* app dashboard */}
-                            <Route path="/app" component={Main} />
+export default function App() {
+    return (
+        <Provider rootStore={store}>
+            <Router history={history}>
+                <div className="app">
+                    {/* declare sub routes */}
+                    <Switch>
+                        {/* app dashboard */}
+                        <Route path="/app" component={Main} />
 
-                            {/* public pages*/}
-                            <Route path="/" render={this.renderPublicPages} />
+                        {/* public pages*/}
+                        <Route path="/" render={renderPublicPages} />
 
-                            {/* 404 */}
-                            <Route path="*" render={() => <p>Future 404 page</p>} />
-                        </Switch>
+                        {/* 404 */}
+                        <Route path="*" render={() => <p>Future 404 page</p>} />
+                    </Switch>
 
-                        <Loader />
-                        <ToastContainer />
-                    </div>
-                </Router>
-            </Provider>
-        );
-    }
+                    <Loader />
+                    <ToastContainer />
+                </div>
+            </Router>
+        </Provider>
+    );
 }

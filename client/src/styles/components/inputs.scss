@@ -25,13 +25,13 @@
 
         &.flat {
             background: transparent;
+            border: 0px;
             border-radius: 0px;
             border-bottom: 1px solid var(--grey0);
-            padding-left: 3px;
-            padding-right: 3px;
+            padding: 5px 3px;
 
             &:focus {
-                border-bottom-color: var(--brand-color);
+                border-bottom-color: var(--primary-color);
             }
         }
 

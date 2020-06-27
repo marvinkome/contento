@@ -7,7 +7,7 @@ import User, { IUser } from '@models/users';
 import auth, { generateJWT, formatUserProfile } from '@libs/auth';
 import { sendPasswordResetLink } from '@libs/emails';
 import { multerUploads, dataUri, uploader } from '@libs/images';
-import { setupUserAfterSignUp } from "@libs/userSetup";
+import { setupUserAfterSignUp } from '@libs/userSetup';
 
 const router = Router();
 
@@ -249,7 +249,7 @@ router.get('/my-profile', auth.required, async (req, res) => {
     const user = await User.findById(id);
 
     if (!user) {
-        return res.sendStatus(400);
+        return res.sendStatus(401);
     }
 
     res.send({ user: formatUserProfile(user) });

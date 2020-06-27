@@ -17,7 +17,8 @@ function formatContents(contents) {
         type: content.type,
         name: content.name || '',
         slug: content.slug || '',
-        content: content.content || ''
+        content: content.content || '',
+        ref: React.createRef()
     }));
 }
 
@@ -75,14 +76,28 @@ function useBlocks(queryResponse) {
         }
     }, [data]);
 
+    useEffect(() => {
+        // scroll to the newly added item
+        const lastBlock = blocks[blocks.length - 1];
+        if (lastBlock?.name.length === 0) {
+            lastBlock.ref.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    }, [blocks]);
+
     const addBlock = (blockType) => {
+        const ref = React.createRef();
+
         const block = {
             // use a random ID until item is saved
             id: `${Math.floor(Math.random() * 1000)}`,
             type: blockType,
             name: '',
             slug: '',
-            content: ''
+            content: '',
+            ref
         };
 
         updateBlockState(blocks.concat([block]));

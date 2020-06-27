@@ -21,6 +21,7 @@ export default class MainEditor extends React.Component {
                                     return (
                                         <Text
                                             key={block.id}
+                                            ref={block.ref}
                                             blockData={block}
                                             removeBlock={removeBlock}
                                             updateBlock={updateBlock}

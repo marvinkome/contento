@@ -1,7 +1,7 @@
 import React from 'react';
 import CollapsibleCard from 'components/collapsibleCard';
 
-export default class TextBlock extends React.Component {
+class TextBlock extends React.Component {
     state = {
         nameError: null,
         slugError: null
@@ -59,26 +59,12 @@ export default class TextBlock extends React.Component {
         this.props.updateBlock(blockData.id, 'content', value);
     };
 
-    renderBlockHeader = () => {
-        const { blockData } = this.props;
-        return (
-            <input
-                className="form-input flat"
-                type="text"
-                id={`textBlockTitle-${blockData.id}`}
-                placeholder="Click name of this block e.g: Header Title"
-                onChange={this.onTitleChange}
-                value={this.props.blockData.name}
-            />
-        );
-    };
-
     render() {
-        const { removeBlock, blockData } = this.props;
+        const { removeBlock, blockData, forwardedRef } = this.props;
         const { slugError, nameError } = this.state;
 
         return (
-            <div className="text-block block">
+            <div ref={forwardedRef} className="text-block block">
                 <CollapsibleCard
                     title={blockData.name.length ? blockData.name : 'Untitled'}
                     onDelete={() => removeBlock(blockData.id)}
@@ -87,7 +73,7 @@ export default class TextBlock extends React.Component {
                         <div className="form-group">
                             <label htmlFor="block-name">Block Name:</label>
                             <input
-                                className="form-input"
+                                className="form-input flat"
                                 id={`block-name-${blockData.id}`}
                                 type="text"
                                 placeholder="eg: Header Text"
@@ -101,7 +87,7 @@ export default class TextBlock extends React.Component {
                         <div className="form-group">
                             <label htmlFor="block-slug">Block Slug (API Identifier):</label>
                             <input
-                                className="form-input"
+                                className="form-input flat"
                                 id={`block-slug-${blockData.id}`}
                                 type="text"
                                 placeholder="eg: headerText"
@@ -113,16 +99,20 @@ export default class TextBlock extends React.Component {
                         </div>
                     </header>
 
-                    <textarea
-                        className="form-input flat"
-                        type="text"
-                        id={blockData.id}
-                        placeholder="Text content..."
-                        onChange={this.onContentChange}
-                        value={blockData.content}
-                    />
+                    <div className="form-group">
+                        <textarea
+                            className="form-input"
+                            type="text"
+                            id={blockData.id}
+                            placeholder="Text content..."
+                            onChange={this.onContentChange}
+                            value={blockData.content}
+                        />
+                    </div>
                 </CollapsibleCard>
             </div>
         );
     }
 }
+
+export default React.forwardRef((props, ref) => <TextBlock {...props} forwardedRef={ref} />);

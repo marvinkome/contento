@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactModal from 'react-modal';
 import { MdClose } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 ReactModal.setAppElement('#root');
 
@@ -13,7 +14,7 @@ export function EditPageModal(props) {
         try {
             await props.editPage({ variables: { name, id: props.page.id } });
         } catch (e) {
-            // do nothing, we're already handling it
+            toast.error('Oops, error updating this page');
         }
 
         props.toggleModal();
