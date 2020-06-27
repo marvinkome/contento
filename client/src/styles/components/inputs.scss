@@ -2,10 +2,11 @@
     margin-bottom: 1rem;
 
     label {
+        display: block;
         font-weight: 500;
         color: var(--color3);
         font-size: 15px;
-        padding-bottom: 5px;
+        padding-bottom: 10px;
     }
 
     .form-input {
@@ -40,7 +41,14 @@
             }
 
             font-size: var(--small-text);
-            font-style: italic;
+        }
+
+        & ~ small.toggle-info {
+            display: none;
+        }
+
+        &:focus ~ small.toggle-info {
+            display: block;
         }
     }
 }

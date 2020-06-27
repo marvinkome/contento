@@ -10,6 +10,7 @@ import { setupApollo } from 'libs/graphql';
 // pages
 import Profile from './profile';
 import Sites from './sites';
+import SitesSettings from './site-settings';
 import Pages from './pages';
 import Editor from './editor';
 
@@ -78,6 +79,9 @@ class Main extends React.Component {
 
                         {/* pages */}
                         <Route exact path="/app/sites/:siteid/pages" component={Pages} />
+
+                        {/* site settings */}
+                        <Route exact path="/app/sites/settings/:siteid" component={SitesSettings} />
 
                         {/* sites */}
                         <Route exact path="/app/" component={Sites} />

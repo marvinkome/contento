@@ -7,6 +7,7 @@ export const siteType = gql`
     type Site {
         id: ID!
         name: String!
+        description: String
         pages: [Page]
 
         siteSecretKey: String

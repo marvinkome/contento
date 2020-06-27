@@ -26,7 +26,7 @@ function TopbarDropdown(props) {
 
     return (
         <Dropdown>
-            {siteid && <Link to={`/app/sites/${siteid}/settings`}>Site settings</Link>}
+            {siteid && <Link to={`/app/sites/settings/${siteid}`}>Site settings</Link>}
 
             <Link to="/app/profile">User profile</Link>
 
