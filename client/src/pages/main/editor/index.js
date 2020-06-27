@@ -131,12 +131,22 @@ export default function EditorHooks() {
     const { blocks, addBlock, removeBlock, updateBlock } = useBlocks(queryResponse);
     const { saveBlocks } = useSave(blocks);
 
+    if (!queryResponse.loading && !queryResponse.data?.page) {
+        return (
+            <Layout>
+                <main className="editor-page">
+                    <p>Oops page not found</p>
+                </main>
+            </Layout>
+        );
+    }
+
     return (
         <Layout>
             <main className="editor-page">
                 <section className="main-section">
                     <header className="page-header">
-                        <h1>Home</h1>
+                        <h1>{queryResponse.data?.page.name}</h1>
                     </header>
 
                     {/* main editor */}

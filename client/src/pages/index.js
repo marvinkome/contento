@@ -39,9 +39,6 @@ export default function App() {
 
                         {/* public pages*/}
                         <Route path="/" render={renderPublicPages} />
-
-                        {/* 404 */}
-                        <Route path="*" render={() => <p>Future 404 page</p>} />
                     </Switch>
 
                     <Loader />

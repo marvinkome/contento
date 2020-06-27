@@ -73,10 +73,20 @@ export default function Pages() {
 
     // page query
     const { siteid } = useParams();
-    const { error, data } = useQuery(GET_SITE_PAGES, { variables: { siteid } });
+    const { error, data, loading } = useQuery(GET_SITE_PAGES, { variables: { siteid } });
 
     // add page
     const [addPage, deletePage, editPage] = useMutations();
+
+    if (!loading && !data.site) {
+        return (
+            <Layout>
+                <main className="pages-page">
+                    <p>Oops site not found</p>
+                </main>
+            </Layout>
+        );
+    }
 
     return (
         <Layout>

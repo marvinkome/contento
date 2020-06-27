@@ -1,4 +1,5 @@
 import React from 'react';
+import Layout from 'components/layout';
 import { Switch, Route } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { inject } from 'mobx-react';
@@ -90,7 +91,16 @@ class Main extends React.Component {
                         <Route exact path="/app/profile" component={Profile} />
 
                         {/* 404 */}
-                        <Route path="/app/*" render={() => <p>Future 404 page</p>} />
+                        <Route
+                            path="/app/*"
+                            render={() => (
+                                <Layout>
+                                    <div className="error-404-page ">
+                                        <p>Page not found</p>
+                                    </div>
+                                </Layout>
+                            )}
+                        />
                     </Switch>
                 </ApolloProvider>
             </div>

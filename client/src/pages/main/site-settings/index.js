@@ -44,8 +44,18 @@ function useMutations() {
 
 export default function SiteSettings() {
     const { siteid } = useParams();
-    const { data } = useQuery(GET_SITE, { variables: { siteid } });
+    const { data, loading } = useQuery(GET_SITE, { variables: { siteid } });
     const [deleteSite, editSite] = useMutations();
+
+    if (!loading && !data.site) {
+        return (
+            <Layout>
+                <main className="site-settings-page">
+                    <p>Oops site not found</p>
+                </main>
+            </Layout>
+        );
+    }
 
     return (
         <Layout>
