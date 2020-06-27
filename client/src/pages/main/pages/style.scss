@@ -18,11 +18,11 @@
         display: flex;
         flex-flow: row wrap;
         justify-content: flex-start;
-        margin: 0px -15px;
 
         .page-container {
             flex-basis: 25%;
-            padding: 15px;
+            padding: 15px 30px;
+            padding-left: 0px;
 
             .page {
                 background-color: var(--primary-color);

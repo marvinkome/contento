@@ -86,16 +86,17 @@ export default function Pages() {
                 <section className="page-list">
                     {error && <p>Error loading pages</p>}
 
-                    {data &&
-                        data.site.pages.map((page) => (
-                            <Page
-                                page={page}
-                                key={page.id}
-                                siteId={data.site.id}
-                                deletePage={deletePage}
-                                editPage={editPage}
-                            />
-                        ))}
+                    {data?.site?.pages.length === 0 && <p>No pages available.</p>}
+
+                    {data?.site?.pages.map((page) => (
+                        <Page
+                            page={page}
+                            key={page.id}
+                            siteId={data.site.id}
+                            deletePage={deletePage}
+                            editPage={editPage}
+                        />
+                    ))}
                 </section>
 
                 {/* modal */}

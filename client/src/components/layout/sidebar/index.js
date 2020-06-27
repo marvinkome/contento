@@ -1,10 +1,24 @@
 import React from 'react';
-import plus from 'assets/icons/plus_icon.svg';
-import { useQuery } from '@apollo/react-hooks';
-import { GET_SITES } from './graphql';
+import AddSiteModal from './addSiteModal';
+import { Link } from 'react-router-dom';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { GET_SITES, ADD_SITE } from './graphql';
+import './style.scss';
 
 export default function Sidebar() {
     const { data, error } = useQuery(GET_SITES);
+
+    // add site mutation
+    const [addSite] = useMutation(ADD_SITE, {
+        update(cache, { data: { addSite } }) {
+            const { sites } = cache.readQuery({ query: GET_SITES });
+
+            cache.writeQuery({
+                query: GET_SITES,
+                data: { sites: sites.concat([addSite]) }
+            });
+        }
+    });
 
     if (error) {
         console.log(error);
@@ -15,16 +29,13 @@ export default function Sidebar() {
             <aside className="sidebar--aside">
                 {data?.sites &&
                     data.sites.map((site) => (
-                        <a key={site.id} href="/" className="site-btn">
+                        <Link key={site.id} to={`/app/sites/${site.id}/pages`} className="site-btn">
                             {site.name.charAt(0)}
                             <span className="tooltip__text">{site.name}</span>
-                        </a>
+                        </Link>
                     ))}
 
-                <a href="/" className="add-icon site-btn">
-                    <img src={plus} alt="icon" />
-                    <span className="tooltip__text">Click here to create a new site</span>
-                </a>
+                <AddSiteModal addSite={addSite} />
             </aside>
         </div>
     );

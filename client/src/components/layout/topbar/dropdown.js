@@ -2,10 +2,12 @@ import React from 'react';
 import { mainClient } from 'libs/api';
 import { AUTH_TOKEN_KEY } from 'libs/keys';
 import { inject } from 'mobx-react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Dropdown from 'components/dropdown';
 
 function TopbarDropdown(props) {
+    const { siteid } = useParams();
+
     const logout = (e) => {
         e.preventDefault();
 
@@ -24,6 +26,8 @@ function TopbarDropdown(props) {
 
     return (
         <Dropdown>
+            {siteid && <Link to={`/app/sites/${siteid}/settings`}>Site settings</Link>}
+
             <Link to="/app/profile">User profile</Link>
 
             <hr />
