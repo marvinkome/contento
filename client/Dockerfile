@@ -1,5 +1,4 @@
-FROM node:11.15.0
-RUN curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 0.26.1
+FROM node:12.0.0
 
 # create app directory
 WORKDIR /app

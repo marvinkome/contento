@@ -1,51 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import { Redirect } from 'react-router-dom';
 import Layout from 'components/layout';
-import PageHeader from './components/pageHeader';
-import CreateSiteModal from './components/createSiteModal';
-import Site from './components/Site';
-import { useQuery, useMutation } from '@apollo/react-hooks';
-import { GET_SITES, ADD_SITE } from './graphql';
-import './style.scss';
+import { GET_SITES } from './graphql';
 
-export default function Sites() {
-    // modal
-    const [createModalIsOpen, setCreateModalState] = useState(false);
-    const toggleCreateModal = () => setCreateModalState(!createModalIsOpen);
+export default function SitePage() {
+    const { data, error } = useQuery(GET_SITES);
 
-    // sites query
-    const { loading, error, data } = useQuery(GET_SITES);
+    if (error) {
+        return (
+            <Layout>
+                <p>Error loading site...</p>
+            </Layout>
+        );
+    }
 
-    // add site mutation
-    const [addSite] = useMutation(ADD_SITE, {
-        update(cache, { data: { addSite } }) {
-            const { sites } = cache.readQuery({ query: GET_SITES });
+    // redirect to the last site in the list
+    const site = data?.sites[data.sites.length - 1];
 
-            cache.writeQuery({
-                query: GET_SITES,
-                data: { sites: sites.concat([addSite]) }
-            });
-        }
-    });
+    if (site?.id) {
+        return <Redirect to={`/app/sites/${site.id}/pages`} />;
+    }
 
-    return (
-        <Layout>
-            <main className="sites-page">
-                <PageHeader toggleModal={toggleCreateModal} />
-
-                <div className="site-list">
-                    {loading && <p>Fetching sites...</p>}
-                    {error && <p>Error loading sites</p>}
-
-                    {data && data.sites.map((site) => <Site key={site.id} site={site} />)}
-                </div>
-            </main>
-
-            {/* modal */}
-            <CreateSiteModal
-                toggleModal={toggleCreateModal}
-                isOpen={createModalIsOpen}
-                addSite={addSite}
-            />
-        </Layout>
-    );
+    return null;
 }

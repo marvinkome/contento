@@ -42,7 +42,7 @@ class RegistrationPage extends React.Component {
         this.props.setProfile(resp.data.user);
 
         // redirect to dashboard
-        this.props.history.push('/app/sites');
+        this.props.history.push('/app');
     };
 
     render() {

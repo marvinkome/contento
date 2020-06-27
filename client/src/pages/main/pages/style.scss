@@ -7,6 +7,7 @@
         margin-bottom: 25px;
 
         h1 {
+            font-family: 'Playfair Display', serif;
             font-size: var(--heading-3);
             font-weight: bold;
             color: #000;
@@ -26,26 +27,56 @@
             .page {
                 background-color: var(--primary-color);
                 color: #fff;
-                text-align: center;
-                padding: 35% 3em;
+                padding: 1.5em 20px;
+                border-radius: 10px;
 
                 p {
-                    border: 1px solid #fff;
-                    padding: 15px;
+                    font-weight: bold;
+                    font-size: var(--meduim-text);
+                    margin-bottom: 40%;
+                }
+
+                .page-actions {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .primary-action {
+                        background-color: #fff;
+                        border: 1px solid #fff;
+                        border-radius: 5px;
+                        font-size: var(--small-text);
+                        padding: 10px 15px;
+                        color: #000;
+                    }
+
+                    .dropdown-icon {
+                        margin-left: auto;
+                    }
+
+                    .dropdown-container {
+                        width: 90%;
+                        right: 0;
+                        left: 1.8rem;
+                    }
                 }
             }
         }
     }
 }
 
-#add-page-modal {
+#add-page-modal,
+#edit-page-modal {
     overflow: auto;
-    left: 30%;
     width: 40%;
 
     .modal-content {
+        p {
+            margin-bottom: 20px;
+        }
+
         form {
-            padding: 20px 0px;
             width: 100%;
 
             label {
@@ -53,8 +84,26 @@
             }
 
             .btn {
+                margin-top: 2em;
                 width: 100%;
             }
+        }
+    }
+}
+
+#delete-page-modal {
+    top: 30%;
+    width: 45%;
+
+    .modal-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        p {
+            margin-bottom: 20px;
         }
     }
 }

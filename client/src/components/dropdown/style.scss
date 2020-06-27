@@ -1,14 +1,21 @@
 .dropdown-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-left: 0px;
-    font-size: 2em;
     cursor: pointer;
+
+    .icon {
+        font-size: 1.5em;
+        margin-inline-end: 0px;
+    }
 }
 
 .dropdown-container {
     position: absolute;
-    right: 3.8rem;
+    right: 3.4rem;
     z-index: 10;
-    margin-top: 7em;
+    top: 3em;
     display: none;
 
     &.isOpen {
@@ -21,7 +28,7 @@
         height: 20px;
         border-radius: 3px;
         top: 0;
-        right: 25px;
+        right: 15px;
         margin-top: -7px;
         transform: rotate(45deg);
         z-index: -1;
@@ -43,11 +50,15 @@
             margin: 5px 0px;
         }
 
-        a {
+        a,
+        .btn {
+            width: 100%;
+            text-align: left;
             display: block;
             color: #fff;
             font-size: var(--small-text);
             padding: 10px 20px;
+            background-color: transparent;
         }
     }
 }

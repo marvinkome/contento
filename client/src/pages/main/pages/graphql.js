@@ -29,3 +29,13 @@ export const DELETE_PAGE = gql`
         deletePage(id: $id, siteId: $siteid)
     }
 `;
+
+export const UPDATE_PAGE = gql`
+    mutation UpdatePage($id: ID!, $name: String!, $siteid: String!) {
+        updatePage(id: $id, name: $name, siteId: $siteid) {
+            id
+            name
+            slug
+        }
+    }
+`;

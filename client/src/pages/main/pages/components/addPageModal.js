@@ -25,16 +25,13 @@ export default class AddPageModal extends React.Component {
                 className="modal-container"
             >
                 <header className="modal-header">
-                    <h2>Add a new page</h2>
+                    <h2> Add a new page</h2>
                     <MdClose className="close-icon icon" onClick={this.props.toggleModal} />
                 </header>
 
                 <section className="modal-body">
                     <article className="modal-content">
-                        <p>
-                            Boost your productivity by making it easier for everyone to access
-                            contents in one location.
-                        </p>
+                        <p>Add a page to hold contents.</p>
 
                         <form onSubmit={this.onSubmit} className="form">
                             <div className="form-group">

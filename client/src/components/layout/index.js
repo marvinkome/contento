@@ -8,7 +8,7 @@ export default class Layout extends React.Component {
     render() {
         return (
             <div className="dashboard__container">
-                <Topbar toggleSidebar={this.toggleSidebar} />
+                <Topbar />
                 <Sidebar />
                 <div className="dashboard__main">{this.props.children}</div>
             </div>

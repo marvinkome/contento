@@ -13,10 +13,10 @@ export const inputDef = `
 `;
 
 export const typeDef = `
-    addPage(name: String!, slug: String! siteId: String!): Page
-    updatePage(id: ID!, name: String): Page
+    addPage(name: String!, slug: String!, siteId: String!): Page
+    updatePage(id: ID!, siteId: String!, name: String): Page
     deletePage(id: ID!, siteId: String!): ID
-    updateContents(id: ID! siteId: ID!, blocks: [BlockInput]): Page
+    updateContents(id: ID!, siteId: ID!, blocks: [BlockInput]): Page
 `;
 
 export const resolver = {
@@ -41,9 +41,19 @@ export const resolver = {
     }),
 
     updatePage: authenticated(async (_: any, data: any, context: IContext) => {
+        // get site
+        const site = await Site.findOne({
+            _id: data.siteId,
+            owner: context.currentUser
+        });
+
+        if (!site) {
+            throw Error('Site not found, possibly deleted or belongs to another user');
+        }
+
         const page = await Page.findOne({
             _id: data.id,
-            owner: context.currentUser
+            site: site.id
         });
 
         if (!page) {

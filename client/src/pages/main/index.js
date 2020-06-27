@@ -80,7 +80,7 @@ class Main extends React.Component {
                         <Route exact path="/app/sites/:siteid/pages" component={Pages} />
 
                         {/* sites */}
-                        <Route exact path="/app/sites" component={Sites} />
+                        <Route exact path="/app/" component={Sites} />
 
                         {/* profile */}
                         <Route exact path="/app/profile" component={Profile} />

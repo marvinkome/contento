@@ -1,14 +1,10 @@
 import React from 'react';
+import plus from 'assets/icons/plus_icon.svg';
 import { useQuery } from '@apollo/react-hooks';
-import SidebarAside from './sidebarAside';
 import { GET_SITES } from './graphql';
 
 export default function Sidebar() {
-    const { data, error, loading } = useQuery(GET_SITES);
-
-    if (loading) {
-        return null;
-    }
+    const { data, error } = useQuery(GET_SITES);
 
     if (error) {
         console.log(error);
@@ -16,11 +12,20 @@ export default function Sidebar() {
 
     return (
         <div className="dashboard__sidebar">
-            <SidebarAside />
+            <aside className="sidebar--aside">
+                {data?.sites &&
+                    data.sites.map((site) => (
+                        <a key={site.id} href="/" className="site-btn">
+                            {site.name.charAt(0)}
+                            <span className="tooltip__text">{site.name}</span>
+                        </a>
+                    ))}
 
-            <div className="sidebar__main">
-                <p>SideBar Main</p>
-            </div>
+                <a href="/" className="add-icon site-btn">
+                    <img src={plus} alt="icon" />
+                    <span className="tooltip__text">Click here to create a new site</span>
+                </a>
+            </aside>
         </div>
     );
 }
