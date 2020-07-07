@@ -1,9 +1,10 @@
 import { Schema, model, Document } from 'mongoose';
+import { IUser } from './users';
 
 export interface ISite extends Document {
     name: string;
     description?: string;
-    owner: Schema.Types.ObjectId;
+    owner: IUser | null;
     lastTokenReset: number;
     createdAt: string;
     updatedAt: string;

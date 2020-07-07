@@ -1,12 +1,11 @@
 import { Request } from 'express';
 import { v2 as cloudinary } from 'cloudinary';
 import multer from 'multer';
-// @ts-ignore
-import Datauri from 'datauri';
+import DataUriParser from 'datauri/parser';
 import path from 'path';
 
 const storage = multer.memoryStorage();
-const dUri = new Datauri();
+const dUri = new DataUriParser();
 
 export const setup_cloudinary = () => {
     return cloudinary.config({

@@ -4,7 +4,7 @@ import { contentSchema, IContent } from './content';
 export interface IPage extends Document {
     name: string;
     slug: string;
-    site: Schema.Types.ObjectId;
+    site: Schema.Types.ObjectId | string;
     contents: [IContent];
     createdAt: string;
     updatedAt: string;
