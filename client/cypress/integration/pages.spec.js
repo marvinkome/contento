@@ -81,7 +81,7 @@ describe('Pages page test', () => {
         cy.get('.page-list .page-container')
             .eq(0)
             .get('.page-name')
-            .contains('Edit Test Page');
+            .contains('Test Page');
     });
 
     it('creates a new page', () => {
@@ -139,6 +139,6 @@ describe('Pages page test', () => {
         cy.get('.page-list .page-container')
             .eq(0)
             .get('.page-name')
-            .contains('Edit Demo Page');
+            .contains('Demo Page');
     });
 });

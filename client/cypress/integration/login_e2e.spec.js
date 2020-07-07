@@ -4,7 +4,7 @@ describe('Login page tests [E2E]', () => {
     beforeEach(() => {
         // create new user for login
         cy.request('POST', `${serverUrl}/api/auth/register`, {
-            email: 'testuser@gmail.com',
+            email: 'johndoe@gmail.com',
             password: 'this is the password for test user',
             fullName: 'Test User'
         });
@@ -19,7 +19,7 @@ describe('Login page tests [E2E]', () => {
         cy.route('POST', `${serverUrl}/api/auth/login`).as('loginE2EApi');
 
         // type in email
-        cy.get('input#email').type('testuser@gmail.com');
+        cy.get('input#email').type('johndoe@gmail.com');
 
         // type in password
         cy.get('input#password').type('this is the password for test user');
@@ -40,7 +40,7 @@ describe('Login page tests [E2E]', () => {
     afterEach(() => {
         // remove test user from DB
         cy.request('DELETE', `${serverUrl}/api/auth/user`, {
-            email: 'testuser@gmail.com'
+            email: 'johndoe@gmail.com'
         });
     });
 });

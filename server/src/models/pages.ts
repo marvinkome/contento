@@ -20,12 +20,11 @@ export const pageSchema: Schema<IPage> = new Schema(
         slug: {
             type: String,
             minlength: 3,
-            unique: true,
             required: true
         },
         site: {
             type: Schema.Types.ObjectId,
-            ref: 'User'
+            ref: 'Site'
         },
         contents: [contentSchema]
     },
@@ -33,5 +32,7 @@ export const pageSchema: Schema<IPage> = new Schema(
         timestamps: true
     }
 );
+
+pageSchema.index({ slug: 1, site: 1 }, { unique: true });
 
 export default model<IPage>('Page', pageSchema);

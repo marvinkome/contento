@@ -2,5 +2,8 @@
     "baseUrl": "http://localhost:3033",
     "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*", "*e2e*"],
     "video": false,
-    "screenshotOnRunFailure": false
+    "screenshotOnRunFailure": false,
+    "env": {
+        "serverUrl": "http://localhost:7077"
+    }
 }

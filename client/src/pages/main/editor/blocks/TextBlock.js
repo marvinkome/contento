@@ -16,7 +16,7 @@ class TextBlock extends React.Component {
     }
 
     validateName = (name) => {
-        if (!name.length) {
+        if (name.length < 3) {
             return this.setState({ nameError: 'Block name is required' });
         }
 
@@ -24,7 +24,7 @@ class TextBlock extends React.Component {
     };
 
     validateSlug = (slug) => {
-        if (!slug || !slug.length) {
+        if (!slug || slug.length < 3) {
             return this.setState({ slugError: 'Block slug is required' });
         }
 

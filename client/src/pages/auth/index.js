@@ -23,16 +23,6 @@ export default class AuthPages extends React.Component {
 
                 {/* reset password page */}
                 <Route exact path="/reset-password/:token" component={ResetPassword} />
-
-                {/* 404 */}
-                <Route
-                    path="*"
-                    render={() => (
-                        <div className="error-404-page ">
-                            <p>Page not found</p>
-                        </div>
-                    )}
-                />
             </main>
         );
     }

@@ -31,6 +31,33 @@ function formatContentsForSave(contents) {
     }));
 }
 
+function validateBlocks(blocks) {
+    // validate all blocks
+    // all name and slug must not be empty
+    const nameValid = blocks.every((block) => block.name.length >= 3);
+    const slugs = blocks.map((block) => block.slug);
+
+    const slugSet = slugs.every((slug) => slug.length >= 3);
+    const slugUnique = new Set(slugs).size === slugs.length;
+
+    if (!nameValid) {
+        toast.error('Error saving. Make sure all required fields are set');
+        return false;
+    }
+
+    if (!slugSet) {
+        toast.error('Error saving. Make sure all required fields are set');
+        return false;
+    }
+
+    if (!slugUnique) {
+        toast.error('Error saving. Make sure all slugs are unique');
+        return false;
+    }
+
+    return true;
+}
+
 /* === Custom Hooks ==== */
 
 function useDataFetch() {
@@ -48,6 +75,10 @@ function useSave(blocks) {
 
     return {
         saveBlocks: async () => {
+            if (!validateBlocks(blocks)) {
+                return false;
+            }
+
             // call mutation function
             try {
                 await saveBlocks({

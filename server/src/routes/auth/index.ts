@@ -4,6 +4,8 @@ import jwt from 'jsonwebtoken';
 import axios, { AxiosResponse } from 'axios';
 
 import User, { IUser } from '@models/users';
+import Site from '@models/sites';
+import Page from '@models/pages';
 import auth, { generateJWT, formatUserProfile } from '@libs/auth';
 import { sendPasswordResetLink } from '@libs/emails';
 import { multerUploads, dataUri, uploader } from '@libs/images';
@@ -35,6 +37,7 @@ router.post('/register', auth.optional, async (req, res) => {
         });
     } catch (e) {
         const message = e.message;
+        console.log(message);
 
         return res.status(400).send({
             error: 'Error processing data',
@@ -342,7 +345,19 @@ if (process.env.NODE_ENV !== 'production') {
         const data = req.body;
 
         try {
-            await User.findOneAndDelete({ email: data.email });
+            const user = await User.findOne({ email: data.email });
+            const sites = await Site.find({ owner: user?.id });
+
+            for (const site of sites) {
+                // delete pages
+                await Page.deleteMany({ site: site.id });
+
+                // delete sites
+                await Site.findByIdAndDelete(site.id);
+            }
+
+            // delete user
+            await User.findByIdAndDelete(user?.id);
             return res.send({
                 message: 'User profile deleted'
             });

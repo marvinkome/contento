@@ -6,7 +6,7 @@ WORKDIR /app
 # Install app dependencies
 COPY package.json ./
 COPY yarn.lock ./
-RUN yarn
+RUN yarn --frozen-lockfile
 
 # Bundle app source
 COPY . .

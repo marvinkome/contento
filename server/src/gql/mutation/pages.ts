@@ -37,7 +37,22 @@ export const resolver = {
             site: site.id
         });
 
-        return page.save();
+        try {
+            await page.save();
+        } catch (e) {
+            const message = e.message;
+            const dupError = message.indexOf('duplicate key error') !== -1;
+
+            console.error(message, dupError);
+
+            if (dupError) {
+                throw Error('A page with this slug already exist');
+            } else {
+                throw Error(message);
+            }
+        }
+
+        return page;
     }),
 
     updatePage: authenticated(async (_: any, data: any, context: IContext) => {

@@ -24,7 +24,6 @@ export const contentSchema: Schema<IContent> = new Schema(
         slug: {
             type: String,
             minlength: 3,
-            unique: true,
             required: true
         },
         content: {

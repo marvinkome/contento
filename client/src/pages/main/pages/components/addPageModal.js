@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 import ReactModal from 'react-modal';
 import { MdClose } from 'react-icons/md';
 
@@ -11,8 +12,12 @@ export default class AddPageModal extends React.Component {
         const name = e.target['page-name'].value;
         const slug = e.target['page-slug'].value;
 
-        await this.props.addPage({ variables: { name, slug } });
-        this.props.toggleModal();
+        try {
+            await this.props.addPage({ variables: { name, slug } });
+            this.props.toggleModal();
+        } catch (e) {
+            toast.error(e.message);
+        }
     };
 
     render() {

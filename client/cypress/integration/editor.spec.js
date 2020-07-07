@@ -106,7 +106,7 @@ describe('Editor page test', () => {
             .its('length')
             .should('eq', 1);
 
-        cy.get('.block .title-and-toggle h3').should('contain.text', 'Untitled');
+        cy.get('.block .title-and-toggle p').should('contain.text', 'Untitled');
     });
 
     it('Can edit a block', () => {
@@ -148,7 +148,7 @@ describe('Editor page test', () => {
             .clear()
             .type('This is content of the new block');
 
-        cy.get('.block .title-and-toggle h3').should('contain.text', 'New block name');
+        cy.get('.block .title-and-toggle p').should('contain.text', 'New block name');
     });
 
     it('Can remove a block', () => {
@@ -180,7 +180,51 @@ describe('Editor page test', () => {
         );
     });
 
-    it('Shows error about fields when saving contents', () => {});
+    it('Shows error about fields when saving contents', () => {
+        cy.mockGraphqlOps({
+            operations: {
+                GetPage: {
+                    page: {
+                        id: 'randomID',
+                        name: 'Test Page',
+                        contents: [
+                            {
+                                id: 'randomContentID',
+                                type: 'TEXT',
+                                name: 'Test Block',
+                                slug: 'testBlock',
+                                content: 'This is content of the test block'
+                            }
+                        ]
+                    }
+                }
+            }
+        });
 
-    it('Can save contents', () => {});
+        cy.get('.block input#block-name-randomContentID').should('have.value', 'Test Block');
+        cy.get('.block input#block-slug-randomContentID').should('have.value', 'testBlock');
+        cy.get('.block textarea#randomContentID').should(
+            'have.value',
+            'This is content of the test block'
+        );
+
+        // edit fields
+        cy.get('.block input#block-name-randomContentID')
+            .clear()
+            .type('New block name');
+        cy.get('.block input#block-slug-randomContentID').clear();
+        cy.get('.block textarea#randomContentID')
+            .clear()
+            .type('This is content of the new block');
+
+        // Save block
+        cy.get('.block-list .btn')
+            .contains('Save')
+            .click();
+
+        cy.get('.Toastify__toast--error .Toastify__toast-body').should(
+            'contain.text',
+            'Error saving. Make sure all required fields are set'
+        );
+    });
 });

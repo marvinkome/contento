@@ -15,7 +15,7 @@ export default function Page(props) {
                         to={`/app/sites/${props.siteId}/editor/${props.page.id}`}
                         className="primary-action"
                     >
-                        Manage contents
+                        Manage content
                     </Link>
 
                     <Dropdown toggle={<MdSettings className="icon" />}>
