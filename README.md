@@ -1,5 +1,7 @@
 # Contento
 
+![](https://github.com/marvinkome/contento/workflows/Client%20CI/CD/badge.svg?master)
+
 Create contents dynamically without having to edit your code every time
 
 ## Development
