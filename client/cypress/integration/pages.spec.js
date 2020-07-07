@@ -47,9 +47,7 @@ describe('Pages page test', () => {
         });
 
         // check that sites are available
-        cy.get('.page-list')
-            .children()
-            .should('have.length', 0);
+        cy.get('.page-list .page').should('have.length', 0);
     });
 
     it('displays page with list of pages', () => {
