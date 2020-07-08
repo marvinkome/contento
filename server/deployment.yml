@@ -19,4 +19,4 @@ spec:
                       - containerPort: 7077
                   envFrom:
                       - secretRef:
-                            name: prod-secret
+                            name: contento-server-prod-secret
