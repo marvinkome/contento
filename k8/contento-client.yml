@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: contento-client-svc
+spec:
+  selector:
+    app: contento-266211
+  ports:
+    - port: 80
+      targetPort: 3033
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: contento-client-dep
+  labels:
+    app: contento-266211
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: contento-266211
+    spec:
+      containers:
+        - name: contento-client
+          image: docker.io/marvinkome/contento-client:47b32d6887c595f81e3ac072be6fc4e32d917828
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3033
+          envFrom:
+            - secretRef:
+                name: contento-client-prod-secret
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3033
+            initialDelaySeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3033

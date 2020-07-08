@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: contento-server-svc
+spec:
+  selector:
+    app: contento-266211
+  ports:
+    - port: 80
+      targetPort: 7077
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: contento-server-dep
+  labels:
+    app: contento-266211
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: contento-266211
+    spec:
+      containers:
+        - name: contento-server
+          image: docker.io/marvinkome/contento-server:e75f8d0a118c687f07be371483fdd7c9ed4d7346
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 7077
+          envFrom:
+            - secretRef:
+                name: contento-server-prod-secret
+          livenessProbe:
+            httpGet:
+              path: /api
+              port: 7077
+            initialDelaySeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /api
+              port: 7077
