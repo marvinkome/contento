@@ -30,11 +30,9 @@ userSchema.pre('save', async function(next) {
         return next();
     }
 
-    // @ts-ignore
-    const passwordHash = await hash(this.password, 10);
+    const passwordHash = await hash((this as IUser).password, 10);
 
-    // @ts-ignore
-    this.password = passwordHash;
+    (this as IUser).password = passwordHash;
     next();
 });
 

@@ -1,11 +1,13 @@
 import { Request } from 'express';
 import { v2 as cloudinary } from 'cloudinary';
 import multer from 'multer';
-import DataUriParser from 'datauri/parser';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import Datauri from 'datauri';
 import path from 'path';
 
 const storage = multer.memoryStorage();
-const dUri = new DataUriParser();
+const dUri = new Datauri();
 
 export const setup_cloudinary = () => {
     return cloudinary.config({

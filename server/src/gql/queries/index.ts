@@ -20,7 +20,7 @@ export const queryResolver = {
     Query: {
         hello: () => 'world',
 
-        user: authenticated(async function(_: any, __: any, context: IContext) {
+        user: authenticated(function(_: any, __: any, context: IContext) {
             return context.currentUser;
         }),
 
@@ -29,10 +29,10 @@ export const queryResolver = {
         }),
 
         site: authenticated(async (_: any, { id }: any, context: IContext) => {
-            return Site.findOne({ owner: context.currentUser?.id, _id: id  });
+            return Site.findOne({ owner: context.currentUser?.id, _id: id });
         }),
 
-        pages: authenticated(async (_: any, {siteId}: any, context: IContext) => {
+        pages: authenticated(async (_: any, { siteId }: any, context: IContext) => {
             // find pages for the site where owner matches current users
             const site = await Site.findOne({ _id: siteId, owner: context.currentUser?.id });
 
@@ -43,15 +43,17 @@ export const queryResolver = {
             return Page.find({ site: site.id });
         }),
 
-        page: authenticated(async (_: any, { id, siteId }: { id: string, siteId: string }, context: IContext) => {
-            // find pages for the site where owner matches current users
-            const site = await Site.findOne({ _id: siteId, owner: context.currentUser?.id });
+        page: authenticated(
+            async (_: any, { id, siteId }: { id: string; siteId: string }, context: IContext) => {
+                // find pages for the site where owner matches current users
+                const site = await Site.findOne({ _id: siteId, owner: context.currentUser?.id });
 
-            if (!site) {
-                throw Error('Site not found, possibly deleted or belongs to another user');
+                if (!site) {
+                    throw Error('Site not found, possibly deleted or belongs to another user');
+                }
+
+                return Page.findOne({ site: site.id, _id: id });
             }
-
-            return Page.findOne({ site: site.id, _id: id });
-        }),
+        )
     }
 };

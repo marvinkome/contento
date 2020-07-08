@@ -1,6 +1,10 @@
 import LocalStrategy from 'passport-local';
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import GoogleStrategy from 'passport-google-token';
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import GithubStrategy from 'passport-github-token';
 import User from '@models/users';

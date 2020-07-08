@@ -12,8 +12,7 @@ export default function createApp() {
     const app = express();
 
     // setup mongoose
-    // @ts-ignore
-    connect(process.env.DB_URL || '', {
+    void connect(process.env.DB_URL || '', {
         useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true

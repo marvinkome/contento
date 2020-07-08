@@ -1,5 +1,3 @@
-import { Response } from 'express';
-
 export class ErrorHandler extends Error {
     statusCode: number;
 

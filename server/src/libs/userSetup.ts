@@ -2,7 +2,7 @@ import Site from '@models/sites';
 import Page from '@models/pages';
 import { IUser } from '@models/users';
 
-export async function setupUserAfterSignUp(user: IUser) {
+export async function setupUserAfterSignUp(user: IUser): Promise<void> {
     // create an example site
     const site = new Site({
         name: 'Example site',

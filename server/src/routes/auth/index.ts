@@ -36,7 +36,7 @@ router.post('/register', auth.optional, async (req, res) => {
             user: formatUserProfile(user)
         });
     } catch (e) {
-        const message = e.message;
+        const message = e.message as string;
         console.log(message);
 
         return res.status(400).send({
@@ -237,7 +237,7 @@ router.post('/reset-password', auth.optional, async (req, res) => {
     }
 
     user.password = password;
-    user.save();
+    await user.save();
 
     return res.send({
         message: 'You can now login with your new password'
@@ -246,8 +246,7 @@ router.post('/reset-password', auth.optional, async (req, res) => {
 
 // all rest api routes
 router.get('/my-profile', auth.required, async (req, res) => {
-    // @ts-ignore
-    const { id } = req.payload;
+    const { id } = (req as any).payload;
 
     const user = await User.findById(id);
 
@@ -263,8 +262,7 @@ router.put(
     auth.required,
     multerUploads.single('profileImage'),
     async (req, res) => {
-        // @ts-ignore
-        const { id } = req.payload;
+        const { id } = (req as any).payload;
         const { fullName, email } = req.body;
 
         const user = await User.findById(id);
@@ -300,8 +298,7 @@ router.put(
 );
 
 router.post('/unlink-github', auth.required, async (req, res) => {
-    // @ts-ignore
-    const { id } = req.payload;
+    const { id } = (req as any).payload;
 
     const user = await User.findById(id);
 
@@ -317,8 +314,7 @@ router.post('/unlink-github', auth.required, async (req, res) => {
 });
 
 router.post('/unlink-google', auth.required, async (req, res) => {
-    // @ts-ignore
-    const { id } = req.payload;
+    const { id } = (req as any).payload;
 
     const user = await User.findById(id);
 

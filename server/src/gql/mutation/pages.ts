@@ -104,7 +104,7 @@ export const resolver = {
         return data.id;
     }),
 
-    updateContents: authenticated(async (_: any, data: any, context: IContext) => {
+    updateContents: authenticated(async (_: any, data: any) => {
         const page = await Page.findOne({
             _id: data.id,
             site: data.siteId

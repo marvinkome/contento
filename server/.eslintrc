@@ -1,0 +1,41 @@
+{
+    "env": {
+        "es6": true
+    },
+    "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": "tsconfig.json",
+        "sourceType": "module"
+    },
+    "plugins": ["@typescript-eslint"],
+    "rules": {
+        "@typescript-eslint/no-unsafe-assignment": 0,
+        "@typescript-eslint/no-unsafe-member-access": 0,
+        "@typescript-eslint/no-unsafe-call": 0,
+        "@typescript-eslint/no-unsafe-return": 0,
+        "@typescript-eslint/restrict-template-expressions": 0,
+        "@typescript-eslint/restrict-plus-operands": 0,
+        "@typescript-eslint/no-explicit-any": 0,
+        "@typescript-eslint/no-non-null-assertion": 0,
+        "@typescript-eslint/no-misused-promises": 0,
+        "@typescript-eslint/explicit-module-boundary-types": 0,
+        "semi": [1, "always"],
+        "quotemark": 0,
+        "interface-name": 0,
+        "interface-over-type-literal": 0,
+        "object-literal-sort-keys": 0,
+        "ordered-imports": 0,
+        "trailing-comma": 0,
+        "jsx-no-multiline-js": 0,
+        "jsx-curly-spacing": 0,
+        "jsx-no-lambda": 0,
+        "jsx-boolean-value": [0, "never"],
+        "no-var-requires": 0,
+        "only-arrow-functions": 0,
+        "member-access": 0
+    }
+}

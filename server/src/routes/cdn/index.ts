@@ -11,7 +11,7 @@ const router = Router();
  *
  * @param siteid: ID of the site to retrieve
  */
-router.get('/sites/:siteid', authorizedToSite, async (req, res, next) => {
+router.get('/sites/:siteid', authorizedToSite, async (req, res) => {
     const site = await Site.findOne({ _id: req.params.siteid });
 
     if (!site) {
@@ -35,7 +35,7 @@ router.get('/sites/:siteid', authorizedToSite, async (req, res, next) => {
  *
  * @param siteid: ID of the site to retrieve
  */
-router.get('/sites/:siteid/pages', authorizedToSite, async (req, res, next) => {
+router.get('/sites/:siteid/pages', authorizedToSite, async (req, res) => {
     const site = await Site.findOne({ _id: req.params.siteid });
 
     if (!site) {
@@ -75,7 +75,7 @@ router.get('/sites/:siteid/pages', authorizedToSite, async (req, res, next) => {
  * @param siteid: ID of the site to retrieve
  * @param pageid: ID of the page to retrieve
  */
-router.get('/sites/:siteid/pages/:page_slug', authorizedToSite, async (req, res, next) => {
+router.get('/sites/:siteid/pages/:page_slug', authorizedToSite, async (req, res) => {
     const page = await Page.findOne({ slug: req.params.page_slug, site: req.params.siteid });
 
     if (!page) {

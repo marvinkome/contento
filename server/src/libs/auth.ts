@@ -94,7 +94,6 @@ export async function authorizedToSite(req: Request, res: Response, next: (...ar
     const token = getTokenFromHeaders(req);
 
     if (!token) {
-        // @ts-ignore
         return res.status(401).send({
             error: {
                 message: 'Token is required to access data'
@@ -107,7 +106,6 @@ export async function authorizedToSite(req: Request, res: Response, next: (...ar
     try {
         payload = jwt.verify(token, process.env.APP_KEY || '');
     } catch (e) {
-        // @ts-ignore
         return res.status(400).send({
             error: {
                 message: 'Invalid access token. Go to your app to get a new token'
@@ -118,7 +116,6 @@ export async function authorizedToSite(req: Request, res: Response, next: (...ar
     // get site
     const site = await Site.findById(payload.id);
     if (!site) {
-        // @ts-ignore
         return res.status(401).send({
             error: {
                 message: 'Invalid access token. Go to your app to get a new token'
@@ -131,7 +128,6 @@ export async function authorizedToSite(req: Request, res: Response, next: (...ar
     const valid = moment(payload.iat * 1000).isAfter(site.lastTokenReset);
 
     if (!valid) {
-        // @ts-ignore
         return res.status(401).send({
             error: {
                 message: 'Invalid access token. Go to your app to get a new token'
