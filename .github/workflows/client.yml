@@ -73,6 +73,15 @@ jobs:
           curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
           chmod u+x ./kustomize
 
+      - name: Create Kustomize file
+        run: |-
+          cat <<EOF >./kustomization.yaml
+            apiVersion: kustomize.config.k8s.io/v1beta1
+            kind: Kustomization
+            resources:
+              - ./k8/contento-client.yml
+          EOF
+
       - name: Deploy
         run: |-
           ./kustomize edit set image docker.io/IMAGE:TAG=docker.io/marvinkome/$IMAGE:${{ github.sha }}

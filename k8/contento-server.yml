@@ -33,10 +33,10 @@ spec:
                 name: contento-server-prod-secret
           livenessProbe:
             httpGet:
-              path: /api
+              path: /
               port: 7077
             initialDelaySeconds: 5
           readinessProbe:
             httpGet:
-              path: /api
+              path: /
               port: 7077
