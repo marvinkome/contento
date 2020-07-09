@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: contento-server
-          image: docker.io/marvinkome/contento-server:TAG
+          image: docker.io/IMAGE:TAG
           imagePullPolicy: Always
           ports:
             - containerPort: 7077
