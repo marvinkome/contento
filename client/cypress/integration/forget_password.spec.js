@@ -25,7 +25,10 @@ describe('Forget Password Page', () => {
         // check that request has been made to the server
         cy.wait('@forgetPasswordApi').then((xhr) => {
             // check that request was made
-            assert.deepEqual(xhr.request.body, { email: 'testuser@gmail.com' });
+            assert.deepEqual(xhr.request.body, {
+                email: 'testuser@gmail.com',
+                callbackUrl: '/reset-password'
+            });
             assert.isNotNull(xhr.response.body, 'Forgot password API Called');
         });
     });

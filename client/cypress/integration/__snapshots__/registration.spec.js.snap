@@ -100,21 +100,8 @@ exports[`Registration Page > should display registration form <snapshot> #0`] = 
       <p class="divider">Or</p>
       <form class="form">
         <div class="form-group">
-          <label for="fullName">Full Name</label
-          ><input class="form-input" id="fullName" type="text" required="" />
-        </div>
-        <div class="form-group">
           <label for="email">Email address</label
           ><input class="form-input" id="email" type="email" required="" />
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label
-          ><input
-            class="form-input"
-            id="password"
-            type="password"
-            required=""
-          />
         </div>
         <button data-testid="submit-btn" type="submit" class="btn btn-primary">
           Create account
