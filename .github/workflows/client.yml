@@ -59,7 +59,7 @@ jobs:
           docker push ${{ secrets.DOCKER_USER }}/contento-client:${{ github.sha }}
           docker push ${{ secrets.DOCKER_USER }}/contento-client:latest
 
-            - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
           version: "290.0.1"
           service_account_key: ${{ secrets.GKE_SA_KEY }}
