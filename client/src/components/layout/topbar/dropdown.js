@@ -2,11 +2,12 @@ import React from 'react';
 import { mainClient } from 'libs/api';
 import { AUTH_TOKEN_KEY } from 'libs/keys';
 import { inject } from 'mobx-react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 import Dropdown from 'components/dropdown';
 
 function TopbarDropdown(props) {
     const { siteid } = useParams();
+    const history = useHistory();
 
     const logout = (e) => {
         e.preventDefault();
@@ -21,7 +22,7 @@ function TopbarDropdown(props) {
         mainClient.removeAccessToken();
 
         // go to landing page
-        props.history.push('/login');
+        history.push('/login');
     };
 
     return (
