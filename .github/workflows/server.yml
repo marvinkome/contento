@@ -71,6 +71,6 @@ jobs:
       - name: Deploy
         run: |-
           ./kustomize edit set image docker.io/IMAGE:TAG=docker.io/marvinkome/$IMAGE:${{ github.sha }}
-          ./kustomize build . | kubectl apply -f -
+          ./kustomize build ./k8 | kubectl apply -f -
           kubectl rollout status deployment/$DEPLOYMENT_NAME
           kubectl get services -o wide
