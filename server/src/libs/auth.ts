@@ -142,12 +142,14 @@ export default {
     required: expressJWT({
         secret: process.env.APP_KEY || '',
         userProperty: 'payload',
-        getToken: getTokenFromHeaders
+        getToken: getTokenFromHeaders,
+        algorithms: ['HS256']
     }),
     optional: expressJWT({
         secret: process.env.APP_KEY || '',
         userProperty: 'payload',
         getToken: getTokenFromHeaders,
-        credentialsRequired: false
+        credentialsRequired: false,
+        algorithms: ['HS256']
     })
 };
