@@ -38,6 +38,7 @@ export default function createApp() {
     setup_cloudinary();
 
     // api routes
+    app.use('/', (_, res) => res.json({ message: "You're at contento server" }));
     app.use('/api', routes);
 
     return { app, apolloServer };

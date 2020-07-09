@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: contento-client
-          image: docker.io/marvinkome/contento-client:47b32d6887c595f81e3ac072be6fc4e32d917828
+          image: docker.io/IMAGE:TAG
           imagePullPolicy: Always
           ports:
             - containerPort: 3033
