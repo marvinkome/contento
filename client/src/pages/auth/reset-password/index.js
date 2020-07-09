@@ -3,17 +3,19 @@ import logo from 'assets/logo.png';
 import AboutSection from '../components/about';
 import { authApi } from 'libs/api';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 export default class ResetPassword extends React.Component {
     onSubmit = async (e) => {
         e.preventDefault();
 
         const password = e.target['password'].value;
-        const token = this.props.match.params.token;
+        const token = new URLSearchParams(window.location.search).get('token');
 
         const resp = await authApi.resetPassword({ password, token });
-        toast.success(resp.data.message);
+
+        if (!resp) return;
+
+        this.props.history.push('/login');
     };
 
     render() {

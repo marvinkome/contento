@@ -6,16 +6,41 @@ import { inject } from 'mobx-react';
 import { withRouter, Link } from 'react-router-dom';
 import { authApi } from 'libs/api';
 import { AUTH_TOKEN_KEY } from 'libs/keys';
+import { toast } from 'react-toastify';
 
 class RegistrationPage extends React.Component {
+    state = {
+        hasVerified: false,
+        verificationSent: false
+    };
+
+    componentDidMount() {
+        if (new URLSearchParams(window.location.search).get('token')) {
+            this.setState({ hasVerified: true });
+        }
+    }
+
     onSubmit = async (e) => {
         e.preventDefault();
 
         const fullName = e.target['fullName'].value;
-        const email = e.target['email'].value;
         const password = e.target['password'].value;
+        const token = new URLSearchParams(window.location.search).get('token');
 
-        this.register({ fullName, email, password }, 'local');
+        this.register({ fullName, token, password }, 'local');
+    };
+
+    onVerify = async (e) => {
+        e.preventDefault();
+
+        const email = e.target['email'].value;
+        const resp = await authApi.verifyEmail({
+            email,
+            callbackUrl: this.props.location.pathname
+        });
+
+        if (!resp) return;
+        toast.success('Verification email sent');
     };
 
     register = async (data, authType) => {
@@ -45,6 +70,41 @@ class RegistrationPage extends React.Component {
         this.props.history.push('/app');
     };
 
+    renderVerificationForm() {
+        return (
+            <form onSubmit={this.onVerify} className="form">
+                <div className="form-group">
+                    <label htmlFor="email">Email address</label>
+                    <input className="form-input" id="email" type="email" required />
+                </div>
+
+                <button data-testid="submit-btn" type="submit" className="btn btn-primary">
+                    Create account
+                </button>
+            </form>
+        );
+    }
+
+    renderRegisterForm() {
+        return (
+            <form onSubmit={this.onSubmit} className="form">
+                <div className="form-group">
+                    <label htmlFor="fullName">Full Name</label>
+                    <input className="form-input" id="fullName" type="text" required />
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <input className="form-input" id="password" type="password" required />
+                </div>
+
+                <button data-testid="submit-btn" type="submit" className="btn btn-primary">
+                    Create account
+                </button>
+            </form>
+        );
+    }
+
     render() {
         return (
             <>
@@ -70,35 +130,9 @@ class RegistrationPage extends React.Component {
 
                         <p className="divider">Or</p>
 
-                        <form onSubmit={this.onSubmit} className="form">
-                            <div className="form-group">
-                                <label htmlFor="fullName">Full Name</label>
-                                <input className="form-input" id="fullName" type="text" required />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="email">Email address</label>
-                                <input className="form-input" id="email" type="email" required />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="password">Password</label>
-                                <input
-                                    className="form-input"
-                                    id="password"
-                                    type="password"
-                                    required
-                                />
-                            </div>
-
-                            <button
-                                data-testid="submit-btn"
-                                type="submit"
-                                className="btn btn-primary"
-                            >
-                                Create account
-                            </button>
-                        </form>
+                        {this.state.hasVerified
+                            ? this.renderRegisterForm()
+                            : this.renderVerificationForm()}
 
                         <p className="term-and-conditions">
                             By signing up you agree to our <a href="/terms">Terms of service</a> and

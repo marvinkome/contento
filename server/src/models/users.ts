@@ -7,6 +7,7 @@ export interface IUser extends Document {
     googleId?: string;
     githubId?: string;
     profile: { name?: string; picture?: string };
+    isVerified: boolean;
     verify_password: (password: string) => Promise<boolean>;
 }
 
@@ -22,7 +23,8 @@ export const userSchema: Schema<IUser> = new Schema({
     profile: {
         name: String,
         picture: String
-    }
+    },
+    isVerified: Boolean
 });
 
 userSchema.pre('save', async function(next) {

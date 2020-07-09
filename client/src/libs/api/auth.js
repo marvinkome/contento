@@ -18,6 +18,10 @@ export default class AuthClient {
         return this.client.post('/auth/login', data);
     }
 
+    verifyEmail(data) {
+        return this.client.post('/auth/verify-email', data);
+    }
+
     register(data) {
         return this.client.post('/auth/register', data);
     }

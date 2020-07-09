@@ -7,7 +7,7 @@ import User, { IUser } from '@models/users';
 import Site from '@models/sites';
 import Page from '@models/pages';
 import auth, { generateJWT, formatUserProfile } from '@libs/auth';
-import { sendPasswordResetLink } from '@libs/emails';
+import { sendPasswordResetLink, sendVerificationEmail } from '@libs/emails';
 import { multerUploads, dataUri, uploader } from '@libs/images';
 import { setupUserAfterSignUp } from '@libs/userSetup';
 
@@ -16,12 +16,62 @@ const router = Router();
 /**
  * Email/Password Auth Routes
  */
+router.post('/verify-email', auth.optional, async (req, res) => {
+    const { email, callbackUrl } = req.body;
+
+    const user = await User.findOne({ email });
+    if (user) {
+        return res.status(400).send({
+            error: {
+                message: 'Email is already taken'
+            }
+        });
+    }
+
+    // generate JWT token to reset the password
+    const token = generateJWT({ email }, 'email-verification');
+
+    try {
+        await sendVerificationEmail({
+            to: email,
+            data: {
+                verifyLink: `${process.env.CLIENT_URL}${callbackUrl}?token=${token}`
+            }
+        });
+    } catch (e) {
+        console.log(e);
+        return res.status(500).send({
+            error: {
+                message: 'Error sending email'
+            }
+        });
+    }
+
+    return res.send({
+        message: 'A verification link has been sent to your email'
+    });
+});
+
 router.post('/register', auth.optional, async (req, res) => {
-    const data = req.body;
+    // first get email from verification token
+    const { token, ...data } = req.body;
+
+    // check if token is valid
+    if (!token) {
+        return res.status(400).send({
+            error: { message: 'Token is required to continue' }
+        });
+    }
+
+    // decode token to get email
+    const payload = jwt.verify(token, process.env.APP_KEY || '');
+
+    // get user id from token
+    const email = (payload as { id: string }).id;
 
     try {
         const user = new User({
-            email: data.email,
+            email,
             password: data.password
         });
 
@@ -153,7 +203,7 @@ router.post('/github', auth.optional, async (req, res, next) => {
  */
 router.post('/forget-password', auth.optional, async (req, res) => {
     // get user model
-    const { email } = req.body;
+    const { email, callbackUrl } = req.body;
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -179,7 +229,7 @@ router.post('/forget-password', auth.optional, async (req, res) => {
         await sendPasswordResetLink({
             to: email,
             data: {
-                resetLink: process.env.CLIENT_PASSWORD_RESET_URL + '/' + token,
+                resetLink: `${process.env.CLIENT_URL}${callbackUrl}?token=${token}`,
                 name: user.profile.name
             }
         });

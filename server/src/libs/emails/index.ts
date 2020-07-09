@@ -34,3 +34,14 @@ export function sendPasswordResetLink(options: IEmailOptions) {
         locals: options.data
     });
 }
+
+export function sendVerificationEmail(options: IEmailOptions) {
+    return email.send({
+        template: 'email-verification',
+        message: {
+            to: options.to,
+            subject: 'Verify your email on Contento'
+        },
+        locals: options.data
+    });
+}

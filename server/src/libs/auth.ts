@@ -14,31 +14,34 @@ export function setup_auth() {
     passport.use(Strategies.githubStrategy);
 }
 
-export function generateJWT(user: IUser, useCase = 'login') {
+export function generateJWT(user: IUser | { email: string }, useCase = 'login') {
     const today = new Date();
     const expirationDate = new Date(today);
     let signingKey = process.env.APP_KEY || '';
+    let jwtData: { id: string; exp: number };
 
     switch (useCase) {
+        case 'email-verification': {
+            const time = 1 * 60 * 60 * 1000;
+            expirationDate.setTime(today.getTime() + time); // set to expire in 1hr
+            jwtData = { id: user.email, exp: expirationDate.getTime() / 1000 };
+            break;
+        }
         case 'reset-password': {
             const time = 1 * 60 * 60 * 1000;
             expirationDate.setTime(today.getTime() + time); // set to expire in 1hr
-            signingKey = user.password;
+            signingKey = (user as IUser).password;
+            jwtData = { id: (user as IUser)._id, exp: expirationDate.getTime() / 1000 };
             break;
         }
         default: {
             expirationDate.setDate(today.getDate() + 30); // set to expire in 30 days
+            jwtData = { id: (user as IUser)._id, exp: expirationDate.getTime() / 1000 };
             break;
         }
     }
 
-    return jwt.sign(
-        {
-            id: user._id,
-            exp: expirationDate.getTime() / 1000
-        },
-        signingKey
-    );
+    return jwt.sign(jwtData, signingKey);
 }
 
 export function getTokenFromHeaders(req: Request) {

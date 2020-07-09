@@ -11,7 +11,7 @@ export default class ForgetPassword extends React.Component {
 
         const email = e.target['email'].value;
 
-        const resp = await authApi.forgetPassword({ email });
+        const resp = await authApi.forgetPassword({ email, callbackUrl: '/reset-password' });
         toast.success(resp.data.message);
     };
 
@@ -37,8 +37,6 @@ export default class ForgetPassword extends React.Component {
                                 it.
                             </p>
                         </header>
-
-                        {/* <p className="divider">Or</p> */}
 
                         <form onSubmit={this.onSubmit} className="form">
                             <div className="form-group">

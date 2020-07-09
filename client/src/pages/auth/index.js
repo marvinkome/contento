@@ -22,7 +22,7 @@ export default class AuthPages extends React.Component {
                 <Route exact path="/forgot-password" component={ForgotPassword} />
 
                 {/* reset password page */}
-                <Route exact path="/reset-password/:token" component={ResetPassword} />
+                <Route exact path="/reset-password" component={ResetPassword} />
             </main>
         );
     }
