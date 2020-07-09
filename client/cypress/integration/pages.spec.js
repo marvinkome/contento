@@ -14,7 +14,7 @@ describe('Pages page test', () => {
         // mock profile calls
         cy.route('GET', '/api/auth/my-profile', '@successJSON').as('profileApi');
         cy.route('/sockjs-node', {});
-        localStorage.setItem('contentlify_auth_token', 'auth-token');
+        localStorage.setItem('contento_auth_token', 'auth-token');
 
         // initial mock
         cy.mockGraphqlOps({
