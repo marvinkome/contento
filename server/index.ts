@@ -1,5 +1,3 @@
-import express from 'express';
-import path from 'path';
 import createApp from './src';
 
 const { app, apolloServer } = createApp();
