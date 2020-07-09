@@ -30,7 +30,7 @@ describe('Login page tests [E2E]', () => {
         // check that request has been made to the server
         cy.wait('@loginE2EApi').should(() => {
             // check that token has been added to lacal storage
-            expect(localStorage.getItem('contentlify_auth_token')).exist;
+            expect(localStorage.getItem('contento_auth_token')).exist;
 
             // expect redirect to occur
             cy.url().should('include', '/');

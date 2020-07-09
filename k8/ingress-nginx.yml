@@ -1,0 +1,25 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+spec:
+  # default for externalTrafficPolicy = 'Local', but due to an issue
+  # (https://stackoverflow.com/questions/59286126/kubernetes-cluterissuer-challenge-timeouts,
+  # https://github.com/danderson/metallb/issues/287)
+  # it has to be 'Cluster' for now
+  externalTrafficPolicy: Cluster
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: ingress-nginx
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: https

@@ -1,5 +1,6 @@
 import { authenticated } from '@libs/auth';
 import Site from '@models/sites';
+import Page from '@models/pages';
 import { IContext } from '@gql/index';
 
 export const typeDef = `
@@ -65,6 +66,8 @@ export const resolver = {
         if (!site) {
             throw Error('Site not found, possibly deleted or belongs to another user');
         }
+        // delete pages
+        await Page.deleteMany({ site: site.id });
 
         await site.remove();
         return data.id;

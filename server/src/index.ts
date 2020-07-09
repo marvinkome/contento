@@ -39,6 +39,7 @@ export default function createApp() {
 
     // api routes
     app.use('/api', routes);
+    app.get('/', (_, res) => res.json({ message: "You're at contento server v1.0" }));
 
     return { app, apolloServer };
 }

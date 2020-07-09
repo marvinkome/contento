@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: contento-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+    - hosts:
+        - mycontento.com
+        - api.mycontento.com
+      secretName: letsencrypt-prod
+  rules:
+    - host: mycontento.com
+      http:
+        paths:
+          - backend:
+              serviceName: contento-client-svc
+              servicePort: 80
+    - host: api.mycontento.com
+      http:
+        paths:
+          - backend:
+              serviceName: contento-server-svc
+              servicePort: 80

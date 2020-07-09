@@ -31,7 +31,7 @@ describe('Registration Page', () => {
         // check that request has been made to the server
         cy.wait('@registerApi').should(() => {
             // check that token has been added to lacal storage
-            expect(localStorage.getItem('contentlify_auth_token')).to.eq('user token');
+            expect(localStorage.getItem('contento_auth_token')).to.eq('user token');
         });
     });
 

@@ -2,11 +2,11 @@ version: "3"
 
 services:
   server:
-    image: marvinkome/contento_server:latest
+    image: marvinkome/contento-server:latest
     restart: always
 
   client:
-    image: marvinkome/contento_client:latest
+    image: marvinkome/contento-client:latest
     restart: always
     environment:
       - PORT=3033

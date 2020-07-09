@@ -283,7 +283,7 @@ router.put(
             const file = dataUri(req).content;
 
             try {
-                const result = await uploader.upload(file!);
+                const result = await uploader.upload(file);
                 user.profile.picture = result.url;
             } catch (e) {
                 console.log(e);
