@@ -8,7 +8,7 @@ const email = new Email({
         options: { extension: 'ejs' }
     },
     message: {
-        from: process.env.GMAIL_USER
+        from: `Contento <${process.env.GMAIL_USER}>`
     },
     transport: {
         service: 'gmail',
@@ -29,7 +29,7 @@ export function sendPasswordResetLink(options: IEmailOptions) {
         template: 'reset-password',
         message: {
             to: options.to,
-            subject: 'Password Reset Email'
+            subject: 'Reset your password'
         },
         locals: options.data
     });
@@ -40,7 +40,7 @@ export function sendVerificationEmail(options: IEmailOptions) {
         template: 'email-verification',
         message: {
             to: options.to,
-            subject: 'Verify your email on Contento'
+            subject: 'Verify your email'
         },
         locals: options.data
     });
