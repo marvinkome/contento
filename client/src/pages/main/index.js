@@ -21,7 +21,7 @@ class Main extends React.Component {
     };
 
     async componentDidMount() {
-        const auth_message = 'Auth key not found. Redirecting to login page';
+        const auth_message = 'Session expired. Redirecting to login page';
 
         try {
             // setup auth
@@ -39,7 +39,7 @@ class Main extends React.Component {
     }
 
     setupAuth = async () => {
-        const auth_message = 'Auth key not found. Redirecting to login page';
+        const auth_message = 'Session expired. Redirecting to login page';
 
         // get token
         const token = localStorage.getItem(AUTH_TOKEN_KEY);
