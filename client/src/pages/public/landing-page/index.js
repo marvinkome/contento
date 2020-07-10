@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 
 // assets
 import Logo from 'assets/logo.png';
-import VidContainer from 'assets/landing-page/VidContainer.png';
+import HeaderImage from 'assets/landing-page/headerImage.svg';
+import HowItWorksImage from 'assets/landing-page/howItWorks.svg';
 
 // styles
 import './style.scss';
@@ -11,100 +12,74 @@ import './style.scss';
 export default function LandingPage() {
     return (
         <div className="landing-page">
-            <div className="header--container">
+            <header className="header--container">
                 <div className="text--container">
                     <div className="logo">
                         <img src={Logo} alt="logo" width="200px" />
                     </div>
 
                     <div className="header--text">
-                        <h1>NEXT GEN CMS</h1>
+                        <h1>A modern approach to content management</h1>
 
                         <p>
-                            Stop using old tools to solve a modern problem: delivering great digital
-                            experiences. Web CMSes create digital sprawl — content silos that slow
-                            innovation. But a unified content layer enables your team to scale and
-                            iterate faster. See ya, CMS.
+                            Create and update contents from a central location. And stop deploying
+                            new versions of your website because of a grammatical error or typo.
                         </p>
 
-                        <div className="btn--container">
-                            <Link to="/register" className="site-btn grey--md">
-                                GET STARTED - FOR FREE
-                            </Link>
-
-                            <a href="/" className="site-btn white">
-                                LEARN MORE
-                            </a>
-                        </div>
+                        <Link to="/register" className="btn btn-primary">
+                            GET STARTED - FOR FREE
+                        </Link>
                     </div>
                 </div>
 
-                <div className="boxes--container">
-                    <div className="header-box">
-                        <div className="header--video">
-                            <img src={VidContainer} alt="A video" width="100%" />
-                        </div>
-                    </div>
+                <div className="svg--container">
+                    <img src={HeaderImage} alt="contento-header" />
                 </div>
-            </div>
+            </header>
 
-            <div className="discover--container">
-                <div className="vid-grid">
-                    <h2>How Contento changes the way it was</h2>
+            <section className="discover--container">
+                <h2>Here's how contento works</h2>
 
-                    <div className="video--player">
-                        <img src={VidContainer} alt="A video" />
-                    </div>
-                </div>
-
-                <div className="text-grid">
-                    <p className="paragraph--text">
-                        Stop using old tools to solve a modern problem: delivering great digital
-                        experiences. Web CMSes create digital sprawl — content silos that slow
-                        innovation. But a unified content layer enables your team to scale and
-                        iterate faster. See ya, CMS.
-                    </p>
-                    <a href="/" className="site-btn">
-                        Discover it’s power
-                    </a>
-                </div>
-            </div>
-
-            <div className="get-started__container">
-                <div className="get-started__text">
-                    <div className="header-get-started__text">
-                        <h2>CONTENTO IS FOR ANYONE</h2>
-                        <p>- BUILT BY DEVELOPERS FOR DEVELOPERS</p>
+                <div className="discover-grid">
+                    <div className="svg--container">
+                        <img src={HowItWorksImage} alt="How contento works" />
                     </div>
 
-                    <div className="intro--text">
+                    <div className="text--container">
                         <p>
-                            Stop using old tools to solve a modern problem: delivering great digital
-                            experiences. Web CMSes create digital sprawl — content silos that slow
-                            innovation. But a unified content layer enables your team to scale and
-                            iterate faster. See ya, CMS.
+                            <span>1:</span>
+                            <span>
+                                Create content easily for each page of your website using the
+                                Contento editor
+                            </span>
                         </p>
+
                         <p>
-                            Stop using old tools to solve a modern problem: delivering great digital
-                            experiences. Web CMSes create digital sprawl — content silos that slow
-                            innovation. But a unified content layer enables your team to scale and
-                            iterate faster. See ya, CMS.
+                            <span>2:</span>
+                            <span>Apply content on your website using the Contento API</span>
+                        </p>
+
+                        <p>
+                            <span>3:</span>
+                            <span>
+                                Update the content on the Contento editor and automatically get
+                                changes on your website
+                            </span>
                         </p>
                     </div>
-                    <a href="/" className="site-btn">
-                        GET STARTED - FOR FREE
-                    </a>
                 </div>
+            </section>
 
-                <div className="media--container">
-                    <img src={VidContainer} alt="A box" />
+            <footer className="footer--container">
+                <div className="footer--background">
+                    <h1>Modernize your approach to handling content</h1>
+
+                    <Link to="/register" className="btn btn-primary">
+                        GET STARTED - for free
+                    </Link>
                 </div>
-            </div>
-
-            <div className="footer--container">
-                <div className="footer--background"></div>
                 <div className="footer-background--light"></div>
-            </div>
+            </footer>
         </div>
     );
 }
