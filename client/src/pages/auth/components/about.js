@@ -7,11 +7,8 @@ export default function AboutSection() {
         <aside className="about-section">
             <img alt="svg1" src={svg1} className="svg-icon icon1" />
             <section className="about-information">
-                <h1>The new standard in content management</h1>
-                <p>
-                    Finally, the freedom to use your favorite tools and frameworks without CMS
-                    technical debt.
-                </p>
+                <h1>A modern approach to content management</h1>
+                <p>Finally, the freedom to manage your contents without changing code.</p>
             </section>
             <img alt="svg2" src={svg2} className="svg-icon icon2" />
         </aside>
