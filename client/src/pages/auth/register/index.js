@@ -133,11 +133,6 @@ class RegistrationPage extends React.Component {
                         {this.state.hasVerified
                             ? this.renderRegisterForm()
                             : this.renderVerificationForm()}
-
-                        <p className="term-and-conditions">
-                            By signing up you agree to our <a href="/terms">Terms of service</a> and
-                            acknowledge our <a href="/privacy-policy">Privacy Policy</a>
-                        </p>
                     </article>
                 </section>
                 <AboutSection />

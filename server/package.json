@@ -4,12 +4,14 @@
     "main": "index.ts",
     "license": "MIT",
     "scripts": {
-        "build": "tsc",
+        "build": "tsc && yarn copy-static-assets",
         "start": "node -r module-alias/register -r dotenv/config ./dist/index.js",
         "dev": "nodemon --exec ts-node -r dotenv/config -r tsconfig-paths/register index.ts",
-        "test": "echo \"Error: no test specified\" && exit 0"
+        "test": "echo \"Error: no test specified\" && exit 0",
+        "copy-static-assets": "ts-node copyStaticAssets.ts"
     },
     "dependencies": {
+        "@types/shelljs": "0.8.8",
         "@types/shortid": "^0.0.29",
         "apollo-server-express": "^2.6.1",
         "axios": "^0.19.2",
@@ -36,6 +38,7 @@
         "passport-google-oauth": "^2.0.0",
         "passport-google-token": "^0.1.2",
         "passport-local": "^1.0.0",
+        "shelljs": "0.8.4",
         "shortid": "^2.2.15",
         "tslint": "^5.20.1"
     },
