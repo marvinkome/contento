@@ -37,7 +37,7 @@ export default function LandingPage() {
                         <h1>A modern approach to content management</h1>
 
                         <p>
-                            Create and update contents from a central location. And stop deploying
+                            Create and update contents from a central location and stop deploying
                             new versions of your website because of a grammatical error or typo.
                         </p>
 
