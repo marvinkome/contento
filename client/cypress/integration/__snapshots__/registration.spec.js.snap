@@ -107,10 +107,6 @@ exports[`Registration Page > should display registration form <snapshot> #0`] = 
           Create account
         </button>
       </form>
-      <p class="term-and-conditions">
-        By signing up you agree to our <a href="/terms">Terms of service</a> and
-        acknowledge our <a href="/privacy-policy">Privacy Policy</a>
-      </p>
     </article>
   </section>
   <aside class="about-section">
