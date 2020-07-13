@@ -5,15 +5,15 @@
 The codebase for Contento, an open source content platform for developers. You don't have to make a
 deployment to fix a typo or grammatical error.
 
-Website: [https://mycontento.com](https://mycontento.com)
+Website: [https://mycontento.com](https://mycontento.com)  
 API documentation: [API documentation wiki](https://github.com/marvinkome/contento/wiki/Contento-API)
 
 ## Stack
 
 This project uses
 
-Fronted: ReactJs, Mobx and Apollo client.
-Backend: Apollo server, typescript, express and mongo db on the backend.
+Fronted: ReactJs, Mobx and Apollo client.  
+Backend: Apollo server, typescript, express and mongo db on the backend.  
 CI/CD: Cypress, Github actions, Docker and Kubernates on a GCP cluster.
 
 ## Development
