@@ -28,6 +28,9 @@ export default function createApp() {
         })
     );
 
+    // setup rate limiting
+    app.set('trust proxy', 1);
+
     // setup graphql
     apolloServer.applyMiddleware({ app });
 

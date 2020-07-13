@@ -1,10 +1,25 @@
 import Site from '@models/sites';
+import rateLimit from 'express-rate-limit';
 import Page, { IPage } from '@models/pages';
 import { keyBy } from 'lodash';
 import { Router } from 'express';
 import { authorizedToSite } from '@libs/auth';
 import { handleError } from '@libs/errors';
 const router = Router();
+
+// rate limit
+const limiter = rateLimit({
+    windowMs: 1000,
+    max: 120
+});
+router.use(limiter);
+
+/**
+ * This is the default endpoint, redirects to documentation
+ */
+router.get('/', (_, res) => {
+    res.redirect('https://github.com/marvinkome/contento/wiki/Contento-API');
+});
 
 /**
  * This is the endpoint to get site basic details like name and id

@@ -3,6 +3,65 @@
 .landing-page {
     background-color: #fafafa;
 
+    .navbar {
+        display: flex;
+
+        .logo {
+            display: flex;
+            align-items: center;
+            padding: 2em 4em;
+
+            @include for-phone-only {
+                padding: 2em 0em;
+                padding-left: 2em;
+            }
+
+            img {
+                width: 150px;
+            }
+        }
+
+        ul {
+            padding: 2em 4em;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-left: auto;
+
+            @include for-phone-only {
+                padding: 2em 0em;
+                padding-right: 1em;
+            }
+
+            li {
+                margin: 0 20px;
+
+                @include for-phone-only {
+                    margin: 0 10px;
+                }
+
+                a {
+                    color: var(--primary-color);
+
+                    @include for-phone-only {
+                        display: none;
+                    }
+
+                    &.auth-link {
+                        border-radius: 50px;
+                        border: 1px solid var(--primary-color);
+                        padding: 7px 2em;
+
+                        @include for-phone-only {
+                            padding: 7px 1.5em;
+                            display: inline-block;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     .header--container {
         display: flex;
         margin-bottom: 10rem;
@@ -18,14 +77,6 @@
 
             @include for-phone-only {
                 margin-right: 0em;
-            }
-
-            .logo {
-                padding: 2em 4em;
-
-                @include for-phone-only {
-                    padding: 2em 2em;
-                }
             }
 
             .header--text {
@@ -157,7 +208,7 @@
         position: relative;
 
         .footer--background {
-            height: 65%;
+            height: 75%;
             top: 10%;
             right: 20%;
             width: 60%;

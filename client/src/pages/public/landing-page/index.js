@@ -12,12 +12,27 @@ import './style.scss';
 export default function LandingPage() {
     return (
         <div className="landing-page">
+            <nav className="navbar">
+                <div className="logo">
+                    <img src={Logo} alt="logo" />
+                </div>
+
+                <ul>
+                    <li>
+                        <a href="https://github.com/marvinkome/contento/wiki/Contento-API">
+                            Documentation
+                        </a>
+                    </li>
+
+                    <li>
+                        <Link className="auth-link" to="/login">
+                            Login
+                        </Link>
+                    </li>
+                </ul>
+            </nav>
             <header className="header--container">
                 <div className="text--container">
-                    <div className="logo">
-                        <img src={Logo} alt="logo" width="200px" />
-                    </div>
-
                     <div className="header--text">
                         <h1>A modern approach to content management</h1>
 
