@@ -33,8 +33,7 @@ function TopbarDropdown(props) {
 
             <hr />
 
-            <Link to="/contact-us">Contact us</Link>
-            <Link to="/documentation">Documentation</Link>
+            <a href="https://github.com/marvinkome/contento/wiki/Contento-API">API Documentation</a>
 
             <hr />
 
