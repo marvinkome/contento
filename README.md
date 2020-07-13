@@ -7,7 +7,7 @@ deployment to fix a typo or grammatical error.
 
 Website: [https://mycontento.com](https://mycontento.com)
 
-Api documentation: [Api documentation wiki](https://github.com/marvinkome/contento/wiki/Contento-API)
+Api documentation: [API documentation wiki](https://github.com/marvinkome/contento/wiki/Contento-API)
 
 ## Stack
 
