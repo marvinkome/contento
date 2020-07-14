@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
+import ReactGA from 'react-ga';
 import { Link } from 'react-router-dom';
 import { GOOGLE_ANALYTICS } from 'libs/keys';
+
 // assets
 import Logo from 'assets/logo.png';
 import HeaderImage from 'assets/landing-page/headerImage.svg';
