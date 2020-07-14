@@ -1,7 +1,13 @@
+@import 'styles/utils/mixins.scss';
+
 .auth__container {
     display: flex;
     height: 100vh;
     position: relative;
+
+    @include for-phone-only {
+        flex-direction: column;
+    }
 
     .about-section {
         display: flex;
@@ -12,6 +18,10 @@
         justify-content: center;
         align-items: center;
         overflow: hidden;
+
+        @include for-phone-only {
+            display: none;
+        }
 
         .about-information {
             width: 60%;
@@ -48,8 +58,11 @@
         background: var(--bg-color);
         padding: 2em 3em;
         height: 100%;
-
         overflow: auto;
+
+        @include for-phone-only {
+            padding: 2em 1em;
+        }
 
         .header {
             display: flex;
@@ -61,7 +74,14 @@
             }
 
             & > a {
+                display: flex;
+                align-items: center;
                 width: 30%;
+                margin-right: auto;
+
+                @include for-phone-only {
+                    width: 40%;
+                }
 
                 img {
                     width: 100%;
@@ -72,6 +92,11 @@
         .form-container {
             margin: 4em 0px;
             width: 60%;
+
+            @include for-phone-only {
+                margin: 3em auto;
+                width: 90%;
+            }
 
             .form-header {
                 padding: 15px 0px;
