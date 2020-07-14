@@ -7,3 +7,4 @@ export const GITHUB_CLIENT_KEY = __DEV__ ? 'edb690e9e92ffbbe926d' : 'c7a5dd1f5fd
 export const GOOGLE_CLIENT_KEY = __DEV__
     ? '764204004419-vq0lhhuutp7jjhushatuvcmm7gd695np.apps.googleusercontent.com'
     : '764204004419-2jqhlgh99olns4dsqs1sn085vrleg5k9.apps.googleusercontent.com';
+export const GOOGLE_ANALYTICS = 'UA-172696244-1';

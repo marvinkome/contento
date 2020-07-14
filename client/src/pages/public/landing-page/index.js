@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
+import { GOOGLE_ANALYTICS } from 'libs/keys';
 // assets
 import Logo from 'assets/logo.png';
 import HeaderImage from 'assets/landing-page/headerImage.svg';
@@ -10,6 +10,13 @@ import HowItWorksImage from 'assets/landing-page/howItWorks.svg';
 import './style.scss';
 
 export default function LandingPage() {
+    useEffect(() => {
+        if (process.env.NODE_ENV === 'production') {
+            ReactGA.initialize(GOOGLE_ANALYTICS);
+            ReactGA.pageview('/');
+        }
+    }, []);
+
     return (
         <div className="landing-page">
             <nav className="navbar">
