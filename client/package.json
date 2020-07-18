@@ -15,7 +15,7 @@
         "graphql": "^14.5.8",
         "graphql-tag": "^2.10.1",
         "http-proxy-middleware": "^0.20.0",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.19",
         "mobx": "^5.15.0",
         "mobx-devtools-mst": "^0.9.21",
         "mobx-react": "^6.1.4",
